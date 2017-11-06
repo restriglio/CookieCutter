@@ -6,8 +6,8 @@ a brand new project using Room and LiveData.
 # How the project is structured
 
 - app
-- MVVM
-- MVP (still in dev process)
+- mvvm
+- mvp (still in dev process)
 
 As you can see, we offer two different arquitectures using MVP and MVVM patterns to build our application.
 Those base arquitecture are implemented as a library module and should be included in the application gradle.
