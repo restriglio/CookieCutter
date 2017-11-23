@@ -6,11 +6,15 @@ a brand new project using Room and LiveData.
 # How the project is structured
 
 - app
-- mvvm
-- mvp (still in dev process)
+- MVVM
 
-As you can see, we offer two different arquitectures using MVP and MVVM patterns to build our application.
-Those base arquitecture are implemented as a library module and should be included in the application gradle.
+As you can see, we offer MVVM to build our application.
+This base arquitecture is implemented as a library module and should be included in the application gradle.
+
+MVVM contains:
+ - BaseView
+ - BaseViewModel
+ - BaseActivity
 
 # Room Persistence Library
 Room provides an abstraction layer over SQLite to allow fluent database access while harnessing the full power of SQLite.
