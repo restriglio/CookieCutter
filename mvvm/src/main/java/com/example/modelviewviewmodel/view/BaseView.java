@@ -14,7 +14,7 @@ public abstract class BaseView {
 
     protected WeakReference<BaseActivity> mBaseActivity;
     public BaseView(BaseActivity baseActivity){
-        mBaseActivity = new WeakReference<BaseActivity>(baseActivity);
+        mBaseActivity = new WeakReference<>(baseActivity);
     }
 
     protected void initLiveData(){

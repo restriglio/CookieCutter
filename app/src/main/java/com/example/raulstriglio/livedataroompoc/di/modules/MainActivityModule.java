@@ -1,5 +1,7 @@
 package com.example.raulstriglio.livedataroompoc.di.modules;
 
+import com.example.raulstriglio.livedataroompoc.db.entities.User;
+
 import dagger.Module;
 
 /**
@@ -8,6 +10,5 @@ import dagger.Module;
 
 @Module
 public class MainActivityModule {
-
 
 }

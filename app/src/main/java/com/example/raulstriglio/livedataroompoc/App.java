@@ -3,6 +3,7 @@ package com.example.raulstriglio.livedataroompoc;
 import android.app.Activity;
 import android.app.Application;
 
+
 import com.example.raulstriglio.livedataroompoc.di.components.DaggerAppComponent;
 
 import javax.inject.Inject;
@@ -36,4 +37,5 @@ public class App extends Application  implements HasActivityInjector {
     public AndroidInjector<Activity> activityInjector() {
         return activityDispatchingAndroidInjector;
     }
+
 }

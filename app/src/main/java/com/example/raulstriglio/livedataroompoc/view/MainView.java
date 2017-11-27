@@ -1,21 +1,18 @@
 package com.example.raulstriglio.livedataroompoc.view;
 
-import android.app.Activity;
 import android.arch.lifecycle.Observer;
 import android.support.annotation.Nullable;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.modelviewviewmodel.view.BaseView;
-import com.example.modelviewviewmodel.viewmodel.BaseViewModel;
 import com.example.raulstriglio.livedataroompoc.R;
 import com.example.raulstriglio.livedataroompoc.activity.MainActivity;
 import com.example.raulstriglio.livedataroompoc.db.entities.User;
-import com.example.raulstriglio.livedataroompoc.modelview.MainViewModel;
+import com.example.raulstriglio.livedataroompoc.viewmodel.MainViewModel;
 
-import java.lang.ref.WeakReference;
-import java.lang.reflect.AccessibleObject;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -33,13 +30,20 @@ public class MainView extends BaseView {
     private MainViewModel mMainViewModel;
     private List<User> mUsers;
 
-    @BindView(R.id.db_info)
+    @BindView(R.id.names_list)
     TextView mDbInfo;
 
     @BindView(R.id.add_user)
     Button button;
 
-    public MainView(MainActivity mainActivity, MainViewModel mainViewModel ){
+    @BindView(R.id.et_name)
+    EditText etName;
+
+    @BindView(R.id.et_last_name)
+    EditText etLastName;
+
+    @Inject
+    public MainView(MainActivity mainActivity, MainViewModel mainViewModel) {
         super(mainActivity);
 
         ButterKnife.bind(this, mainActivity);
@@ -59,22 +63,31 @@ public class MainView extends BaseView {
     }
 
     @OnClick(R.id.add_user)
-    public void addUser(){
-        mMainViewModel.addUser();
+    public void addUser() {
+
+
+        String name = etName.getText().toString();
+        String lastName = etLastName.getText().toString();
+
+        if (!name.isEmpty() && !lastName.isEmpty()) {
+            mMainViewModel.addUser(name, lastName);
+        } else {
+            Toast.makeText(mBaseActivity.get(), "Incomplete information", Toast.LENGTH_SHORT).show();
+        }
+
     }
 
     @Override
     protected void showDataInUi() {
 
         StringBuilder sb = new StringBuilder();
-        for (User user: mUsers) {
+        for (User user : mUsers) {
             sb.append(user.name);
-            sb.append(",");
+            sb.append(", ");
             sb.append(user.lastName);
             sb.append("\n");
         }
 
         mDbInfo.setText(sb.toString());
-        Toast.makeText(mBaseActivity.get(), sb.toString(), Toast.LENGTH_SHORT).show();
     }
 }

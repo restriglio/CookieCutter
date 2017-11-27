@@ -13,13 +13,13 @@ import java.util.Date;
 
 public class DatabaseInitializer {
 
-    public static void populateAsync(final AppDatabase db) {
+    public void populateAsync(final AppDatabase db) {
 
         PopulateDbAsync task = new PopulateDbAsync(db);
         task.execute();
     }
 
-    private static User addUser(final AppDatabase db, final String id, final String name,
+    private User addUser(final AppDatabase db, final String id, final String name,
                                 final String lastName, final int age) {
         User user = new User();
         user.id = id;
@@ -30,16 +30,16 @@ public class DatabaseInitializer {
         return user;
     }
 
-    private static void populateWithTestData(AppDatabase db) {
+    private void populateWithTestData(AppDatabase db) {
         db.userModel().deleteAll();
 
-        User user1 = addUser(db, "1", "Jason", "Seaver", 40);
-        User user2 = addUser(db, "2", "Mike", "Seaver", 12);
-        addUser(db, "3", "Carol", "Seaver", 15);
+        User user1 = addUser(db, "1", "Esteban", "Moya", 40);
+        User user2 = addUser(db, "2", "Camilo", "Rever", 12);
+        addUser(db, "3", "Susan", "Sanson", 15);
     }
 
 
-    private static class PopulateDbAsync extends AsyncTask<Void, Void, Void> {
+    private class PopulateDbAsync extends AsyncTask<Void, Void, Void> {
 
         private final AppDatabase mDb;
 

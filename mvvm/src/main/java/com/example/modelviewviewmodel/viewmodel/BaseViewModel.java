@@ -14,6 +14,6 @@ public abstract class BaseViewModel extends AndroidViewModel {
     }
 
 
-    public abstract void createDb();
+    public abstract void initializeData();
 
 }
