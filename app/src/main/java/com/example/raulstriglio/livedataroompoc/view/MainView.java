@@ -18,6 +18,8 @@ import java.lang.ref.WeakReference;
 import java.lang.reflect.AccessibleObject;
 import java.util.List;
 
+import javax.inject.Inject;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;

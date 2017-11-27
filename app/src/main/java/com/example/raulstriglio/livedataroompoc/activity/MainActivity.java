@@ -9,17 +9,25 @@ import com.example.raulstriglio.livedataroompoc.R;
 import com.example.raulstriglio.livedataroompoc.modelview.MainViewModel;
 import com.example.raulstriglio.livedataroompoc.view.MainView;
 
+import javax.inject.Inject;
+
+import dagger.android.AndroidInjection;
+
 public class MainActivity extends BaseActivity {
 
     private MainViewModel mainViewModel;
+
+    @Inject
     private MainView mainView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.activity_main);
         mainViewModel = ViewModelProviders.of(this).get(MainViewModel.class);
 
-        mainView = new MainView(this, mainViewModel);
+        AndroidInjection.inject(this);
+        //mainView = new MainView(this, mainViewModel);
     }
 }
