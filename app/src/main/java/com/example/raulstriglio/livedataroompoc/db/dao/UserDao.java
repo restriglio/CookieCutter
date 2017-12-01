@@ -22,8 +22,8 @@ public interface UserDao {
     @Query("select * from users")
     LiveData<List<User>> loadAllUsers();
 
-    @Query("select * from users where first_name = :firstName and last_name = :lastName")
-    List<User> findByNameAndLastName(String firstName, String lastName);
+    @Query("select * from users where first_name like :text or last_name like :text")
+    LiveData<List<User>> findUSerByString(String text);
 
     @Insert(onConflict = IGNORE)
     void insertUser(User user);

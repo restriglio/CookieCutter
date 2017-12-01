@@ -2,14 +2,16 @@ package com.example.raulstriglio.livedataroompoc.repositories;
 
 import android.app.Application;
 import android.arch.lifecycle.LiveData;
+import android.arch.lifecycle.MediatorLiveData;
+import android.arch.lifecycle.MutableLiveData;
 import android.content.Context;
-import android.support.v4.content.ContextCompat;
 
 import com.example.modelviewviewmodel.repository.BaseRepository;
 import com.example.raulstriglio.livedataroompoc.db.AppDatabase;
 import com.example.raulstriglio.livedataroompoc.db.DatabaseInitializer;
 import com.example.raulstriglio.livedataroompoc.db.entities.User;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -21,22 +23,25 @@ import javax.inject.Inject;
 public class UserRepository extends BaseRepository {
 
     AppDatabase mDb;
-    private LiveData<List<User>> users;
-
-
+    private LiveData<List<User>> mUsers;
+    private LiveData<List<User>> mFoundUsers;
     DatabaseInitializer databaseInitializer;
     private Context mContext;
 
+
     @Inject
     public UserRepository(Application application){
-
         mContext = application.getApplicationContext();
+        initLocalData();
+    }
+
+    public void initLocalData(){
         createDb();
 
         if(mDb != null) {
-            users = mDb.userModel().loadAllUsers();
+            mUsers = mDb.userModel().loadAllUsers();
         } else {
-            users = null;
+            mUsers = null;
         }
     }
 
@@ -46,7 +51,7 @@ public class UserRepository extends BaseRepository {
         newUser.lastName = lastName;
         mDb.userModel().insertUser(newUser);
 
-        users = mDb.userModel().loadAllUsers();
+        mUsers = mDb.userModel().loadAllUsers();
     }
 
     public void createDb(){
@@ -57,7 +62,23 @@ public class UserRepository extends BaseRepository {
         databaseInitializer.populateAsync(mDb);
     }
 
-    public LiveData<List<User>> getUsers() {
-        return users;
+    public void searchUser(String text){
+        mFoundUsers = mDb.userModel().findUSerByString(text);
     }
+
+    public LiveData<List<User>> getFoundUsers(){
+
+        if(mFoundUsers == null){
+            mFoundUsers =  new MutableLiveData<>();
+        }
+        return mFoundUsers;
+    }
+
+    public LiveData<List<User>> getmUsers() {
+        if(mUsers == null){
+            mUsers =  new MutableLiveData<>();
+        }
+        return mUsers;
+    }
+
 }

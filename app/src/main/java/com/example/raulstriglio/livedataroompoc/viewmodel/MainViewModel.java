@@ -4,10 +4,9 @@ import android.app.Application;
 import android.arch.lifecycle.LiveData;
 
 import com.example.modelviewviewmodel.viewmodel.BaseViewModel;
-import com.example.raulstriglio.livedataroompoc.db.AppDatabase;
-import com.example.raulstriglio.livedataroompoc.db.DatabaseInitializer;
 import com.example.raulstriglio.livedataroompoc.db.entities.User;
 import com.example.raulstriglio.livedataroompoc.repositories.UserRepository;
+import com.example.raulstriglio.livedataroompoc.view.MainView;
 
 import java.util.List;
 
@@ -20,16 +19,16 @@ import javax.inject.Inject;
 public class MainViewModel extends BaseViewModel {
 
     @Inject
-    UserRepository userRepository;
+    UserRepository mUserRepository;
+
 
     @Inject
     public MainViewModel(Application application) {
         super(application);
-        initializeData();
     }
 
     public void addUser(String name, String lastName){
-        userRepository.addUser(name, lastName);
+        mUserRepository.addUser(name, lastName);
     }
 
     @Override
@@ -37,7 +36,15 @@ public class MainViewModel extends BaseViewModel {
 
     }
 
+    public void findUserByText(String text){
+        mUserRepository.searchUser(text);
+    }
+
     public LiveData<List<User>> getUsers() {
-        return userRepository.getUsers();
+        return mUserRepository.getmUsers();
+    }
+
+    public LiveData<List<User>> getFoundUsers(){
+        return mUserRepository.getFoundUsers();
     }
 }

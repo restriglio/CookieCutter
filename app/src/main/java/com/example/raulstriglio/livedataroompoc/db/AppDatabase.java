@@ -14,7 +14,7 @@ import com.example.raulstriglio.livedataroompoc.db.entities.User;
  * Created by raul.striglio on 03/11/17.
  */
 
-@Database(entities = {User.class}, version = 2)
+@Database(entities = {User.class}, version = 1)
 public abstract class AppDatabase extends RoomDatabase {
 
     private static AppDatabase INSTANCE;
@@ -31,13 +31,17 @@ public abstract class AppDatabase extends RoomDatabase {
         return INSTANCE;
     }
 
-    public static final Migration MIGRATION_1_2 = new Migration(1, 2) {
+
+    // If you need to updater database version, and add entities or new columns,
+    // you gonna have to implement a Migration operation in order to avoid crashes or users losing data
+
+    /*public static final Migration MIGRATION_1_2 = new Migration(1, 2) {
         @Override
         public void migrate(SupportSQLiteDatabase database) {
             database.execSQL("ALTER TABLE product "
                     + " ADD COLUMN street TEXT, number TEXT, neighborhood TEXT");
         }
-    };
+    };*/
 
     public static void destroyInstance() {
         INSTANCE = null;
