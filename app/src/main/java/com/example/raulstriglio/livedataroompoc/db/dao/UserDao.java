@@ -19,25 +19,28 @@ import static android.arch.persistence.room.OnConflictStrategy.IGNORE;
 @Dao
 public interface UserDao {
 
-    @Query("select * from user")
+    @Query("select * from users")
     LiveData<List<User>> loadAllUsers();
 
-    @Query("select * from user where name = :firstName and lastName = :lastName")
+    @Query("select * from users where first_name = :firstName and last_name = :lastName")
     List<User> findByNameAndLastName(String firstName, String lastName);
 
     @Insert(onConflict = IGNORE)
     void insertUser(User user);
 
+    @Insert
+    void insertAll(User... users);
+
     @Update(onConflict = IGNORE)
     void updateUser(User user);
 
-    @Query("delete from user where name like :badName OR lastName like :badName")
+    @Query("delete from users where first_name like :badName OR last_name like :badName")
     int deleteUsersByName(String badName);
 
     @Delete
     void deleteUser(User user);
 
-    @Query("DELETE FROM User")
+    @Query("DELETE FROM users")
     void deleteAll();
 }
 

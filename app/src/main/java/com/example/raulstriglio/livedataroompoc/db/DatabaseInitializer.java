@@ -1,11 +1,9 @@
 package com.example.raulstriglio.livedataroompoc.db;
 
 import android.os.AsyncTask;
-import android.util.Log;
 
+import com.example.raulstriglio.livedataroompoc.db.entities.Address;
 import com.example.raulstriglio.livedataroompoc.db.entities.User;
-
-import java.util.Date;
 
 /**
  * Created by raul.striglio on 03/11/17.
@@ -19,13 +17,13 @@ public class DatabaseInitializer {
         task.execute();
     }
 
-    private User addUser(final AppDatabase db, final String id, final String name,
-                                final String lastName, final int age) {
+    private User addUser(final AppDatabase db, final String name,
+                         final String lastName, final int age, Address address) {
         User user = new User();
-        user.id = id;
         user.age = age;
         user.name = name;
         user.lastName = lastName;
+        user.setAddress(address);
         db.userModel().insertUser(user);
         return user;
     }
@@ -33,9 +31,10 @@ public class DatabaseInitializer {
     private void populateWithTestData(AppDatabase db) {
         db.userModel().deleteAll();
 
-        User user1 = addUser(db, "1", "Esteban", "Moya", 40);
-        User user2 = addUser(db, "2", "Camilo", "Rever", 12);
-        addUser(db, "3", "Susan", "Sanson", 15);
+
+        addUser(db, "Chuck", "Norris", 40, new Address("Maipu", "429", "Centro"));
+        addUser(db, "jean claude", "van damme", 12, new Address("saavedra", "1429", "Centro"));
+        addUser(db, "steven", "seagal", 15, new Address("Balcarce", "321", "Alerces"));
     }
 
 

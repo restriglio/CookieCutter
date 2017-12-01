@@ -49,4 +49,9 @@ public class AppModule {
     BaseRepository provideUserRepository(UserRepository userRepository){
         return userRepository;
     }
+
+    @Provides
+    StringBuilder provideStringBuilder(StringBuilder stringBuilder){
+        return stringBuilder;
+    }
 }

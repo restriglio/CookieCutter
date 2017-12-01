@@ -85,6 +85,8 @@ public class MainView extends BaseView {
             sb.append(user.name);
             sb.append(", ");
             sb.append(user.lastName);
+            sb.append(", ");
+            sb.append(user.getAddress().toString());
             sb.append("\n");
         }
 
