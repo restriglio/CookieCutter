@@ -1,6 +1,7 @@
 package com.example.raulstriglio.livedataroompoc.db.dao;
 
 import android.arch.lifecycle.LiveData;
+import android.arch.lifecycle.MutableLiveData;
 import android.arch.persistence.room.Dao;
 import android.arch.persistence.room.Delete;
 import android.arch.persistence.room.Insert;
@@ -23,7 +24,10 @@ public interface UserDao {
     LiveData<List<User>> loadAllUsers();
 
     @Query("select * from users where first_name like :text or last_name like :text")
-    LiveData<List<User>> findUSerByString(String text);
+    List<User> findUserByString(String text);
+
+    @Query("select * from users where first_name like :text or last_name like :text")
+    List<User> findUSerByStringNoLive(String text);
 
     @Insert(onConflict = IGNORE)
     void insertUser(User user);

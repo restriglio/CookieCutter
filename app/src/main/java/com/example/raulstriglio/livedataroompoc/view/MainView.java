@@ -79,7 +79,7 @@ public class MainView extends BaseView {
             @Override
             public void onChanged(@Nullable List<User> users) {
 
-                if(users == null || users.size() <= 0){
+                if (users == null || users.size() <= 0) {
                     //Fetch date from API or Server
                 } else {
                     //Fetched data from DataBase with Room
@@ -94,22 +94,24 @@ public class MainView extends BaseView {
 
     //Since this users list comes from a search query, we just have to check on our local DB.
     //After that, we could perform same ooperation after server ( Offline first approach )
-    public void subscribeSearchOperationLiveData(){
+    public void subscribeSearchOperationLiveData() {
         mMainViewModel.getFoundUsers().observe(mBaseActivity.get(), new Observer<List<User>>() {
             @Override
             public void onChanged(@Nullable List<User> users) {
 
-                if(users == null || users.size() <= 0){
-                  //Query not yet performed
-                } else {
-                    //Fetched data from DataBase with Room
-                    ((MainActivity) mBaseActivity.get()).showFoundUsersInFragment(users);
+                if (((MainActivity) mBaseActivity.get()).getmCurrentFragment() != null) {
+                    if (users == null || users.size() <= 0) {
+                        //Query not yet performed
+                    } else {
+                        //Fetched data from DataBase with Room
+                        ((MainActivity) mBaseActivity.get()).showFoundUsersInFragment(users);
+                    }
                 }
             }
         });
     }
 
-    public void performSearch(String textToFind){
+    public void performSearch(String textToFind) {
         getViewModel().findUserByText(textToFind);
     }
 
@@ -143,7 +145,7 @@ public class MainView extends BaseView {
         mDbInfo.setText(sb.toString());
     }
 
-    public MainViewModel getViewModel(){
+    public MainViewModel getViewModel() {
         return mMainViewModel;
     }
 }

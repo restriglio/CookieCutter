@@ -36,8 +36,9 @@ public class MainViewModel extends BaseViewModel {
 
     }
 
-    public void findUserByText(String text){
-        mUserRepository.searchUser(text);
+    public LiveData<List<User>> findUserByText(String text){
+       mUserRepository.searchUser(text);
+       return getUsers();
     }
 
     public LiveData<List<User>> getUsers() {

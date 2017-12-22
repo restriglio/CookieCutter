@@ -98,6 +98,10 @@ public class FindUserFragment extends Fragment {
         ((MainActivity) getActivity()).getMainView().performSearch(textToFind);
     }
 
+    public void showFoundUsers(String users){
+        foundUser.setText(users);
+    }
+
     @Override
     public void onStop() {
         super.onStop();

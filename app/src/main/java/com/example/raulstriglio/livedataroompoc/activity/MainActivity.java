@@ -10,6 +10,7 @@ import android.widget.Toast;
 import com.example.modelviewviewmodel.activities.BaseActivity;
 import com.example.raulstriglio.livedataroompoc.R;
 import com.example.raulstriglio.livedataroompoc.db.entities.User;
+import com.example.raulstriglio.livedataroompoc.fragments.FindUserFragment;
 import com.example.raulstriglio.livedataroompoc.viewmodel.MainViewModel;
 import com.example.raulstriglio.livedataroompoc.view.MainView;
 
@@ -23,6 +24,7 @@ public class MainActivity extends BaseActivity {
 
     private MainViewModel mainViewModel;
     private MainView mainView;
+    private Fragment mCurrentFragment;
 
     @Inject
     ViewModelProvider.Factory mViewModelFactory;
@@ -40,6 +42,8 @@ public class MainActivity extends BaseActivity {
 
 
     public void goToFragmentWithStack(int fragmentContainer, Fragment fragment, String tag) {
+
+        mCurrentFragment = fragment;
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
         transaction.replace(fragmentContainer, fragment, tag);
         transaction.addToBackStack(tag);
@@ -47,7 +51,17 @@ public class MainActivity extends BaseActivity {
     }
 
     public void showFoundUsersInFragment(List<User> users){
-        Toast.makeText(this, users.size(), Toast.LENGTH_SHORT).show();
+        StringBuilder sb = new StringBuilder();
+        for (User user : users) {
+            sb.append(user.name);
+            sb.append(", ");
+            sb.append(user.lastName);
+            sb.append(", ");
+            sb.append(user.getAddress().toString());
+            sb.append("\n");
+        }
+
+        ((FindUserFragment)mCurrentFragment).showFoundUsers(sb.toString());
     }
 
     public MainView getMainView() {
@@ -56,5 +70,9 @@ public class MainActivity extends BaseActivity {
 
     public void setMainView(MainView mainView) {
         this.mainView = mainView;
+    }
+
+    public Fragment getmCurrentFragment() {
+        return mCurrentFragment;
     }
 }

@@ -24,7 +24,7 @@ public class UserRepository extends BaseRepository {
 
     AppDatabase mDb;
     private LiveData<List<User>> mUsers;
-    private LiveData<List<User>> mFoundUsers;
+    private MutableLiveData<List<User>> mFoundUsers;
     DatabaseInitializer databaseInitializer;
     private Context mContext;
 
@@ -62,15 +62,17 @@ public class UserRepository extends BaseRepository {
         databaseInitializer.populateAsync(mDb);
     }
 
-    public void searchUser(String text){
-        mFoundUsers = mDb.userModel().findUSerByString(text);
+    public MutableLiveData<List<User>> searchUser(String text){
+        this.mFoundUsers.setValue(mDb.userModel().findUserByString(text));
+        return this.mFoundUsers;
     }
 
-    public LiveData<List<User>> getFoundUsers(){
+    public MutableLiveData<List<User>> getFoundUsers(){
 
         if(mFoundUsers == null){
             mFoundUsers =  new MutableLiveData<>();
         }
+
         return mFoundUsers;
     }
 
