@@ -148,4 +148,8 @@ public class MainView extends BaseView {
     public MainViewModel getViewModel() {
         return mMainViewModel;
     }
+
+    public void onViewBackPressed(){
+        mClContainer.setVisibility(View.VISIBLE);
+    }
 }

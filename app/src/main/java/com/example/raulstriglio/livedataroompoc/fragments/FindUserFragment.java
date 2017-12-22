@@ -11,6 +11,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ProgressBar;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.example.raulstriglio.livedataroompoc.R;
@@ -30,6 +32,9 @@ public class FindUserFragment extends Fragment {
 
     @BindView(R.id.et_text_to_find)
     EditText etTextToFind;
+
+    @BindView(R.id.pb_search)
+    RelativeLayout mPbSearch;
 
     private Handler mHandler;
     private Runnable delayedAction = null;
@@ -84,6 +89,9 @@ public class FindUserFragment extends Fragment {
                 delayedAction = new Runnable() {
                     @Override
                     public void run() {
+                        mPbSearch.setVisibility(View.VISIBLE);
+                        etTextToFind.setVisibility(View.GONE);
+                        foundUser.setVisibility(View.GONE);
                         startSearching(editable.toString());
                     }
                 };
@@ -98,7 +106,10 @@ public class FindUserFragment extends Fragment {
         ((MainActivity) getActivity()).getMainView().performSearch(textToFind);
     }
 
-    public void showFoundUsers(String users){
+    public void showFoundUsers(String users) {
+        mPbSearch.setVisibility(View.GONE);
+        etTextToFind.setVisibility(View.VISIBLE);
+        foundUser.setVisibility(View.VISIBLE);
         foundUser.setText(users);
     }
 

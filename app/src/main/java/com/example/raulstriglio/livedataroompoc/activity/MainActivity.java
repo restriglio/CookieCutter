@@ -50,7 +50,7 @@ public class MainActivity extends BaseActivity {
         transaction.commit();
     }
 
-    public void showFoundUsersInFragment(List<User> users){
+    public void showFoundUsersInFragment(List<User> users) {
         StringBuilder sb = new StringBuilder();
         for (User user : users) {
             sb.append(user.name);
@@ -61,7 +61,7 @@ public class MainActivity extends BaseActivity {
             sb.append("\n");
         }
 
-        ((FindUserFragment)mCurrentFragment).showFoundUsers(sb.toString());
+        ((FindUserFragment) mCurrentFragment).showFoundUsers(sb.toString());
     }
 
     public MainView getMainView() {
@@ -74,5 +74,15 @@ public class MainActivity extends BaseActivity {
 
     public Fragment getmCurrentFragment() {
         return mCurrentFragment;
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+
+        if ((getSupportFragmentManager().getBackStackEntryCount() <= 0) && (mCurrentFragment != null)) {
+            mainView.onViewBackPressed();
+            mCurrentFragment = null;
+        }
     }
 }
