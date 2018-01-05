@@ -136,7 +136,7 @@ public class MainView extends BaseView {
         for (User user : mUsers) {
             sb.append(user.name);
             sb.append(", ");
-            sb.append(user.lastName);
+            sb.append(user.userName);
             sb.append(", ");
             sb.append(user.getAddress().toString());
             sb.append("\n");

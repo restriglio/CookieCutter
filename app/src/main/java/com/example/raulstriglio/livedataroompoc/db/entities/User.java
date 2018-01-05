@@ -6,6 +6,9 @@ import android.arch.persistence.room.Entity;
 import android.arch.persistence.room.Index;
 import android.arch.persistence.room.PrimaryKey;
 
+import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
+
 /**
  * Created by raul.striglio on 03/11/17.
  */
@@ -13,18 +16,26 @@ import android.arch.persistence.room.PrimaryKey;
 @Entity(tableName = "users", indices =  @Index(value = {"first_name", "last_name"}))
 public class User {
 
+    @SerializedName("id")
+    @Expose
     @PrimaryKey(autoGenerate = true)
     private int uid;
 
+    @SerializedName("name")
+    @Expose
     @ColumnInfo(name = "first_name")
     public String name;
 
-    @ColumnInfo(name = "last_name")
-    public String lastName;
+    @SerializedName("username")
+    @Expose
+    @ColumnInfo(name = "user_name")
+    public String userName;
 
     public int age;
 
     @Embedded
+    @SerializedName("address")
+    @Expose
     private Address address;
 
     public int getUid() {
@@ -36,7 +47,7 @@ public class User {
     }
 
     public Address getAddress() {
-        return address == null ? new Address("", "", "") : address;
+        return address == null ? new Address("", "", "", "") : address;
     }
 
     public void setAddress(Address address) {

@@ -2,7 +2,6 @@ package com.example.raulstriglio.livedataroompoc.repositories;
 
 import android.app.Application;
 import android.arch.lifecycle.LiveData;
-import android.arch.lifecycle.MediatorLiveData;
 import android.arch.lifecycle.MutableLiveData;
 import android.content.Context;
 
@@ -11,7 +10,6 @@ import com.example.raulstriglio.livedataroompoc.db.AppDatabase;
 import com.example.raulstriglio.livedataroompoc.db.DatabaseInitializer;
 import com.example.raulstriglio.livedataroompoc.db.entities.User;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -48,7 +46,7 @@ public class UserRepository extends BaseRepository {
     public void addUser(String name, String lastName){
         User newUser = new User();
         newUser.name = name;
-        newUser.lastName = lastName;
+        newUser.userName = lastName;
         mDb.userModel().insertUser(newUser);
 
         mUsers = mDb.userModel().loadAllUsers();

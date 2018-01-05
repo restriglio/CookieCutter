@@ -22,7 +22,7 @@ public class DatabaseInitializer {
         User user = new User();
         user.age = age;
         user.name = name;
-        user.lastName = lastName;
+        user.userName = lastName;
         user.setAddress(address);
         db.userModel().insertUser(user);
         return user;
@@ -32,9 +32,9 @@ public class DatabaseInitializer {
         db.userModel().deleteAll();
 
 
-        addUser(db, "Chuck", "Norris", 40, new Address("Maipu", "429", "Centro"));
-        addUser(db, "jean claude", "van damme", 12, new Address("saavedra", "1429", "Centro"));
-        addUser(db, "steven", "seagal", 15, new Address("Balcarce", "321", "Alerces"));
+        addUser(db, "Chuck", "Norris", 40, new Address("Maipu", "429", "Centro", zipcode));
+        addUser(db, "jean claude", "van damme", 12, new Address("saavedra", "1429", "Centro", zipcode));
+        addUser(db, "steven", "seagal", 15, new Address("Balcarce", "321", "Alerces", zipcode));
     }
 
 

@@ -5,7 +5,6 @@ import android.arch.lifecycle.ViewModelProviders;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
-import android.widget.Toast;
 
 import com.example.modelviewviewmodel.activities.BaseActivity;
 import com.example.raulstriglio.livedataroompoc.R;
@@ -55,7 +54,7 @@ public class MainActivity extends BaseActivity {
         for (User user : users) {
             sb.append(user.name);
             sb.append(", ");
-            sb.append(user.lastName);
+            sb.append(user.userName);
             sb.append(", ");
             sb.append(user.getAddress().toString());
             sb.append("\n");

@@ -1,9 +1,6 @@
 package com.example.raulstriglio.livedataroompoc.db.entities;
 
-import android.arch.persistence.room.Ignore;
-import android.provider.Telephony;
-
-import javax.inject.Inject;
+import com.google.gson.annotations.SerializedName;
 
 /**
  * Created by raul.striglio on 01/12/17.
@@ -11,18 +8,24 @@ import javax.inject.Inject;
 
 public class Address {
 
+    @SerializedName("street")
     private String street;
 
-    private String number;
+    @SerializedName("suite")
+    private String suite;
 
-    private String neighborhood;
+    @SerializedName("city")
+    private String city;
+
+    @SerializedName("zipcode")
+    private String zipcode;
 
 
-
-    public Address(String street, String number, String neighborhood){
+    public Address(String street, String suite, String city, String zipcode) {
         this.street = street;
-        this.number = number;
-        this.neighborhood = neighborhood;
+        this.suite = suite;
+        this.city = city;
+        this.zipcode = zipcode;
     }
 
     public String getStreet() {
@@ -33,29 +36,41 @@ public class Address {
         this.street = street;
     }
 
-    public String getNumber() {
-        return number;
+    public String getSuite() {
+        return suite;
     }
 
-    public void setNumber(String number) {
-        this.number = number;
+    public void setSuite(String suite) {
+        this.suite = suite;
     }
 
-    public String getNeighborhood() {
-        return neighborhood;
+
+    public String getCity() {
+        return city;
     }
 
-    public void setNeighborhood(String neighborhood) {
-        this.neighborhood = neighborhood;
+    public void setCity(String city) {
+        this.city = city;
     }
-    public String toString(){
+
+    public String getZipcode() {
+        return zipcode;
+    }
+
+    public void setZipcode(String city) {
+        this.zipcode = zipcode;
+    }
+
+    public String toString() {
 
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append(street);
         stringBuilder.append(", ");
-        stringBuilder.append(number);
+        stringBuilder.append(suite);
         stringBuilder.append(", ");
-        stringBuilder.append(neighborhood);
+        stringBuilder.append(city);
+        stringBuilder.append(", ");
+        stringBuilder.append(zipcode);
         stringBuilder.append("\n");
 
         return stringBuilder.toString();
