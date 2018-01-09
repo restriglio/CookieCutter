@@ -22,22 +22,22 @@ public interface UserDao {
     @Query("select * from users")
     LiveData<List<User>> loadAllUsers();
 
-    @Query("select * from users where first_name like :text or userName like :text")
+    @Query("select * from users where first_name like :text or user_name like :text")
     List<User> findUserByString(String text);
 
-    @Query("select * from users where first_name like :text or userName like :text")
+    @Query("select * from users where first_name like :text or user_name like :text")
     List<User> findUSerByStringNoLive(String text);
 
     @Insert(onConflict = IGNORE)
     void insertUser(User user);
 
     @Insert
-    void insertAll(User... users);
+    void insertAll( List<User> users);
 
     @Update(onConflict = IGNORE)
     void updateUser(User user);
 
-    @Query("delete from users where first_name like :badName OR userName like :badName")
+    @Query("delete from users where first_name like :badName OR user_name like :badName")
     int deleteUsersByName(String badName);
 
     @Delete

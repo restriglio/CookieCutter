@@ -32,9 +32,12 @@ public class DatabaseInitializer {
         db.userModel().deleteAll();
 
 
-        addUser(db, "Chuck", "Norris", 40, new Address("Maipu", "429", "Centro", zipcode));
-        addUser(db, "jean claude", "van damme", 12, new Address("saavedra", "1429", "Centro", zipcode));
-        addUser(db, "steven", "seagal", 15, new Address("Balcarce", "321", "Alerces", zipcode));
+        addUser(db, "Chuck", "Norris", 40,
+                new Address("Maipu", "429", "Centro", "2000"));
+        addUser(db, "jean claude", "van damme",
+                12, new Address("saavedra", "1429", "Centro", "1012"));
+        addUser(db, "steven", "seagal", 15,
+                new Address("Balcarce", "321", "Alerces", "2600"));
     }
 
 

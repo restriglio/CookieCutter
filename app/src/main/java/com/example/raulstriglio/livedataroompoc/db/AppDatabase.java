@@ -21,6 +21,7 @@ public abstract class AppDatabase extends RoomDatabase {
 
     public abstract UserDao userModel();
 
+
     public static AppDatabase getInMemoryDatabase(Context context) {
         if (INSTANCE == null) {
             INSTANCE =

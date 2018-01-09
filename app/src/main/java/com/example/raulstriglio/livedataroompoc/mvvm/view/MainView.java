@@ -1,6 +1,7 @@
-package com.example.raulstriglio.livedataroompoc.view;
+package com.example.raulstriglio.livedataroompoc.mvvm.view;
 
 import android.arch.lifecycle.Observer;
+import android.content.Intent;
 import android.support.annotation.Nullable;
 import android.support.constraint.ConstraintLayout;
 import android.view.View;
@@ -13,8 +14,8 @@ import com.example.modelviewviewmodel.view.BaseView;
 import com.example.raulstriglio.livedataroompoc.R;
 import com.example.raulstriglio.livedataroompoc.activity.MainActivity;
 import com.example.raulstriglio.livedataroompoc.db.entities.User;
-import com.example.raulstriglio.livedataroompoc.fragments.FindUserFragment;
-import com.example.raulstriglio.livedataroompoc.viewmodel.MainViewModel;
+import com.example.raulstriglio.livedataroompoc.activity.FindUserActivity;
+import com.example.raulstriglio.livedataroompoc.mvvm.viewmodel.MainViewModel;
 
 import java.util.List;
 
@@ -28,7 +29,7 @@ import butterknife.OnClick;
  * Created by raul.striglio on 03/11/17.
  */
 
-public class MainView extends BaseView {
+public class MainView extends BaseView<MainActivity> {
 
     private MainViewModel mMainViewModel;
     private List<User> mUsers;
@@ -62,13 +63,8 @@ public class MainView extends BaseView {
         mFundUser.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                ((MainActivity) mBaseActivity.get()).goToFragmentWithStack(
-                        R.id.fragment_container,
-                        FindUserFragment.newInstance(),
-                        FindUserFragment.getFindUserFragmentTag()
-                );
-
-                mClContainer.setVisibility(View.GONE);
+                Intent findeUser = new Intent(mBaseActivity.get(), FindUserActivity.class);
+                mBaseActivity.get().startActivity(findeUser);
             }
         });
     }
@@ -88,41 +84,19 @@ public class MainView extends BaseView {
                 }
             }
         });
-
-        subscribeSearchOperationLiveData();
-    }
-
-    //Since this users list comes from a search query, we just have to check on our local DB.
-    //After that, we could perform same ooperation after server ( Offline first approach )
-    public void subscribeSearchOperationLiveData() {
-        mMainViewModel.getFoundUsers().observe(mBaseActivity.get(), new Observer<List<User>>() {
-            @Override
-            public void onChanged(@Nullable List<User> users) {
-
-                if (((MainActivity) mBaseActivity.get()).getmCurrentFragment() != null) {
-                    if (users == null || users.size() <= 0) {
-                        //Query not yet performed
-                    } else {
-                        //Fetched data from DataBase with Room
-                        ((MainActivity) mBaseActivity.get()).showFoundUsersInFragment(users);
-                    }
-                }
-            }
-        });
-    }
-
-    public void performSearch(String textToFind) {
-        getViewModel().findUserByText(textToFind);
     }
 
     @OnClick(R.id.add_user)
     public void addUser() {
 
         String name = etName.getText().toString();
-        String lastName = etLastName.getText().toString();
+        String userName = etLastName.getText().toString();
 
-        if (!name.isEmpty() && !lastName.isEmpty()) {
-            mMainViewModel.addUser(name, lastName);
+        if (!name.isEmpty() && !userName.isEmpty()) {
+            User newUser = new User();
+            newUser.name = name;
+            newUser.userName = userName;
+            mMainViewModel.addUser(newUser);
         } else {
             Toast.makeText(mBaseActivity.get(), "Incomplete information", Toast.LENGTH_SHORT).show();
         }

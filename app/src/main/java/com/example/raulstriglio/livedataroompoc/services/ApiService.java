@@ -1,4 +1,4 @@
-package com.example.raulstriglio.livedataroompoc.network;
+package com.example.raulstriglio.livedataroompoc.services;
 
 import com.example.raulstriglio.livedataroompoc.db.entities.User;
 

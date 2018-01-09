@@ -13,7 +13,7 @@ import com.google.gson.annotations.SerializedName;
  * Created by raul.striglio on 03/11/17.
  */
 
-@Entity(tableName = "users", indices =  @Index(value = {"first_name", "last_name"}))
+@Entity(tableName = "users", indices =  @Index(value = {"first_name", "user_name"}))
 public class User {
 
     @SerializedName("id")

@@ -10,10 +10,10 @@ import java.lang.ref.WeakReference;
  * Created by raul.striglio on 03/11/17.
  */
 
-public abstract class BaseView {
+public abstract class BaseView<T> {
 
-    protected WeakReference<BaseActivity> mBaseActivity;
-    public BaseView(BaseActivity baseActivity){
+    protected WeakReference<T> mBaseActivity;
+    public BaseView(T baseActivity){
         mBaseActivity = new WeakReference<>(baseActivity);
     }
 

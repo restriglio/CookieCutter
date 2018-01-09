@@ -1,12 +1,13 @@
-package com.example.raulstriglio.livedataroompoc.viewmodel;
+package com.example.raulstriglio.livedataroompoc.mvvm.viewmodel;
 
 import android.app.Application;
 import android.arch.lifecycle.LiveData;
 
 import com.example.modelviewviewmodel.viewmodel.BaseViewModel;
 import com.example.raulstriglio.livedataroompoc.db.entities.User;
+import com.example.raulstriglio.livedataroompoc.mvvm.events.GetUsersResponse;
 import com.example.raulstriglio.livedataroompoc.repositories.UserRepository;
-import com.example.raulstriglio.livedataroompoc.view.MainView;
+import com.squareup.otto.Subscribe;
 
 import java.util.List;
 
@@ -21,31 +22,21 @@ public class MainViewModel extends BaseViewModel {
     @Inject
     UserRepository mUserRepository;
 
-
     @Inject
     public MainViewModel(Application application) {
         super(application);
     }
 
-    public void addUser(String name, String lastName){
-        mUserRepository.addUser(name, lastName);
-    }
-
-    @Override
-    public void initializeData() {
-
-    }
-
-    public LiveData<List<User>> findUserByText(String text){
-       mUserRepository.searchUser(text);
-       return getUsers();
+    public void addUser(User user){
+        mUserRepository.addUser(user);
     }
 
     public LiveData<List<User>> getUsers() {
         return mUserRepository.getmUsers();
     }
 
-    public LiveData<List<User>> getFoundUsers(){
-        return mUserRepository.getFoundUsers();
+    @Subscribe
+    public void onGetUsersSucces(GetUsersResponse getUsersResponse){
+        mUserRepository.addUserList(getUsersResponse.getmUsers());
     }
 }

@@ -1,5 +1,6 @@
 package com.example.raulstriglio.livedataroompoc.di.modules;
 
+import com.example.raulstriglio.livedataroompoc.activity.FindUserActivity;
 import com.example.raulstriglio.livedataroompoc.activity.MainActivity;
 
 import dagger.Module;
@@ -14,5 +15,8 @@ public abstract class ActivityBuilder {
 
     @ContributesAndroidInjector(modules = {MainActivityModule.class})
     abstract MainActivity bindMainActivity();
+
+    @ContributesAndroidInjector(modules = {MainActivityModule.class})
+    abstract FindUserActivity bindFindUserActivity();
 
 }

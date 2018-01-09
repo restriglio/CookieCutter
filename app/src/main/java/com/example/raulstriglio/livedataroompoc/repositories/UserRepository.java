@@ -9,6 +9,7 @@ import com.example.modelviewviewmodel.repository.BaseRepository;
 import com.example.raulstriglio.livedataroompoc.db.AppDatabase;
 import com.example.raulstriglio.livedataroompoc.db.DatabaseInitializer;
 import com.example.raulstriglio.livedataroompoc.db.entities.User;
+import com.example.raulstriglio.livedataroompoc.services.ServiceItem;
 
 import java.util.List;
 
@@ -25,58 +26,72 @@ public class UserRepository extends BaseRepository {
     private MutableLiveData<List<User>> mFoundUsers;
     DatabaseInitializer databaseInitializer;
     private Context mContext;
+    private boolean mRequestToServer = true;
+    private ServiceItem mServiceItem;
 
 
     @Inject
-    public UserRepository(Application application){
+    public UserRepository(Application application) {
         mContext = application.getApplicationContext();
         initLocalData();
     }
 
-    public void initLocalData(){
+    public void initLocalData() {
         createDb();
 
-        if(mDb != null) {
+        if (mDb != null) {
             mUsers = mDb.userModel().loadAllUsers();
         } else {
             mUsers = null;
         }
     }
 
-    public void addUser(String name, String lastName){
-        User newUser = new User();
-        newUser.name = name;
-        newUser.userName = lastName;
-        mDb.userModel().insertUser(newUser);
+    public void addUser(User user) {
+        mDb.userModel().insertUser(user);
+    }
 
+    public void addUserList(List<User> userList){
+        mDb.userModel().insertAll(userList);
         mUsers = mDb.userModel().loadAllUsers();
     }
 
-    public void createDb(){
+    public void createDb() {
         mDb = AppDatabase.getInMemoryDatabase(mContext);
-
-        //TODO : change this to get information from server and develop offline first option
         this.databaseInitializer = new DatabaseInitializer();
-        databaseInitializer.populateAsync(mDb);
+
+        /*
+         The first time, it requests information to server
+         */
+        if(mRequestToServer){
+            mServiceItem = new ServiceItem();
+            mServiceItem.getUsers();
+            mRequestToServer = false;
+        } else {
+            getmUsers();
+        }
     }
 
-    public MutableLiveData<List<User>> searchUser(String text){
+    public MutableLiveData<List<User>> searchUser(String text) {
+        if (mFoundUsers == null) {
+            mFoundUsers = new MutableLiveData<>();
+        }
+
         this.mFoundUsers.setValue(mDb.userModel().findUserByString(text));
         return this.mFoundUsers;
     }
 
-    public MutableLiveData<List<User>> getFoundUsers(){
+    public MutableLiveData<List<User>> getFoundUsers() {
 
-        if(mFoundUsers == null){
-            mFoundUsers =  new MutableLiveData<>();
+        if (mFoundUsers == null) {
+            mFoundUsers = new MutableLiveData<>();
         }
 
         return mFoundUsers;
     }
 
     public LiveData<List<User>> getmUsers() {
-        if(mUsers == null){
-            mUsers =  new MutableLiveData<>();
+        if (mUsers == null) {
+            mUsers = new MutableLiveData<>();
         }
         return mUsers;
     }

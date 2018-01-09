@@ -1,4 +1,4 @@
-package com.example.raulstriglio.livedataroompoc.viewmodel;
+package com.example.raulstriglio.livedataroompoc.mvvm.viewmodel;
 
 import android.arch.lifecycle.ViewModel;
 import android.arch.lifecycle.ViewModelProvider;
@@ -9,12 +9,13 @@ import javax.inject.Inject;
  * Created by raul.striglio on 27/11/17.
  */
 
-public class ViewModelFactory implements ViewModelProvider.Factory {
+public class MainViewModelFactory implements ViewModelProvider.Factory {
 
     private MainViewModel mViewModel;
+    private FindUserViewModel findUserViewModel;
 
     @Inject
-    public ViewModelFactory(MainViewModel viewModel) {
+    public MainViewModelFactory(MainViewModel viewModel) {
         this.mViewModel = viewModel;
     }
 
