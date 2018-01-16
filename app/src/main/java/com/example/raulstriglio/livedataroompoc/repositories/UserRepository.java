@@ -31,8 +31,9 @@ public class UserRepository extends BaseRepository {
 
 
     @Inject
-    public UserRepository(Application application) {
+    public UserRepository(Application application, ServiceItem serviceItem) {
         mContext = application.getApplicationContext();
+        mServiceItem = serviceItem;
         initLocalData();
     }
 
@@ -63,7 +64,7 @@ public class UserRepository extends BaseRepository {
          The first time, it requests information to server
          */
         if(mRequestToServer){
-            mServiceItem = new ServiceItem();
+           // mServiceItem = new ServiceItem();
             mServiceItem.getUsers();
             mRequestToServer = false;
         } else {

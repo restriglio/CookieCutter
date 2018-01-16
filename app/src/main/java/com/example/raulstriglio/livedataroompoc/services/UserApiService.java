@@ -14,7 +14,7 @@ import retrofit2.http.Query;
  * Created by raul.striglio on 26/12/17.
  */
 
-public interface ApiService {
+public interface UserApiService {
 
     @GET("users")
     Call<List<User>> getUsers();

@@ -7,6 +7,8 @@ import com.squareup.otto.Bus;
 
 import java.util.List;
 
+import javax.inject.Inject;
+
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -17,12 +19,13 @@ import retrofit2.Response;
 
 public class ServiceItem {
 
-    private ApiService client;
-    private Bus mBus;
+    UserApiService client;
+    Bus bus;
 
-    public ServiceItem() {
-        client = ServiceGenerator.createService(ApiService.class);
-        mBus = BusProvider.getInstance();
+    @Inject
+    public ServiceItem(UserApiService client, Bus bus) {
+       this.client = client;
+       this.bus = bus;
     }
 
     public void getUsers() {
@@ -32,13 +35,12 @@ public class ServiceItem {
         call.enqueue(new Callback<List<User>>() {
             @Override
             public void onResponse(Call<List<User>> call, Response<List<User>> response) {
-                mBus.post(new GetUsersResponse(false, response.body()));
+                bus.post(new GetUsersResponse(false, response.body()));
             }
 
             @Override
             public void onFailure(Call<List<User>> call, Throwable t) {
-                //Handle failure
-                mBus.post(new GetUsersResponse(true, "Error from server"));
+                bus.post(new GetUsersResponse(true, "Error from server"));
             }
         });
     }
