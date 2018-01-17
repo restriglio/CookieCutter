@@ -1,22 +1,9 @@
 package com.example.raulstriglio.livedataroompoc.services;
 
-import com.example.raulstriglio.livedataroompoc.db.entities.User;
 import com.example.raulstriglio.livedataroompoc.mvvm.events.GetUsersResponse;
-import com.example.raulstriglio.livedataroompoc.utils.BusProvider;
 import com.squareup.otto.Bus;
 
-import java.util.List;
-
 import javax.inject.Inject;
-
-import io.reactivex.Observable;
-import io.reactivex.Observer;
-import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.disposables.Disposable;
-import io.reactivex.schedulers.Schedulers;
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 
 /**
  * Created by raul.striglio on 09/01/18.
