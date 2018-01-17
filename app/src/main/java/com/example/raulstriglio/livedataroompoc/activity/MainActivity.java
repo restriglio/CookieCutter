@@ -1,19 +1,12 @@
 package com.example.raulstriglio.livedataroompoc.activity;
 
-import android.arch.lifecycle.ViewModelProvider;
-import android.arch.lifecycle.ViewModelProviders;
-import android.os.Bundle;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentTransaction;
 
+import android.os.Bundle;
 import com.example.modelviewviewmodel.activities.BaseActivity;
 import com.example.raulstriglio.livedataroompoc.R;
 import com.example.raulstriglio.livedataroompoc.db.entities.User;
 import com.example.raulstriglio.livedataroompoc.mvvm.viewmodel.MainViewModel;
 import com.example.raulstriglio.livedataroompoc.mvvm.view.MainView;
-import com.example.raulstriglio.livedataroompoc.utils.BusProvider;
-
-import java.util.List;
 
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -22,12 +15,12 @@ import dagger.android.AndroidInjection;
 
 public class MainActivity extends BaseActivity {
 
-    private MainViewModel mainViewModel;
-    private MainView mainView;
+    @Inject
+    MainViewModel mainViewModel;
 
     @Inject
-    @Named("MainViewModelFactory")
-    ViewModelProvider.Factory mViewModelFactory;
+    MainView mainView;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,9 +33,6 @@ public class MainActivity extends BaseActivity {
     @Override
     protected void onResume() {
         super.onResume();
-
-        mainViewModel = ViewModelProviders.of(this, mViewModelFactory).get(MainViewModel.class);
-        mainView = new MainView(this, mainViewModel);
     }
 
     @Override

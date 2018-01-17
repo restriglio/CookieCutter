@@ -5,9 +5,8 @@ import android.arch.lifecycle.LiveData;
 
 import com.example.modelviewviewmodel.viewmodel.BaseViewModel;
 import com.example.raulstriglio.livedataroompoc.db.entities.User;
-import com.example.raulstriglio.livedataroompoc.mvvm.events.GetUsersResponse;
+import com.example.raulstriglio.livedataroompoc.mvvm.view.MainView;
 import com.example.raulstriglio.livedataroompoc.repositories.UserRepository;
-import com.squareup.otto.Subscribe;
 
 import java.util.List;
 
@@ -32,6 +31,10 @@ public class MainViewModel extends BaseViewModel {
     }
 
     public LiveData<List<User>> getUsers() {
-        return mUserRepository.getmUsers();
+        return mUserRepository.getUsersList();
+    }
+
+    public void requestUsersToServer() {
+        mUserRepository.requestUsersToServer();
     }
 }

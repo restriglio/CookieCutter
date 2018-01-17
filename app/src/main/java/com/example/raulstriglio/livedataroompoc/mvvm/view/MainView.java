@@ -79,9 +79,10 @@ public class MainView extends BaseView<MainActivity> {
             public void onChanged(@Nullable List<User> users) {
 
                 if (users == null || users.size() <= 0) {
-                    //Fetch date from API or Server
+                    //Fetch data from API or Server
+                    mMainViewModel.requestUsersToServer();
                 } else {
-                    //Fetched data from DataBase with Room
+                    //Data fetched from DataBase
                     mUsers = users;
                     showDataInUi();
                 }

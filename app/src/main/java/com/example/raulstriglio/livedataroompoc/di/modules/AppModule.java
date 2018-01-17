@@ -7,20 +7,11 @@ import com.example.modelviewviewmodel.repository.BaseRepository;
 import com.example.raulstriglio.livedataroompoc.App;
 import com.example.raulstriglio.livedataroompoc.BuildConfig;
 import com.example.raulstriglio.livedataroompoc.db.DatabaseInitializer;
-import com.example.raulstriglio.livedataroompoc.mvvm.viewmodel.FindUserViewModelFactory;
-import com.example.raulstriglio.livedataroompoc.mvvm.viewmodel.MainViewModelFactory;
 import com.example.raulstriglio.livedataroompoc.repositories.UserRepository;
-import com.example.raulstriglio.livedataroompoc.services.ServiceItem;
 import com.example.raulstriglio.livedataroompoc.services.UserApiService;
-import com.example.raulstriglio.livedataroompoc.utils.BusProvider;
-import com.squareup.otto.Bus;
-
-import javax.inject.Named;
 import javax.inject.Singleton;
 import dagger.Module;
 import dagger.Provides;
-import io.reactivex.android.plugins.RxAndroidPlugins;
-import io.reactivex.internal.schedulers.RxThreadFactory;
 import okhttp3.OkHttpClient;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
@@ -48,19 +39,6 @@ public class AppModule {
 
     @Provides
     @Singleton
-    @Named("MainViewModelFactory")
-    ViewModelProvider.Factory provideViewModelFactory(MainViewModelFactory mainViewModelFactory){
-        return mainViewModelFactory;
-    }
-
-    @Provides
-    @Singleton
-    @Named("FindUserViewModelFactory")
-    ViewModelProvider.Factory provideFindUserViewModelFactory(FindUserViewModelFactory findUserViewModelFactory){
-        return findUserViewModelFactory;
-    }
-
-    @Provides
     BaseRepository provideUserRepository(UserRepository userRepository){
         return userRepository;
     }
@@ -87,16 +65,4 @@ public class AppModule {
 
         return retrofit.create(UserApiService.class);
     }
-
-    /*@Provides
-    @Singleton
-    Bus provideBus() {
-        return BusProvider.getInstance();
-    }*/
-
-    /*@Provides
-    @Singleton
-    ServiceItem provideServiceItem(Bus bus, UserApiService userApiService ){
-        return new ServiceItem(userApiService, bus);
-    }*/
 }
