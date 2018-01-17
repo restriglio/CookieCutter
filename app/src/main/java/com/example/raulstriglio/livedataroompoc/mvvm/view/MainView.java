@@ -40,20 +40,8 @@ public class MainView extends BaseView<MainActivity> {
     @BindView(R.id.names_list)
     RecyclerView mUsersRecyclerView;
 
-    @BindView(R.id.add_user)
-    Button button;
-
-    @BindView(R.id.et_name)
-    EditText etName;
-
-    @BindView(R.id.et_last_name)
-    EditText etLastName;
-
     @BindView(R.id.fund_user)
     Button mFundUser;
-
-    @BindView(R.id.cl_container)
-    ConstraintLayout mClContainer;
 
     @Inject
     public MainView(MainActivity mainActivity, MainViewModel mainViewModel) {
@@ -90,23 +78,6 @@ public class MainView extends BaseView<MainActivity> {
         });
     }
 
-    @OnClick(R.id.add_user)
-    public void addUser() {
-
-        String name = etName.getText().toString();
-        String userName = etLastName.getText().toString();
-
-        if (!name.isEmpty() && !userName.isEmpty()) {
-            User newUser = new User();
-            newUser.name = name;
-            newUser.userName = userName;
-            mMainViewModel.addUser(newUser);
-        } else {
-            Toast.makeText(mBaseActivity.get(), "Incomplete information", Toast.LENGTH_SHORT).show();
-        }
-
-    }
-
     @Override
     protected void showDataInUi() {
 
@@ -119,9 +90,5 @@ public class MainView extends BaseView<MainActivity> {
 
     public MainViewModel getViewModel() {
         return mMainViewModel;
-    }
-
-    public void onViewBackPressed(){
-        mClContainer.setVisibility(View.VISIBLE);
     }
 }
