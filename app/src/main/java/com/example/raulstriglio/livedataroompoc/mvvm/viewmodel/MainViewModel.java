@@ -34,9 +34,4 @@ public class MainViewModel extends BaseViewModel {
     public LiveData<List<User>> getUsers() {
         return mUserRepository.getmUsers();
     }
-
-    @Subscribe
-    public void onGetUsersSucces(GetUsersResponse getUsersResponse){
-        mUserRepository.addUserList(getUsersResponse.getmUsers());
-    }
 }

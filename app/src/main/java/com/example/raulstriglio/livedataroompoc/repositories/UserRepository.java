@@ -10,10 +10,17 @@ import com.example.raulstriglio.livedataroompoc.db.AppDatabase;
 import com.example.raulstriglio.livedataroompoc.db.DatabaseInitializer;
 import com.example.raulstriglio.livedataroompoc.db.entities.User;
 import com.example.raulstriglio.livedataroompoc.services.ServiceItem;
+import com.example.raulstriglio.livedataroompoc.services.UserApiService;
 
 import java.util.List;
 
 import javax.inject.Inject;
+
+import io.reactivex.Observable;
+import io.reactivex.Observer;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.disposables.Disposable;
+import io.reactivex.schedulers.Schedulers;
 
 /**
  * Created by raul.striglio on 27/11/17.
@@ -27,13 +34,13 @@ public class UserRepository extends BaseRepository {
     DatabaseInitializer databaseInitializer;
     private Context mContext;
     private boolean mRequestToServer = true;
-    private ServiceItem mServiceItem;
+    private UserApiService mClient;
 
 
     @Inject
-    public UserRepository(Application application, ServiceItem serviceItem) {
+    public UserRepository(Application application, UserApiService client) {
         mContext = application.getApplicationContext();
-        mServiceItem = serviceItem;
+        mClient = client;
         initLocalData();
     }
 
@@ -64,12 +71,37 @@ public class UserRepository extends BaseRepository {
          The first time, it requests information to server
          */
         if(mRequestToServer){
-           // mServiceItem = new ServiceItem();
-            mServiceItem.getUsers();
+            requestUsersToServer();
             mRequestToServer = false;
         } else {
             getmUsers();
         }
+    }
+
+    private void requestUsersToServer(){
+        Observable<List<User>> usersObservable = mClient.getUsers();
+        usersObservable.subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Observer<List<User>>() {
+                    @Override
+                    public void onSubscribe(Disposable d) {
+
+                    }
+
+                    @Override
+                    public void onNext(List<User> users) {
+                        addUserList(users);
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+
+                    }
+
+                    @Override
+                    public void onComplete() {
+                    }
+                });
     }
 
     public MutableLiveData<List<User>> searchUser(String text) {

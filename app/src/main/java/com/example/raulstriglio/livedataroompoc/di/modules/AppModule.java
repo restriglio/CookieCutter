@@ -19,8 +19,11 @@ import javax.inject.Named;
 import javax.inject.Singleton;
 import dagger.Module;
 import dagger.Provides;
+import io.reactivex.android.plugins.RxAndroidPlugins;
+import io.reactivex.internal.schedulers.RxThreadFactory;
 import okhttp3.OkHttpClient;
 import retrofit2.Retrofit;
+import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 /**
@@ -78,20 +81,22 @@ public class AppModule {
     UserApiService provideUserApiService(OkHttpClient okHttpClient) {
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(BuildConfig.API_URL)
-                .addConverterFactory(GsonConverterFactory.create()).client(okHttpClient).build();
+                .addConverterFactory(GsonConverterFactory.create())
+                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
+                .client(okHttpClient).build();
 
         return retrofit.create(UserApiService.class);
     }
 
-    @Provides
+    /*@Provides
     @Singleton
     Bus provideBus() {
         return BusProvider.getInstance();
-    }
+    }*/
 
-    @Provides
+    /*@Provides
     @Singleton
     ServiceItem provideServiceItem(Bus bus, UserApiService userApiService ){
         return new ServiceItem(userApiService, bus);
-    }
+    }*/
 }

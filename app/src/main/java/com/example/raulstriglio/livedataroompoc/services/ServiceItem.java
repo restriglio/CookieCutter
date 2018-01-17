@@ -9,6 +9,11 @@ import java.util.List;
 
 import javax.inject.Inject;
 
+import io.reactivex.Observable;
+import io.reactivex.Observer;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.disposables.Disposable;
+import io.reactivex.schedulers.Schedulers;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -24,15 +29,15 @@ public class ServiceItem {
 
     @Inject
     public ServiceItem(UserApiService client, Bus bus) {
-       this.client = client;
-       this.bus = bus;
+        this.client = client;
+        this.bus = bus;
     }
 
     public void getUsers() {
-        Call<List<User>> call =
-                client.getUsers();
+        //Call<List<User>> call =
 
-        call.enqueue(new Callback<List<User>>() {
+
+       /* call.enqueue(new Callback<List<User>>() {
             @Override
             public void onResponse(Call<List<User>> call, Response<List<User>> response) {
                 bus.post(new GetUsersResponse(false, response.body()));
@@ -42,7 +47,7 @@ public class ServiceItem {
             public void onFailure(Call<List<User>> call, Throwable t) {
                 bus.post(new GetUsersResponse(true, "Error from server"));
             }
-        });
+        });*/
     }
 
 }

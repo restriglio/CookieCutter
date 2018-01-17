@@ -4,6 +4,8 @@ import android.arch.lifecycle.Observer;
 import android.content.Intent;
 import android.support.annotation.Nullable;
 import android.support.constraint.ConstraintLayout;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -13,6 +15,7 @@ import android.widget.Toast;
 import com.example.modelviewviewmodel.view.BaseView;
 import com.example.raulstriglio.livedataroompoc.R;
 import com.example.raulstriglio.livedataroompoc.activity.MainActivity;
+import com.example.raulstriglio.livedataroompoc.activity.UserAdapter;
 import com.example.raulstriglio.livedataroompoc.db.entities.User;
 import com.example.raulstriglio.livedataroompoc.activity.FindUserActivity;
 import com.example.raulstriglio.livedataroompoc.mvvm.viewmodel.MainViewModel;
@@ -35,7 +38,7 @@ public class MainView extends BaseView<MainActivity> {
     private List<User> mUsers;
 
     @BindView(R.id.names_list)
-    TextView mDbInfo;
+    RecyclerView mUsersRecyclerView;
 
     @BindView(R.id.add_user)
     Button button;
@@ -106,17 +109,11 @@ public class MainView extends BaseView<MainActivity> {
     @Override
     protected void showDataInUi() {
 
-        StringBuilder sb = new StringBuilder();
-        for (User user : mUsers) {
-            sb.append(user.name);
-            sb.append(", ");
-            sb.append(user.userName);
-            sb.append(", ");
-            sb.append(user.getAddress().toString());
-            sb.append("\n");
-        }
-
-        mDbInfo.setText(sb.toString());
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(mBaseActivity.get());
+        UserAdapter userAdapter = new UserAdapter(mUsers);
+        mUsersRecyclerView.setLayoutManager(linearLayoutManager);
+        mUsersRecyclerView.setAdapter(userAdapter);
+        userAdapter.notifyDataSetChanged();
     }
 
     public MainViewModel getViewModel() {

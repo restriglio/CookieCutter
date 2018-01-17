@@ -24,7 +24,6 @@ public class MainActivity extends BaseActivity {
 
     private MainViewModel mainViewModel;
     private MainView mainView;
-    private Fragment mCurrentFragment;
 
     @Inject
     @Named("MainViewModelFactory")
@@ -44,13 +43,11 @@ public class MainActivity extends BaseActivity {
 
         mainViewModel = ViewModelProviders.of(this, mViewModelFactory).get(MainViewModel.class);
         mainView = new MainView(this, mainViewModel);
-        BusProvider.register(mainViewModel);
     }
 
     @Override
     protected void onPause() {
         super.onPause();
-        BusProvider.unregister(mainViewModel);
     }
 
     public MainView getMainView() {
@@ -59,9 +56,5 @@ public class MainActivity extends BaseActivity {
 
     public void setMainView(MainView mainView) {
         this.mainView = mainView;
-    }
-
-    public Fragment getmCurrentFragment() {
-        return mCurrentFragment;
     }
 }

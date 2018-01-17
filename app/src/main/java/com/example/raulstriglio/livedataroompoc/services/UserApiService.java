@@ -4,6 +4,7 @@ import com.example.raulstriglio.livedataroompoc.db.entities.User;
 
 import java.util.List;
 
+import io.reactivex.Observable;
 import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.GET;
@@ -17,11 +18,11 @@ import retrofit2.http.Query;
 public interface UserApiService {
 
     @GET("users")
-    Call<List<User>> getUsers();
+    Observable<List<User>> getUsers();
 
     @GET("users")
-    Call<User> getUserById(@Query("id") Integer id);
+    Observable<User> getUserById(@Query("id") Integer id);
 
     @POST("users")
-    Call<User> postUser(@Body User user);
+    Observable<User> postUser(@Body User user);
 }
