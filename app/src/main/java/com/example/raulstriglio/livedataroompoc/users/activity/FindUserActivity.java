@@ -1,12 +1,12 @@
-package com.example.raulstriglio.livedataroompoc.activity;
+package com.example.raulstriglio.livedataroompoc.users.activity;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 
 import com.example.modelviewviewmodel.activities.BaseActivity;
 import com.example.raulstriglio.livedataroompoc.R;
-import com.example.raulstriglio.livedataroompoc.mvvm.view.FindUserView;
-import com.example.raulstriglio.livedataroompoc.mvvm.viewmodel.FindUserViewModel;
+import com.example.raulstriglio.livedataroompoc.users.view.FindUserView;
+import com.example.raulstriglio.livedataroompoc.users.viewmodel.FindUserViewModel;
 import javax.inject.Inject;
 
 import dagger.android.AndroidInjection;

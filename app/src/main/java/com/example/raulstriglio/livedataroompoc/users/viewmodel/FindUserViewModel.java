@@ -1,4 +1,4 @@
-package com.example.raulstriglio.livedataroompoc.mvvm.viewmodel;
+package com.example.raulstriglio.livedataroompoc.users.viewmodel;
 
 import android.app.Application;
 import android.arch.lifecycle.LiveData;
@@ -31,7 +31,7 @@ public class FindUserViewModel extends BaseViewModel {
     }
 
     public LiveData<List<User>> getFoundUsers(){
-        return mUserRepository.getFoundUsers();
+        return mUserRepository.getFoundUsersList();
     }
 
 }

@@ -1,17 +1,22 @@
-package com.example.raulstriglio.livedataroompoc.activity;
+package com.example.raulstriglio.livedataroompoc.users.view;
 
+import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.raulstriglio.livedataroompoc.Constants;
 import com.example.raulstriglio.livedataroompoc.R;
 import com.example.raulstriglio.livedataroompoc.db.entities.User;
-import com.example.raulstriglio.livedataroompoc.services.UserApiService;
+import com.example.raulstriglio.livedataroompoc.posts.activity.PostsActivity;
+import com.example.raulstriglio.livedataroompoc.users.activity.MainActivity;
 
 import java.util.List;
+
+import javax.inject.Inject;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -22,10 +27,13 @@ import butterknife.ButterKnife;
 
 public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserViewHolder> {
 
-    List<User> users;
+    private List<User> users;
+    private Context context;
 
-    public UserAdapter(List<User> users) {
+
+    public UserAdapter(List<User> users, Context context) {
         this.users = users;
+        this.context = context;
     }
 
 
@@ -39,7 +47,7 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserViewHolder
     public void onBindViewHolder(UserViewHolder holder, int position) {
         StringBuilder sb = new StringBuilder();
 
-        User user = users.get(position);
+        final User user = users.get(position);
         sb.append(user.name);
         sb.append(", ");
         sb.append(user.userName);
@@ -48,6 +56,15 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserViewHolder
         sb.append("\n");
 
         holder.tvUser.setText(sb.toString());
+
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(context, PostsActivity.class);
+                intent.putExtra(Constants.USER_ID, String.valueOf(user.getUid()));
+                context.startActivity(intent);
+            }
+        });
 
     }
 

@@ -3,11 +3,9 @@ package com.example.raulstriglio.livedataroompoc.repositories;
 import android.app.Application;
 import android.arch.lifecycle.LiveData;
 import android.arch.lifecycle.MutableLiveData;
-import android.content.Context;
 
-import com.example.modelviewviewmodel.repository.BaseRepository;
+import com.example.modelviewviewmodel.repository.UseCaseRepository;
 import com.example.raulstriglio.livedataroompoc.db.AppDatabase;
-import com.example.raulstriglio.livedataroompoc.db.DatabaseInitializer;
 import com.example.raulstriglio.livedataroompoc.db.entities.User;
 import com.example.raulstriglio.livedataroompoc.services.UserApiService;
 
@@ -27,51 +25,43 @@ import io.reactivex.schedulers.Schedulers;
  */
 
 @Singleton
-public class UserRepository extends BaseRepository {
+public class UserRepository extends UseCaseRepository<User> {
 
-    AppDatabase mDb;
-    DatabaseInitializer databaseInitializer;
-
-    private Context mContext;
-
-    private static boolean mRequestToServer;
+    private AppDatabase mDataBase;
     private UserApiService mClient;
     private CompositeDisposable disposable;
 
-    private LiveData<List<User>> mUsersList = new MutableLiveData<>();
-    private MutableLiveData<List<User>>  mFoundUsers = new MutableLiveData<>();
-
+    private MutableLiveData<List<User>> mFoundUsersList = new MutableLiveData<>();
 
     @Inject
-    public UserRepository(Application application, UserApiService client) {
-        mContext = application.getApplicationContext();
+    public UserRepository(Application context, UserApiService client) {
+        super(context);
+        mContext = context;
         mClient = client;
         disposable = new CompositeDisposable();
-        initLocalData();
     }
 
     public void initLocalData() {
-        createDb();
-        getUsersList();
+        mDataBase = AppDatabase.getInMemoryDatabase(mContext);
+        setDataList(mDataBase.userModel().loadAllUsers());
+
+        getDataList();
     }
 
-    public void addUser(User user) {
-        mDb.userModel().insertUser(user);
+    @Override
+    public void addData(User user) {
+        mDataBase.userModel().insertUser(user);
     }
 
-    public void addUserList(List<User> userList) {
-        mDb.userModel().insertAll(userList);
-        mUsersList = mDb.userModel().loadAllUsers();
+    @Override
+    public void addDataList(List<User> dataList) {
+        mDataBase.userModel().insertAll(dataList);
+        setDataList(mDataBase.userModel().loadAllUsers());
     }
 
-    public void createDb() {
-        mDb = AppDatabase.getInMemoryDatabase(mContext);
-        this.databaseInitializer = new DatabaseInitializer();
-        mUsersList = mDb.userModel().loadAllUsers();
-    }
-
-    public void requestUsersToServer() {
-        mClient.getUsers().subscribeOn(Schedulers.computation())
+    @Override
+    public void requestDataToServer() {
+        mClient.getUsers().subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Observer<List<User>>() {
                     @Override
@@ -81,7 +71,7 @@ public class UserRepository extends BaseRepository {
 
                     @Override
                     public void onNext(List<User> users) {
-                        addUserList(users);
+                        addDataList(users);
                         disposable.dispose();
                     }
 
@@ -97,21 +87,18 @@ public class UserRepository extends BaseRepository {
                 });
     }
 
-    public MutableLiveData<List<User>> searchUser(String text) {
-        if (mFoundUsers == null) {
-            mFoundUsers = new MutableLiveData<>();
-        }
 
-        this.mFoundUsers.setValue(mDb.userModel().findUserByString(text));
-        return this.mFoundUsers;
+    public LiveData<List<User>> searchUser(String text) {
+
+        mFoundUsersList.setValue(mDataBase.userModel().findUserByString(text));
+        return getFoundUsersList();
     }
 
-    public MutableLiveData<List<User>> getFoundUsers() {
-        return mFoundUsers;
+    public MutableLiveData<List<User>> getFoundUsersList() {
+        return mFoundUsersList;
     }
 
-    public LiveData<List<User>> getUsersList() {
-        return mUsersList;
+    public void setFoundUsersList(MutableLiveData<List<User>> mFoundUsersList) {
+        this.mFoundUsersList = mFoundUsersList;
     }
-
 }

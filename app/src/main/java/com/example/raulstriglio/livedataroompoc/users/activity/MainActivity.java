@@ -1,22 +1,17 @@
-package com.example.raulstriglio.livedataroompoc.activity;
+package com.example.raulstriglio.livedataroompoc.users.activity;
 
 
 import android.os.Bundle;
 import com.example.modelviewviewmodel.activities.BaseActivity;
 import com.example.raulstriglio.livedataroompoc.R;
-import com.example.raulstriglio.livedataroompoc.db.entities.User;
-import com.example.raulstriglio.livedataroompoc.mvvm.viewmodel.MainViewModel;
-import com.example.raulstriglio.livedataroompoc.mvvm.view.MainView;
+import com.example.raulstriglio.livedataroompoc.users.viewmodel.MainViewModel;
+import com.example.raulstriglio.livedataroompoc.users.view.MainView;
 
 import javax.inject.Inject;
-import javax.inject.Named;
 
 import dagger.android.AndroidInjection;
 
 public class MainActivity extends BaseActivity {
-
-    @Inject
-    MainViewModel mainViewModel;
 
     @Inject
     MainView mainView;
@@ -40,11 +35,4 @@ public class MainActivity extends BaseActivity {
         super.onPause();
     }
 
-    public MainView getMainView() {
-        return mainView;
-    }
-
-    public void setMainView(MainView mainView) {
-        this.mainView = mainView;
-    }
 }

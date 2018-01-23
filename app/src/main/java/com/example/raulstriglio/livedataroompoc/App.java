@@ -5,6 +5,7 @@ import android.app.Application;
 
 
 import com.example.raulstriglio.livedataroompoc.di.components.DaggerAppComponent;
+import com.example.raulstriglio.livedataroompoc.services.JobManagerFactory;
 
 import javax.inject.Inject;
 
@@ -30,6 +31,8 @@ public class App extends Application  implements HasActivityInjector {
                 .application(this)
                 .build()
                 .inject(this);
+
+        JobManagerFactory.getJobManager(this);
 
     }
 

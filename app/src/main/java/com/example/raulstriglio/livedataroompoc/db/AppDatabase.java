@@ -7,19 +7,22 @@ import android.arch.persistence.room.RoomDatabase;
 import android.arch.persistence.room.migration.Migration;
 import android.content.Context;
 
+import com.example.raulstriglio.livedataroompoc.db.dao.PostDao;
 import com.example.raulstriglio.livedataroompoc.db.dao.UserDao;
+import com.example.raulstriglio.livedataroompoc.db.entities.Post;
 import com.example.raulstriglio.livedataroompoc.db.entities.User;
 
 /**
  * Created by raul.striglio on 03/11/17.
  */
 
-@Database(entities = {User.class}, version = 1)
+@Database(entities = {User.class, Post.class}, version = 1)
 public abstract class AppDatabase extends RoomDatabase {
 
     private static AppDatabase INSTANCE;
 
     public abstract UserDao userModel();
+    public abstract PostDao postsModel();
 
 
     public static AppDatabase getInMemoryDatabase(Context context) {

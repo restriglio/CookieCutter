@@ -3,10 +3,11 @@ package com.example.raulstriglio.livedataroompoc.di.modules;
 import android.arch.lifecycle.ViewModel;
 import android.arch.lifecycle.ViewModelProvider;
 
-import com.example.raulstriglio.livedataroompoc.mvvm.viewmodel.AddUserViewModel;
-import com.example.raulstriglio.livedataroompoc.mvvm.viewmodel.FindUserViewModel;
-import com.example.raulstriglio.livedataroompoc.mvvm.viewmodel.MainViewModel;
-import com.example.raulstriglio.livedataroompoc.mvvm.viewmodel.MainViewModelFactory;
+import com.example.raulstriglio.livedataroompoc.posts.mvvm.viewmodel.AddPostViewModel;
+import com.example.raulstriglio.livedataroompoc.users.viewmodel.FindUserViewModel;
+import com.example.raulstriglio.livedataroompoc.users.viewmodel.MainViewModel;
+import com.example.raulstriglio.livedataroompoc.users.viewmodel.MainViewModelFactory;
+import com.example.raulstriglio.livedataroompoc.posts.mvvm.viewmodel.PostsViewModel;
 
 import dagger.Binds;
 import dagger.Module;
@@ -21,18 +22,23 @@ public abstract class ViewModelModule {
 
     @Binds
     @IntoMap
-    @ViewModelKey(AddUserViewModel.class)
-    abstract ViewModel bindsAddUserViewModel(AddUserViewModel movieListViewModel);
+    @ViewModelKey(PostsViewModel.class)
+    abstract ViewModel bindsPostsViewModel(PostsViewModel postsViewModel);
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(AddPostViewModel.class)
+    abstract ViewModel bindsAddPostViewModel(AddPostViewModel addPostViewModel);
 
     @Binds
     @IntoMap
     @ViewModelKey(FindUserViewModel.class)
-    abstract ViewModel bindsFindUserViewModel(FindUserViewModel movieDetailViewModel);
+    abstract ViewModel bindsFindUserViewModel(FindUserViewModel findUserViewModel);
 
     @Binds
     @IntoMap
     @ViewModelKey(MainViewModel.class)
-    abstract ViewModel bindsMainViewModel(MainViewModel movieDetailViewModel);
+    abstract ViewModel bindsMainViewModel(MainViewModel mainViewModel);
 
     @Binds
     abstract ViewModelProvider.Factory bindsViewModelFactory(MainViewModelFactory movieViewModelFactory);

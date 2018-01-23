@@ -1,4 +1,4 @@
-package com.example.raulstriglio.livedataroompoc.mvvm.viewmodel;
+package com.example.raulstriglio.livedataroompoc.users.viewmodel;
 
 import android.arch.lifecycle.ViewModel;
 import android.arch.lifecycle.ViewModelProvider;

@@ -1,11 +1,10 @@
-package com.example.raulstriglio.livedataroompoc.mvvm.viewmodel;
+package com.example.raulstriglio.livedataroompoc.users.viewmodel;
 
 import android.app.Application;
 import android.arch.lifecycle.LiveData;
 
 import com.example.modelviewviewmodel.viewmodel.BaseViewModel;
 import com.example.raulstriglio.livedataroompoc.db.entities.User;
-import com.example.raulstriglio.livedataroompoc.mvvm.view.MainView;
 import com.example.raulstriglio.livedataroompoc.repositories.UserRepository;
 
 import java.util.List;
@@ -21,20 +20,17 @@ public class MainViewModel extends BaseViewModel {
     @Inject
     UserRepository mUserRepository;
 
+
     @Inject
     public MainViewModel(Application application) {
         super(application);
     }
 
-    public void addUser(User user){
-        mUserRepository.addUser(user);
-    }
-
     public LiveData<List<User>> getUsers() {
-        return mUserRepository.getUsersList();
+        return mUserRepository.getDataList();
     }
 
-    public void requestUsersToServer() {
-        mUserRepository.requestUsersToServer();
+    public void fetchUsersFromServer() {
+        mUserRepository.requestDataToServer();
     }
 }

@@ -1,13 +1,13 @@
 package com.example.raulstriglio.livedataroompoc.di.modules;
 
 import android.app.Application;
-import android.arch.lifecycle.ViewModelProvider;
 
-import com.example.modelviewviewmodel.repository.BaseRepository;
+import com.example.modelviewviewmodel.repository.UseCaseRepository;
 import com.example.raulstriglio.livedataroompoc.App;
 import com.example.raulstriglio.livedataroompoc.BuildConfig;
-import com.example.raulstriglio.livedataroompoc.db.DatabaseInitializer;
+import com.example.raulstriglio.livedataroompoc.repositories.PostRepository;
 import com.example.raulstriglio.livedataroompoc.repositories.UserRepository;
+import com.example.raulstriglio.livedataroompoc.services.PostApiService;
 import com.example.raulstriglio.livedataroompoc.services.UserApiService;
 import javax.inject.Singleton;
 import dagger.Module;
@@ -21,7 +21,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
  * Created by raul.striglio on 24/11/17.
  */
 
-@Module
+@Module(includes = ViewModelModule.class)
 public class AppModule {
 
     @Provides
@@ -33,20 +33,16 @@ public class AppModule {
 
     @Provides
     @Singleton
-    DatabaseInitializer provideDatabaseInitializer(DatabaseInitializer databaseInitializer){
-        return databaseInitializer;
-    }
-
-    @Provides
-    @Singleton
-    BaseRepository provideUserRepository(UserRepository userRepository){
+    UseCaseRepository provideUserRepository(UserRepository userRepository){
         return userRepository;
     }
 
     @Provides
-    StringBuilder provideStringBuilder(StringBuilder stringBuilder){
-        return stringBuilder;
+    @Singleton
+    UseCaseRepository providePostRepository(PostRepository postRepository){
+        return postRepository;
     }
+
 
     @Provides
     @Singleton
@@ -64,5 +60,17 @@ public class AppModule {
                 .client(okHttpClient).build();
 
         return retrofit.create(UserApiService.class);
+    }
+
+    @Provides
+    @Singleton
+    PostApiService providePostApiService(OkHttpClient okHttpClient) {
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl(BuildConfig.API_URL)
+                .addConverterFactory(GsonConverterFactory.create())
+                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
+                .client(okHttpClient).build();
+
+        return retrofit.create(PostApiService.class);
     }
 }

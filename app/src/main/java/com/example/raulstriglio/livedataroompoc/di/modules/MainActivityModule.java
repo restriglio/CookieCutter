@@ -1,8 +1,8 @@
 package com.example.raulstriglio.livedataroompoc.di.modules;
 
-import com.example.raulstriglio.livedataroompoc.activity.MainActivity;
-import com.example.raulstriglio.livedataroompoc.mvvm.view.MainView;
-import com.example.raulstriglio.livedataroompoc.mvvm.viewmodel.MainViewModel;
+import com.example.raulstriglio.livedataroompoc.users.activity.MainActivity;
+import com.example.raulstriglio.livedataroompoc.users.view.MainView;
+import com.example.raulstriglio.livedataroompoc.users.viewmodel.MainViewModel;
 
 import dagger.Module;
 import dagger.Provides;
@@ -18,5 +18,4 @@ public class MainActivityModule {
     MainView provideMainView(MainActivity mainActivity, MainViewModel mainViewModel){
         return new MainView(mainActivity, mainViewModel);
     }
-
 }

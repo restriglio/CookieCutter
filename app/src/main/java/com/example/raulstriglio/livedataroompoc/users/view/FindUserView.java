@@ -1,4 +1,4 @@
-package com.example.raulstriglio.livedataroompoc.mvvm.view;
+package com.example.raulstriglio.livedataroompoc.users.view;
 
 import android.arch.lifecycle.Observer;
 import android.os.Handler;
@@ -13,11 +13,13 @@ import android.widget.Toast;
 
 import com.example.modelviewviewmodel.view.BaseView;
 import com.example.raulstriglio.livedataroompoc.R;
-import com.example.raulstriglio.livedataroompoc.activity.FindUserActivity;
+import com.example.raulstriglio.livedataroompoc.users.activity.FindUserActivity;
 import com.example.raulstriglio.livedataroompoc.db.entities.User;
-import com.example.raulstriglio.livedataroompoc.mvvm.viewmodel.FindUserViewModel;
+import com.example.raulstriglio.livedataroompoc.users.viewmodel.FindUserViewModel;
 
 import java.util.List;
+
+import javax.inject.Inject;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -26,7 +28,7 @@ import butterknife.ButterKnife;
  * Created by raul.striglio on 09/01/18.
  */
 
-public class FindUserView extends BaseView<FindUserActivity> {
+public class FindUserView extends BaseView<FindUserActivity, FindUserViewModel> {
 
 
     @BindView(R.id.found_user)
@@ -42,15 +44,11 @@ public class FindUserView extends BaseView<FindUserActivity> {
     private Runnable delayedAction = null;
     private List<User> mUsers;
 
-    private FindUserViewModel mFindUserViewModel;
-
+    @Inject
     public FindUserView(FindUserActivity baseActivity, FindUserViewModel findUserViewModel) {
-        super(baseActivity);
-        this.mFindUserViewModel = findUserViewModel;
+        super(baseActivity, findUserViewModel);
         ButterKnife.bind(this, baseActivity);
-
         configureView();
-        initLiveData();
     }
 
     public void configureView() {
@@ -73,23 +71,25 @@ public class FindUserView extends BaseView<FindUserActivity> {
                     mHandler.removeCallbacks(delayedAction);
                 }
 
-                delayedAction = new Runnable() {
-                    @Override
-                    public void run() {
-                        mPbSearch.setVisibility(View.VISIBLE);
-                        etTextToFind.setVisibility(View.GONE);
-                        foundUser.setVisibility(View.GONE);
-                        startSearching(editable.toString());
-                    }
-                };
+                if(editable.toString() != null && !editable.toString().isEmpty()){
+                    delayedAction = new Runnable() {
+                        @Override
+                        public void run() {
+                            mPbSearch.setVisibility(View.VISIBLE);
+                            etTextToFind.setVisibility(View.GONE);
+                            foundUser.setVisibility(View.GONE);
+                            startSearching(editable.toString());
+                        }
+                    };
 
-                mHandler.postDelayed(delayedAction, 1000);
+                    mHandler.postDelayed(delayedAction, 1000);
+                }
             }
         });
     }
 
     public void startSearching(String textToFind) {
-        mFindUserViewModel.findUserByText(textToFind);
+        mBaseViewModel.findUserByText(textToFind);
     }
 
     public void showFoundUsers(String users) {
@@ -112,9 +112,8 @@ public class FindUserView extends BaseView<FindUserActivity> {
     }
 
     //Since this users list comes from a search query, we just have to check our local DB.
-    //After that, we could perform same ooperation after server ( Offline first approach )
     public void subscribeSearchOperationLiveData() {
-        mFindUserViewModel.getFoundUsers().observe(mBaseActivity.get(), new Observer<List<User>>() {
+        mBaseViewModel.getFoundUsers().observe(mBaseActivity.get(), new Observer<List<User>>() {
             @Override
             public void onChanged(@Nullable List<User> users) {
 
@@ -122,18 +121,13 @@ public class FindUserView extends BaseView<FindUserActivity> {
                     //Query not yet performed
                     noUserFound();
                 } else {
-                    //Fetched data from DataBase with Room
+                    //data fetched from DataBase
                     mUsers = users;
                     showDataInUi();
                 }
             }
         });
     }
-
-    public void showFoundUsers(List<User> users) {
-
-    }
-
 
     @Override
     protected void showDataInUi() {
