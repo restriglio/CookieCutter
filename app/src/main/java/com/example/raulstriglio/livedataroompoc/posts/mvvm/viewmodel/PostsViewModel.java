@@ -29,8 +29,9 @@ public class PostsViewModel extends BaseViewModel {
         return postRepository.getDataList();
     }
 
-    public void fetchPostsFromServer() {
-        postRepository.requestDataToServer();
+    public LiveData<List<Post>> getLocalPostsByUserId(String userId) {
+        postRepository.setPostsDataListByUserId(userId);
+        return postRepository.getDataList();
     }
 
     public void fetchPostsByUserId(String userId){

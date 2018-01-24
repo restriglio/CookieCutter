@@ -1,6 +1,7 @@
 package com.example.raulstriglio.livedataroompoc.repositories;
 
 import android.app.Application;
+import android.arch.lifecycle.LiveData;
 import android.arch.lifecycle.MutableLiveData;
 import android.util.Log;
 
@@ -28,6 +29,7 @@ public class PostRepository extends UseCaseRepository<Post> {
     private AppDatabase mDataBase;
     private PostApiService mClient;
     private CompositeDisposable disposable;
+    private String mUserId;
 
     @Inject
     public PostRepository(Application context, PostApiService client){
@@ -43,14 +45,10 @@ public class PostRepository extends UseCaseRepository<Post> {
         setDataList(mDataBase.postsModel().loadAllPosts());
     }
 
-
-    /*
-    *
-    * */
     @Override
     public void addData(Post post) {
         mDataBase.postsModel().insertPost(post);
-
+        //add post job to priority queue
     }
 
     @Override
@@ -59,8 +57,7 @@ public class PostRepository extends UseCaseRepository<Post> {
         setDataList(mDataBase.postsModel().loadAllPosts());
     }
 
-    public void getPostsByUserId(String userId){
-
+    public void setPostsDataListByUserId(String userId){
         MutableLiveData<List<Post>> listMutableLiveData = new MutableLiveData<>();
         listMutableLiveData.setValue(mDataBase.postsModel().loadPostsByUser(userId));
         setDataList(listMutableLiveData);
@@ -68,7 +65,7 @@ public class PostRepository extends UseCaseRepository<Post> {
 
     @Override
     public void requestDataToServer() {
-        mClient.getPosts().subscribeOn(Schedulers.computation())
+        mClient.getPosById(mUserId).subscribeOn(Schedulers.computation())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Observer<List<Post>>() {
                     @Override
@@ -78,7 +75,9 @@ public class PostRepository extends UseCaseRepository<Post> {
 
                     @Override
                     public void onNext(List<Post> posts) {
-                        addDataList(posts);
+                        mDataBase.postsModel().insertAll(posts);
+                        setPostsDataListByUserId(mUserId);
+                        getDataList();
                         disposable.dispose();
                     }
 
@@ -96,30 +95,7 @@ public class PostRepository extends UseCaseRepository<Post> {
 
 
     public void requestPostsToServerByUser(final String userId) {
-        mClient.getPosById(userId).subscribeOn(Schedulers.computation())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Observer<List<Post>>() {
-                    @Override
-                    public void onSubscribe(Disposable d) {
-                        disposable.add(d);
-                    }
-
-                    @Override
-                    public void onNext(List<Post> posts) {
-                        mDataBase.postsModel().insertAll(posts);
-                        getPostsByUserId(userId);
-                        disposable.dispose();
-                    }
-
-                    @Override
-                    public void onError(Throwable e) {
-                        Log.d("error", e.getMessage());
-                    }
-
-                    @Override
-                    public void onComplete() {
-
-                    }
-                });
+        mUserId = userId;
+        requestDataToServer();
     }
 }

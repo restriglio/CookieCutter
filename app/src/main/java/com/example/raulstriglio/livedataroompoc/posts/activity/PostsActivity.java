@@ -22,14 +22,20 @@ public class PostsActivity extends BaseActivity {
     @Inject
     PostsView postsView;
 
+    private String mUserId;
+
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        mUserId = getIntent().getExtras().getString(Constants.USER_ID);
+
         setContentView(R.layout.posts_activity);
-
         AndroidInjection.inject(this);
+    }
 
-        postsView.setUserId(getIntent().getExtras().getString(Constants.USER_ID));
+    public String getUserId(){
+        return mUserId;
     }
 
     @Override

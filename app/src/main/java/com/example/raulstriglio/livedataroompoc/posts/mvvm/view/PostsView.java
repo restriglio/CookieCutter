@@ -43,7 +43,9 @@ public class PostsView extends BaseView<PostsActivity, PostsViewModel> {
 
     @Override
     protected void subscribeUiToLiveData() {
-        mBaseViewModel.getPosts().observeForever(new Observer<List<Post>>() {
+
+        userId = mBaseActivity.get().getUserId();
+        mBaseViewModel.getPosts().observe(mBaseActivity.get(), new Observer<List<Post>>() {
             @Override
             public void onChanged(@Nullable List<Post> posts) {
                 if (posts == null || posts.size() <= 0) {
@@ -51,26 +53,27 @@ public class PostsView extends BaseView<PostsActivity, PostsViewModel> {
                     mBaseViewModel.fetchPostsByUserId(userId);
                 } else {
                     //Data fetched from DataBase
-                    mPosts = posts;
-                    showDataInUi();
+                    mPosts = mBaseViewModel.getLocalPostsByUserId(userId).getValue();
+                    if(mPosts.size() <= 0 ){
+                        mBaseViewModel.fetchPostsByUserId(userId);
+                    } else {
+                        showDataInUi();
+                    }
                 }
             }
         });
     }
+
 
     @Override
     protected void showDataInUi() {
 
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(mBaseActivity.get());
         PostsAdapter postsAdapter = new PostsAdapter(mPosts);
-        mRvPosts.setLayoutManager(linearLayoutManager);
         mRvPosts.setAdapter(postsAdapter);
+        mRvPosts.setLayoutManager(linearLayoutManager);
         postsAdapter.notifyDataSetChanged();
 
-    }
-
-    public void setUserId(String userId) {
-        this.userId = userId;
     }
 
     @OnClick(R.id.fab_add_post)
