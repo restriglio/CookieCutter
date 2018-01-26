@@ -8,7 +8,9 @@ import android.util.Log;
 import com.example.modelviewviewmodel.repository.UseCaseRepository;
 import com.example.raulstriglio.livedataroompoc.db.AppDatabase;
 import com.example.raulstriglio.livedataroompoc.db.entities.Post;
+import com.example.raulstriglio.livedataroompoc.services.JobManagerFactory;
 import com.example.raulstriglio.livedataroompoc.services.PostApiService;
+import com.example.raulstriglio.livedataroompoc.services.PostJob;
 
 import java.util.List;
 
@@ -31,6 +33,7 @@ public class PostRepository extends UseCaseRepository<Post> {
     private CompositeDisposable disposable;
     private String mUserId;
 
+
     @Inject
     public PostRepository(Application context, PostApiService client){
         super(context);
@@ -49,6 +52,8 @@ public class PostRepository extends UseCaseRepository<Post> {
     public void addData(Post post) {
         mDataBase.postsModel().insertPost(post);
         //add post job to priority queue
+        PostJob postJob = new PostJob(post);
+        JobManagerFactory.getJobManager().addJobInBackground(postJob);
     }
 
     @Override

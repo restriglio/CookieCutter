@@ -7,12 +7,14 @@ import android.arch.persistence.room.PrimaryKey;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
+import java.io.Serializable;
+
 /**
  * Created by raul.striglio on 18/01/18.
  */
 
 @Entity(tableName = "posts", indices =  @Index(value = {"userId"}))
-public class Post {
+public class Post implements Serializable{
 
 
     @SerializedName("id")
@@ -31,6 +33,8 @@ public class Post {
     @SerializedName("body")
     @Expose
     private String body;
+
+    private String status;
 
     public String getId() {
         return id;
@@ -62,5 +66,13 @@ public class Post {
 
     public void setBody(String body) {
         this.body = body;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
     }
 }

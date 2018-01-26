@@ -3,6 +3,7 @@
     package="com.example.raulstriglio.livedataroompoc">
 
     <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
 
     <application
         android:name=".App"
@@ -23,6 +24,8 @@
         <activity android:name=".users.activity.FindUserActivity" />
         <activity android:name=".posts.activity.PostsActivity" />
         <activity android:name=".posts.activity.AddPostActivity" />
+
+        <service android:name=".services.SchedulerJobService" android:permission="android.permission.BIND_JOB_SERVICE" />
     </application>
 
 </manifest>

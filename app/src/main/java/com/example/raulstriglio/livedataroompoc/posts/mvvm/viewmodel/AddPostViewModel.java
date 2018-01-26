@@ -18,6 +18,7 @@ public class AddPostViewModel extends BaseViewModel {
     @Inject
     PostRepository mPostRepository;
 
+    @Inject
     public AddPostViewModel(Application application) {
         super(application);
     }

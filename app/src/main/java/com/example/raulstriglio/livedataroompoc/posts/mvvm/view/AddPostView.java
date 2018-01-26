@@ -53,6 +53,7 @@ public class AddPostView extends BaseView<AddPostActivity, AddPostViewModel> {
     @OnClick(R.id.add_post)
     public void addPost() {
         Post newPost = new Post();
+        newPost.setUserId(mBaseActivity.get().getUserId());
         newPost.setBody(etBody.getText().toString());
         newPost.setTitle(etTitle.getText().toString());
         mAddPostViewModel.addPostToDb(newPost);

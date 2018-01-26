@@ -80,6 +80,7 @@ public class PostsView extends BaseView<PostsActivity, PostsViewModel> {
     public void addPost(){
         Intent addPostIntent = new Intent(mBaseActivity.get(), AddPostActivity.class);
         addPostIntent.putExtra(Constants.USER_ID, userId);
+        addPostIntent.putExtra(Constants.USER_ID, userId);
         mBaseActivity.get().startActivity(addPostIntent);
     }
 }

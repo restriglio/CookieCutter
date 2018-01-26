@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 
 import com.example.modelviewviewmodel.activities.BaseActivity;
+import com.example.raulstriglio.livedataroompoc.Constants;
 import com.example.raulstriglio.livedataroompoc.R;
 import com.example.raulstriglio.livedataroompoc.posts.mvvm.view.AddPostView;
 
@@ -19,10 +20,19 @@ public class AddPostActivity extends BaseActivity {
     @Inject
     AddPostView addPostView;
 
+    String mUserId;
+
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.add_post_activity);
         AndroidInjection.inject(this);
+
+        mUserId = getIntent().getExtras().getString(Constants.USER_ID);
     }
+
+    public String getUserId(){
+        return mUserId;
+    }
+
 }

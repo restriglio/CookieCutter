@@ -3,6 +3,7 @@ package com.example.raulstriglio.livedataroompoc.services;
 import com.example.raulstriglio.livedataroompoc.db.entities.Post;
 import com.example.raulstriglio.livedataroompoc.db.entities.User;
 
+import java.io.Serializable;
 import java.util.List;
 
 import io.reactivex.Observable;
