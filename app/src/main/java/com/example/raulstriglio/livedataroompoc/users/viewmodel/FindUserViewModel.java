@@ -34,4 +34,8 @@ public class FindUserViewModel extends BaseViewModel {
         return mUserRepository.getFoundUsersList();
     }
 
+    public void clearFoundUsers(){
+        mUserRepository.deleteFoundUsers();
+    }
+
 }

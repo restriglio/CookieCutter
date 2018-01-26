@@ -23,7 +23,6 @@
 
         <activity android:name=".users.activity.FindUserActivity" />
         <activity android:name=".posts.activity.PostsActivity" />
-        <activity android:name=".posts.activity.AddPostActivity" />
 
         <service android:name=".services.SchedulerJobService" android:permission="android.permission.BIND_JOB_SERVICE" />
     </application>

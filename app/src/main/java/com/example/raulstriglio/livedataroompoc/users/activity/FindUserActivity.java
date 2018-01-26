@@ -42,6 +42,7 @@ public class FindUserActivity extends BaseActivity {
     @Override
     public void onStop() {
         super.onStop();
+        findUserView.removeObserver();
     }
 
 }

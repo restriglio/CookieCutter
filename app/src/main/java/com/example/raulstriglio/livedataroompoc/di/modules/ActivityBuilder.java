@@ -1,6 +1,5 @@
 package com.example.raulstriglio.livedataroompoc.di.modules;
 
-import com.example.raulstriglio.livedataroompoc.posts.activity.AddPostActivity;
 import com.example.raulstriglio.livedataroompoc.posts.activity.PostsActivity;
 import com.example.raulstriglio.livedataroompoc.users.activity.FindUserActivity;
 import com.example.raulstriglio.livedataroompoc.users.activity.MainActivity;
@@ -23,8 +22,4 @@ public abstract class ActivityBuilder {
 
     @ContributesAndroidInjector(modules = {PostsActivityModule.class})
     abstract PostsActivity bindPostActivity();
-
-    @ContributesAndroidInjector(modules = {AddPostsActivityModule.class})
-    abstract AddPostActivity bindAddPostActivity();
-
 }

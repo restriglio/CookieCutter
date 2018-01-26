@@ -101,4 +101,8 @@ public class UserRepository extends UseCaseRepository<User> {
     public void setFoundUsersList(MutableLiveData<List<User>> mFoundUsersList) {
         this.mFoundUsersList = mFoundUsersList;
     }
+
+    public void deleteFoundUsers(){
+        mDataBase.userModel().deleteAll();
+    }
 }

@@ -3,7 +3,6 @@ package com.example.raulstriglio.livedataroompoc.di.modules;
 import android.arch.lifecycle.ViewModel;
 import android.arch.lifecycle.ViewModelProvider;
 
-import com.example.raulstriglio.livedataroompoc.posts.mvvm.viewmodel.AddPostViewModel;
 import com.example.raulstriglio.livedataroompoc.users.viewmodel.FindUserViewModel;
 import com.example.raulstriglio.livedataroompoc.users.viewmodel.MainViewModel;
 import com.example.raulstriglio.livedataroompoc.users.viewmodel.MainViewModelFactory;
@@ -24,11 +23,6 @@ public abstract class ViewModelModule {
     @IntoMap
     @ViewModelKey(PostsViewModel.class)
     abstract ViewModel bindsPostsViewModel(PostsViewModel postsViewModel);
-
-    @Binds
-    @IntoMap
-    @ViewModelKey(AddPostViewModel.class)
-    abstract ViewModel bindsAddPostViewModel(AddPostViewModel addPostViewModel);
 
     @Binds
     @IntoMap

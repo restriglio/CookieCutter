@@ -3,14 +3,12 @@ package com.example.raulstriglio.livedataroompoc.posts.mvvm.view;
 import android.arch.lifecycle.Observer;
 import android.content.Intent;
 import android.support.annotation.Nullable;
-import android.support.design.widget.FloatingActionButton;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
 import com.example.modelviewviewmodel.view.BaseView;
 import com.example.raulstriglio.livedataroompoc.Constants;
 import com.example.raulstriglio.livedataroompoc.R;
-import com.example.raulstriglio.livedataroompoc.posts.activity.AddPostActivity;
 import com.example.raulstriglio.livedataroompoc.posts.activity.PostsActivity;
 import com.example.raulstriglio.livedataroompoc.db.entities.Post;
 import com.example.raulstriglio.livedataroompoc.posts.mvvm.viewmodel.PostsViewModel;
@@ -76,11 +74,4 @@ public class PostsView extends BaseView<PostsActivity, PostsViewModel> {
 
     }
 
-    @OnClick(R.id.fab_add_post)
-    public void addPost(){
-        Intent addPostIntent = new Intent(mBaseActivity.get(), AddPostActivity.class);
-        addPostIntent.putExtra(Constants.USER_ID, userId);
-        addPostIntent.putExtra(Constants.USER_ID, userId);
-        mBaseActivity.get().startActivity(addPostIntent);
-    }
 }
