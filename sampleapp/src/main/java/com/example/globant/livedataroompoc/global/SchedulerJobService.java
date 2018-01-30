@@ -7,6 +7,9 @@ import com.birbit.android.jobqueue.scheduling.FrameworkJobSchedulerService;
 
 /**
  * Created by raul.striglio on 23/01/18.
+ *
+ * The service implementation for the framework job scheduler
+ *
  */
 
 public class SchedulerJobService extends FrameworkJobSchedulerService {

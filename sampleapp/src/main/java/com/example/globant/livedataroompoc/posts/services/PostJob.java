@@ -25,6 +25,9 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 /**
  * Created by raul.striglio on 23/01/18.
+ *
+ * Define your background task as Job and enqueue them to your JobManager instance
+ *
  */
 
 public class PostJob extends Job {
