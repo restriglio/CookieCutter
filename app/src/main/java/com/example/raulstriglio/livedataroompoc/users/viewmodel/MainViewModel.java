@@ -20,7 +20,6 @@ public class MainViewModel extends BaseViewModel {
     @Inject
     UserRepository mUserRepository;
 
-
     @Inject
     public MainViewModel(Application application) {
         super(application);

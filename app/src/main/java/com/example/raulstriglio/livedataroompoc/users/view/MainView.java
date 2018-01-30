@@ -44,8 +44,8 @@ public class MainView extends BaseView<MainActivity, MainViewModel> {
         mFundUser.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent findeUser = new Intent(mBaseActivity.get(), FindUserActivity.class);
-                mBaseActivity.get().startActivity(findeUser);
+                Intent findUser = new Intent(mBaseActivity.get(), FindUserActivity.class);
+                mBaseActivity.get().startActivity(findUser);
             }
         });
     }
