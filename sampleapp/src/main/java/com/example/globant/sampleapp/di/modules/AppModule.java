@@ -2,11 +2,8 @@ package com.example.globant.sampleapp.di.modules;
 
 import android.app.Application;
 
-import com.example.modelviewviewmodel.repository.UseCaseRepository;
 import com.example.globant.sampleapp.global.App;
 import com.example.globant.sampleapp.BuildConfig;
-import com.example.globant.sampleapp.posts.repositories.PostRepository;
-import com.example.globant.sampleapp.users.repositories.UserRepository;
 import com.example.globant.sampleapp.posts.services.PostApiService;
 import com.example.globant.sampleapp.users.services.UserApiService;
 import javax.inject.Singleton;
@@ -29,7 +26,6 @@ public class AppModule {
     Application provideContext(App application) {
         return application;
     }
-
 
     @Provides
     @Singleton
