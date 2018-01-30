@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.raulstriglio.sampleapp">
+    package="com.example.globant.sampleapp">
 
     <uses-permission android:name="android.permission.INTERNET"/>
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
 
     <application
-        android:name="com.example.raulstriglio.sampleapp.global.App"
+        android:name="com.example.globant.sampleapp.global.App"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -14,15 +14,15 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
 
-        <activity android:name="com.example.raulstriglio.sampleapp.users.activity.MainActivity">
+        <activity android:name="com.example.globant.sampleapp.users.activity.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
 
-        <activity android:name="com.example.raulstriglio.sampleapp.users.activity.FindUserActivity" />
-        <activity android:name="com.example.raulstriglio.sampleapp.posts.activity.PostsActivity" />
+        <activity android:name="com.example.globant.sampleapp.users.activity.FindUserActivity" />
+        <activity android:name="com.example.globant.sampleapp.posts.activity.PostsActivity" />
 
     </application>
 
