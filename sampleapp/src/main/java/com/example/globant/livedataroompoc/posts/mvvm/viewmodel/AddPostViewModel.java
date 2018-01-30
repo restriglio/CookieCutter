@@ -22,7 +22,7 @@ public class AddPostViewModel extends BaseViewModel<Post, PostRepository> {
     private Post mPost;
     private String mUserId;
 
-    MutableLiveData<Post> addedPostLiveData = new MutableLiveData<>();
+    private MutableLiveData<Post> addedPostLiveData = new MutableLiveData<>();
 
     @Inject
     public AddPostViewModel(Application application,PostRepository useCaseRepository) {

@@ -6,9 +6,9 @@ package com.example.globant.livedataroompoc.global;
 
 public class Constants {
 
-    public static String USER_ID = "userID";
-    public static String STATUS_SYNCED = "SYNCED";
-    public static String STATUS_SYNCING = "SYNCING";
-    public static String STATUS_ERROR = "ERROR";
+    public final static String USER_ID = "userID";
+    public final static String STATUS_SYNCED = "SYNCED";
+    public final static String STATUS_SYNCING = "SYNCING";
+    public final static String STATUS_ERROR = "ERROR";
 
 }

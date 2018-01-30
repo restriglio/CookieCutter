@@ -32,7 +32,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class PostJob extends Job {
 
-    private Post post;
+    private final Post post;
 
     public PostJob(Post post) {
         super(new Params(1).requireNetwork().persist());
