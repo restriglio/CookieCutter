@@ -43,6 +43,9 @@ public class FindUserView extends BaseView<FindUserActivity, FindUserViewModel> 
     private Handler mHandler;
     private Runnable delayedAction = null;
     private List<User> mUsers;
+    private Observer<List<User>> mListObserver;
+
+    private boolean viewConfigured = false;
 
     @Inject
     public FindUserView(FindUserActivity baseActivity, FindUserViewModel findUserViewModel) {
@@ -71,7 +74,7 @@ public class FindUserView extends BaseView<FindUserActivity, FindUserViewModel> 
                     mHandler.removeCallbacks(delayedAction);
                 }
 
-                if(editable.toString() != null && !editable.toString().isEmpty()){
+                if (editable.toString() != null && !editable.toString().isEmpty()) {
                     delayedAction = new Runnable() {
                         @Override
                         public void run() {
@@ -86,6 +89,8 @@ public class FindUserView extends BaseView<FindUserActivity, FindUserViewModel> 
                 }
             }
         });
+
+        viewConfigured = true;
     }
 
     public void startSearching(String textToFind) {
@@ -107,26 +112,32 @@ public class FindUserView extends BaseView<FindUserActivity, FindUserViewModel> 
     }
 
     @Override
-    protected void subscribeUiToLiveData() {
-        subscribeSearchOperationLiveData();
-    }
-
     //Since this users list comes from a search query, we just have to check our local DB.
-    public void subscribeSearchOperationLiveData() {
-        mBaseViewModel.getFoundUsers().observe(mBaseActivity.get(), new Observer<List<User>>() {
+    protected void subscribeUiToLiveData() {
+
+        mListObserver = new Observer<List<User>>() {
             @Override
             public void onChanged(@Nullable List<User> users) {
 
-                if (users == null || users.size() <= 0) {
-                    //Query not yet performed
-                    noUserFound();
-                } else {
-                    //data fetched from DataBase
-                    mUsers = users;
-                    showDataInUi();
+                if(viewConfigured) {
+                    if (users == null || users.size() <= 0) {
+                        //Query not yet performed
+                        noUserFound();
+                    } else {
+                        //data fetched from DataBase
+                        mUsers = users;
+                        showDataInUi();
+                    }
                 }
             }
-        });
+        };
+
+        mBaseViewModel.getFoundUsers().observe(mBaseActivity.get(), mListObserver);
+    }
+
+    public void removeObserver() {
+        mBaseViewModel.getFoundUsers().removeObserver(mListObserver);
+        mBaseViewModel.clearFoundUsers();
     }
 
     @Override

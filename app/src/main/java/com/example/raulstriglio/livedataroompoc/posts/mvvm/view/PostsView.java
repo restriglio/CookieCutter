@@ -69,7 +69,7 @@ public class PostsView extends BaseView<PostsActivity, PostsViewModel> {
     protected void showDataInUi() {
 
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(mBaseActivity.get());
-        PostsAdapter postsAdapter = new PostsAdapter(mPosts);
+        PostsAdapter postsAdapter = new PostsAdapter(mPosts, mBaseActivity.get());
         mRvPosts.setAdapter(postsAdapter);
         mRvPosts.setLayoutManager(linearLayoutManager);
         postsAdapter.notifyDataSetChanged();
@@ -79,7 +79,6 @@ public class PostsView extends BaseView<PostsActivity, PostsViewModel> {
     @OnClick(R.id.fab_add_post)
     public void addPost(){
         Intent addPostIntent = new Intent(mBaseActivity.get(), AddPostActivity.class);
-        addPostIntent.putExtra(Constants.USER_ID, userId);
         addPostIntent.putExtra(Constants.USER_ID, userId);
         mBaseActivity.get().startActivity(addPostIntent);
     }

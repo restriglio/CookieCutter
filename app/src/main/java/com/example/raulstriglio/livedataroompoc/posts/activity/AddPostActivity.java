@@ -7,8 +7,10 @@ import com.example.modelviewviewmodel.activities.BaseActivity;
 import com.example.raulstriglio.livedataroompoc.Constants;
 import com.example.raulstriglio.livedataroompoc.R;
 import com.example.raulstriglio.livedataroompoc.posts.mvvm.view.AddPostView;
+import com.example.raulstriglio.livedataroompoc.utils.BusProvider;
 
 import javax.inject.Inject;
+
 import dagger.android.AndroidInjection;
 
 /**
@@ -24,14 +26,29 @@ public class AddPostActivity extends BaseActivity {
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
         setContentView(R.layout.add_post_activity);
-        AndroidInjection.inject(this);
-
         mUserId = getIntent().getExtras().getString(Constants.USER_ID);
+        super.onCreate(savedInstanceState);
     }
 
-    public String getUserId(){
+    @Override
+    protected void injectThis() {
+        AndroidInjection.inject(this);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        BusProvider.register(addPostView.getViewModel());
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        BusProvider.unregister(addPostView.getViewModel());
+    }
+
+    public String getUserId() {
         return mUserId;
     }
 

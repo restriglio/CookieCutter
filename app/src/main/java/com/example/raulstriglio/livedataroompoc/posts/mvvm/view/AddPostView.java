@@ -1,13 +1,18 @@
 package com.example.raulstriglio.livedataroompoc.posts.mvvm.view;
 
+import android.arch.lifecycle.Observer;
+import android.support.annotation.Nullable;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.example.modelviewviewmodel.view.BaseView;
+import com.example.raulstriglio.livedataroompoc.Constants;
 import com.example.raulstriglio.livedataroompoc.R;
 import com.example.raulstriglio.livedataroompoc.db.entities.Post;
 import com.example.raulstriglio.livedataroompoc.posts.activity.AddPostActivity;
 import com.example.raulstriglio.livedataroompoc.posts.mvvm.viewmodel.AddPostViewModel;
+import com.example.raulstriglio.livedataroompoc.utils.BusProvider;
 
 import javax.inject.Inject;
 
@@ -21,7 +26,6 @@ import butterknife.OnClick;
 
 public class AddPostView extends BaseView<AddPostActivity, AddPostViewModel> {
 
-    private AddPostViewModel mAddPostViewModel;
 
     @BindView(R.id.add_post)
     Button button;
@@ -37,12 +41,19 @@ public class AddPostView extends BaseView<AddPostActivity, AddPostViewModel> {
     public AddPostView(AddPostActivity baseActivity, AddPostViewModel addPostViewModel) {
         super(baseActivity, addPostViewModel);
         ButterKnife.bind(this, baseActivity);
-        this.mAddPostViewModel = addPostViewModel;
+        mBaseViewModel.setmUserId(mBaseActivity.get().getUserId());
     }
 
     @Override
     protected void subscribeUiToLiveData() {
-
+        mBaseViewModel.getAddedPost().observe(mBaseActivity.get(), new Observer<Post>() {
+            @Override
+            public void onChanged(@Nullable Post post) {
+                if(post != null && post.getStatus() != null) {
+                  mBaseActivity.get().onBackPressed();
+                }
+            }
+        });
     }
 
     @Override
@@ -53,9 +64,10 @@ public class AddPostView extends BaseView<AddPostActivity, AddPostViewModel> {
     @OnClick(R.id.add_post)
     public void addPost() {
         Post newPost = new Post();
+        mBaseViewModel.setmUserId(mBaseActivity.get().getUserId());
         newPost.setUserId(mBaseActivity.get().getUserId());
         newPost.setBody(etBody.getText().toString());
         newPost.setTitle(etTitle.getText().toString());
-        mAddPostViewModel.addPostToDb(newPost);
+        mBaseViewModel.addPostToDb(newPost);
     }
 }

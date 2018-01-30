@@ -13,6 +13,7 @@ import com.example.raulstriglio.livedataroompoc.db.entities.User;
 import java.util.List;
 
 import static android.arch.persistence.room.OnConflictStrategy.IGNORE;
+import static android.arch.persistence.room.OnConflictStrategy.REPLACE;
 
 /**
  * Created by raul.striglio on 18/01/18.
@@ -28,13 +29,16 @@ public interface PostDao {
     @Query("select * from posts where userId like :uid")
     List<Post> loadPostsByUser(String uid);
 
-    @Insert(onConflict = IGNORE)
+    @Query("select * from posts where id like :postId")
+    Post loadPost(String postId);
+
+    @Insert(onConflict = REPLACE)
     void insertPost(Post post);
 
     @Insert
     void insertAll( List<Post> posts);
 
-    @Update(onConflict = IGNORE)
+    @Update(onConflict = REPLACE)
     void updatePost(Post post);
 
     @Delete

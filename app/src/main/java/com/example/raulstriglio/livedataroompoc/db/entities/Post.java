@@ -4,6 +4,7 @@ import android.arch.persistence.room.Entity;
 import android.arch.persistence.room.Index;
 import android.arch.persistence.room.PrimaryKey;
 
+import com.example.raulstriglio.livedataroompoc.Constants;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
@@ -16,6 +17,10 @@ import java.io.Serializable;
 @Entity(tableName = "posts", indices =  @Index(value = {"userId"}))
 public class Post implements Serializable{
 
+
+    public Post(){
+        status = Constants.STATUS_SYNCED;
+    }
 
     @SerializedName("id")
     @Expose

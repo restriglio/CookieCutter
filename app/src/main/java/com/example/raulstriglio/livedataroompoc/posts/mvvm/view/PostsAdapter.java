@@ -1,11 +1,14 @@
 package com.example.raulstriglio.livedataroompoc.posts.mvvm.view;
 
+import android.content.Context;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.example.raulstriglio.livedataroompoc.Constants;
 import com.example.raulstriglio.livedataroompoc.R;
 import com.example.raulstriglio.livedataroompoc.db.entities.Post;
 import com.example.raulstriglio.livedataroompoc.db.entities.User;
@@ -26,9 +29,11 @@ import dagger.Binds;
 public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.PostsViewHolder> {
 
     private List<Post> mPostsList;
+    private Context mContext;
 
-    public PostsAdapter(List<Post> postsList){
+    public PostsAdapter(List<Post> postsList, Context context){
         mPostsList = postsList;
+        mContext = context;
     }
 
     @Override
@@ -43,6 +48,17 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.PostsViewHol
         Post post = mPostsList.get(position);
         holder.tvTitle.setText(post.getTitle());
         holder.tvBody.setText(post.getBody());
+
+        if(post.getStatus().equals(Constants.STATUS_SYNCING)){
+            holder.tvTitle.setTextColor(ContextCompat.getColor(mContext, android.R.color.darker_gray));
+            holder.tvBody.setTextColor(ContextCompat.getColor(mContext,  android.R.color.darker_gray));
+        } else if(post.getStatus().equals(Constants.STATUS_SYNCED)){
+            holder.tvTitle.setTextColor(ContextCompat.getColor(mContext, android.R.color.black));
+            holder.tvBody.setTextColor(ContextCompat.getColor(mContext, android.R.color.black));
+        } else if(post.getStatus().equals(Constants.STATUS_ERROR)){
+            holder.tvTitle.setTextColor(ContextCompat.getColor(mContext, android.R.color.holo_red_dark));
+            holder.tvBody.setTextColor(ContextCompat.getColor(mContext, android.R.color.holo_red_dark));
+        }
     }
 
     @Override

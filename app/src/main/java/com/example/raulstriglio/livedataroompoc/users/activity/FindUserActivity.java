@@ -7,6 +7,7 @@ import com.example.modelviewviewmodel.activities.BaseActivity;
 import com.example.raulstriglio.livedataroompoc.R;
 import com.example.raulstriglio.livedataroompoc.users.view.FindUserView;
 import com.example.raulstriglio.livedataroompoc.users.viewmodel.FindUserViewModel;
+
 import javax.inject.Inject;
 
 import dagger.android.AndroidInjection;
@@ -26,11 +27,8 @@ public class FindUserActivity extends BaseActivity {
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
         setContentView(R.layout.find_user_activity);
-
-        AndroidInjection.inject(this);
-
+        super.onCreate(savedInstanceState);
     }
 
     @Override
@@ -42,6 +40,11 @@ public class FindUserActivity extends BaseActivity {
     @Override
     public void onStop() {
         super.onStop();
+        findUserView.removeObserver();
     }
 
+    @Override
+    protected void injectThis() {
+        AndroidInjection.inject(this);
+    }
 }

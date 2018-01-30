@@ -2,6 +2,7 @@ package com.example.raulstriglio.livedataroompoc.users.activity;
 
 
 import android.os.Bundle;
+
 import com.example.modelviewviewmodel.activities.BaseActivity;
 import com.example.raulstriglio.livedataroompoc.R;
 import com.example.raulstriglio.livedataroompoc.users.viewmodel.MainViewModel;
@@ -16,12 +17,14 @@ public class MainActivity extends BaseActivity {
     @Inject
     MainView mainView;
 
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        setContentView(R.layout.activity_main);
+        super.onCreate(savedInstanceState);
+    }
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-
+    protected void injectThis() {
         AndroidInjection.inject(this);
     }
 

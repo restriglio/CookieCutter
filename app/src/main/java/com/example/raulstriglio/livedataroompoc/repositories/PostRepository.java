@@ -12,6 +12,8 @@ import com.example.raulstriglio.livedataroompoc.services.JobManagerFactory;
 import com.example.raulstriglio.livedataroompoc.services.PostApiService;
 import com.example.raulstriglio.livedataroompoc.services.PostJob;
 
+import org.w3c.dom.ls.LSException;
+
 import java.util.List;
 
 import javax.inject.Inject;
@@ -64,8 +66,12 @@ public class PostRepository extends UseCaseRepository<Post> {
 
     public void setPostsDataListByUserId(String userId){
         MutableLiveData<List<Post>> listMutableLiveData = new MutableLiveData<>();
-        listMutableLiveData.setValue(mDataBase.postsModel().loadPostsByUser(userId));
+        listMutableLiveData.setValue(getPostFromDbByUserId(userId));
         setDataList(listMutableLiveData);
+    }
+
+    public List<Post> getPostFromDbByUserId(String userId){
+        return mDataBase.postsModel().loadPostsByUser(userId);
     }
 
     @Override
@@ -89,6 +95,8 @@ public class PostRepository extends UseCaseRepository<Post> {
                     @Override
                     public void onError(Throwable e) {
                         Log.d("error", e.getMessage());
+                        //manage error
+                        disposable.dispose();
                     }
 
                     @Override
@@ -102,5 +110,17 @@ public class PostRepository extends UseCaseRepository<Post> {
     public void requestPostsToServerByUser(final String userId) {
         mUserId = userId;
         requestDataToServer();
+    }
+
+    public void updatePost(Post post) {
+        mDataBase.postsModel().insertPost(post);
+    }
+
+    public void deletePost(Post post) {
+        mDataBase.postsModel().deletePost(post);
+    }
+
+    public Post loadPost(Post post){
+        return mDataBase.postsModel().loadPost(post.getId());
     }
 }

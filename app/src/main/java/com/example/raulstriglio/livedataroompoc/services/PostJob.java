@@ -8,7 +8,10 @@ import com.birbit.android.jobqueue.Job;
 import com.birbit.android.jobqueue.Params;
 import com.birbit.android.jobqueue.RetryConstraint;
 import com.example.raulstriglio.livedataroompoc.BuildConfig;
+import com.example.raulstriglio.livedataroompoc.Constants;
 import com.example.raulstriglio.livedataroompoc.db.entities.Post;
+import com.example.raulstriglio.livedataroompoc.posts.events.OnPostAddedSuccess;
+import com.example.raulstriglio.livedataroompoc.utils.BusProvider;
 
 import java.util.List;
 
@@ -56,6 +59,16 @@ public class PostJob extends Job {
                 .client(new OkHttpClient.Builder().build()).build();
 
         PostApiService mClient = retrofit.create(PostApiService.class);
+
+        final String postId = post.getId();
+
+        /*
+         *  The server returns error if we don't clean up the id.
+         *  To see on error behavior, uncomment this line.
+         */
+
+        post.setId(null);
+
         mClient.addPost(post).subscribeOn(Schedulers.computation())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Observer<Post>() {
@@ -66,13 +79,18 @@ public class PostJob extends Job {
 
                     @Override
                     public void onNext(Post post) {
-                        post.setStatus("OK");
+                        post.setStatus(Constants.STATUS_SYNCED);
+                        post.setId(postId);
                         disposable.dispose();
+                        BusProvider.getInstance().post(new OnPostAddedSuccess(post));
                     }
 
                     @Override
                     public void onError(Throwable e) {
                         Log.d("error", e.getMessage());
+                        post.setStatus(Constants.STATUS_ERROR);
+                        disposable.dispose();
+                        BusProvider.getInstance().post(new OnPostAddedSuccess(post));
                     }
 
                     @Override

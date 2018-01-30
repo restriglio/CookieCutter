@@ -9,6 +9,7 @@ import com.example.raulstriglio.livedataroompoc.db.AppDatabase;
 import com.example.raulstriglio.livedataroompoc.db.entities.User;
 import com.example.raulstriglio.livedataroompoc.services.UserApiService;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -100,5 +101,9 @@ public class UserRepository extends UseCaseRepository<User> {
 
     public void setFoundUsersList(MutableLiveData<List<User>> mFoundUsersList) {
         this.mFoundUsersList = mFoundUsersList;
+    }
+
+    public void deleteFoundUsers() {
+        mFoundUsersList.setValue(new ArrayList<User>());
     }
 }
