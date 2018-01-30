@@ -26,15 +26,17 @@ public class PostsActivity extends BaseActivity {
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-
-        mUserId = getIntent().getExtras().getString(Constants.USER_ID);
-
         setContentView(R.layout.posts_activity);
+        mUserId = getIntent().getExtras().getString(Constants.USER_ID);
+        super.onCreate(savedInstanceState);
+    }
+
+    @Override
+    protected void injectThis() {
         AndroidInjection.inject(this);
     }
 
-    public String getUserId(){
+    public String getUserId() {
         return mUserId;
     }
 

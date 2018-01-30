@@ -45,6 +45,8 @@ public class FindUserView extends BaseView<FindUserActivity, FindUserViewModel> 
     private List<User> mUsers;
     private Observer<List<User>> mListObserver;
 
+    private boolean viewConfigured = false;
+
     @Inject
     public FindUserView(FindUserActivity baseActivity, FindUserViewModel findUserViewModel) {
         super(baseActivity, findUserViewModel);
@@ -87,6 +89,8 @@ public class FindUserView extends BaseView<FindUserActivity, FindUserViewModel> 
                 }
             }
         });
+
+        viewConfigured = true;
     }
 
     public void startSearching(String textToFind) {
@@ -115,18 +119,20 @@ public class FindUserView extends BaseView<FindUserActivity, FindUserViewModel> 
             @Override
             public void onChanged(@Nullable List<User> users) {
 
-                if (users == null || users.size() <= 0) {
-                    //Query not yet performed
-                    noUserFound();
-                } else {
-                    //data fetched from DataBase
-                    mUsers = users;
-                    showDataInUi();
+                if(viewConfigured) {
+                    if (users == null || users.size() <= 0) {
+                        //Query not yet performed
+                        noUserFound();
+                    } else {
+                        //data fetched from DataBase
+                        mUsers = users;
+                        showDataInUi();
+                    }
                 }
             }
         };
 
-        mBaseViewModel.getFoundUsers().observeForever(mListObserver);
+        mBaseViewModel.getFoundUsers().observe(mBaseActivity.get(), mListObserver);
     }
 
     public void removeObserver() {
