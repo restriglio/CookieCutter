@@ -26,7 +26,7 @@ public interface UserDao {
     @Query("select * from users")
     LiveData<List<User>> loadAllUsers();
 
-    @Query("select * from users where first_name like :text or user_name like :text")
+    @Query("select * from users where first_name like '%' || :text  || '%' or user_name like  '%' || :text  || '%'")
     List<User> findUserByString(String text);
 
     @Insert(onConflict = IGNORE)

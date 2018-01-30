@@ -9,6 +9,10 @@ import dagger.android.ContributesAndroidInjector;
 
 /**
  * Created by raul.striglio on 24/11/17.
+ *
+ * This is a given module to dagger. We map all our activities here.
+ * And Dagger know our activities in compile time.
+ *
  */
 
 @Module

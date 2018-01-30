@@ -33,19 +33,6 @@ public class AppModule {
 
     @Provides
     @Singleton
-    UseCaseRepository provideUserRepository(UserRepository userRepository){
-        return userRepository;
-    }
-
-    @Provides
-    @Singleton
-    UseCaseRepository providePostRepository(PostRepository postRepository){
-        return postRepository;
-    }
-
-
-    @Provides
-    @Singleton
     OkHttpClient provideOkHttpClient() {
         return new OkHttpClient.Builder().build();
     }
