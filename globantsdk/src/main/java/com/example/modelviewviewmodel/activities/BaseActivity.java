@@ -27,7 +27,10 @@ public abstract class BaseActivity extends LifecycleActivity {
     }
 
 
-    /* Implement this  method to allow injection into this activity */
+    /* Implement this  method to allow injection into this activity
+     *  e.g: implement with 'AndroidInjection.inject(this);'
+     *
+     */
     protected abstract void injectThis();
 
 }

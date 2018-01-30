@@ -1,6 +1,5 @@
 package com.example.modelviewviewmodel.repository;
 
-import android.app.Application;
 import android.arch.lifecycle.LiveData;
 import android.arch.lifecycle.MutableLiveData;
 import android.content.Context;
