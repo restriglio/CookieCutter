@@ -20,7 +20,22 @@ public abstract class BaseView<A extends LifecycleActivity, V extends ViewModel>
         subscribeUiToLiveData();
     }
 
+    /* In this method you must define your observer in order to receive the livedata changes managed
+     * by the BaseViewModel.
+     *
+     *  e.g:
+     *  baseViewModel.getDataList().observer(mBaseActivity.get(),ew Observer<List<User>>() {
+     *       @Override
+     *       public void onChanged(@Nullable List<User> users) {
+     *           showDataInUi();
+     *       }
+     *   });
+     *
+     *
+     * */
     protected abstract void subscribeUiToLiveData();
+
+    /* Show the observed live data in your view  */
     protected abstract void showDataInUi();
 
     public V getViewModel() {
