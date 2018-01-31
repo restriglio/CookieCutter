@@ -11,7 +11,7 @@ a brand new project using Room and LiveData.
 Inside globantsdk we offer MVVM structure to build our application.
 This base architecture is implemented as a library module and should be included in the application gradle.
 
-MVVM contains:
+globantsdk contains:
  - BaseView
  - BaseViewModel
  - BaseActivity
