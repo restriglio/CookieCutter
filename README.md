@@ -15,6 +15,8 @@ MVVM contains:
  - BaseView
  - BaseViewModel
  - BaseActivity
+ 
+ ![alt text](https://github.com/restriglio/CookieCutter/blob/master/ACC.png)
 
 # Room Persistence Library
 Room provides an abstraction layer over SQLite to allow fluent database access while harnessing the full power of SQLite.
