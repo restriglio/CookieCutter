@@ -17,7 +17,7 @@ globantsdk contains:
  - BaseActivity
  - UseCaseRepository
  
- Here a simple diagram to explain that architecture:
+ Here a simple diagram to explain the architecture:
  ![alt text](https://github.com/restriglio/CookieCutter/blob/master/ACC.png)
 
 # Room Persistence Library
