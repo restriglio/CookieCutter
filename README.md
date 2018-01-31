@@ -1,21 +1,23 @@
 # CookieCutter
 
-The initial idea of this CookieCutter is to provide a base arquitecture in order to be able to implement
+The initial idea of this CookieCutter is to provide a base architecture in order to be able to implement
 a brand new project using Room and LiveData.
 
 # How the project is structured
 
-- app
-- MVVM
+- sampleapp
+- globantsdk
 
-As you can see, we offer MVVM to build our application.
-This base arquitecture is implemented as a library module and should be included in the application gradle.
+Inside globantsdk we offer MVVM structure to build our application.
+This base architecture is implemented as a library module and should be included in the application gradle.
 
 MVVM contains:
  - BaseView
  - BaseViewModel
  - BaseActivity
+ - UseCaseRepository
  
+ Here a simple diagram to explain that architecture:
  ![alt text](https://github.com/restriglio/CookieCutter/blob/master/ACC.png)
 
 # Room Persistence Library
