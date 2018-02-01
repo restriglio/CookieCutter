@@ -1,5 +1,6 @@
 package com.example.modelviewviewmodel.view;
 
+import android.arch.lifecycle.AndroidViewModel;
 import android.arch.lifecycle.LifecycleActivity;
 import android.arch.lifecycle.ViewModel;
 
@@ -7,9 +8,13 @@ import java.lang.ref.WeakReference;
 
 /**
  * Created by raul.striglio on 03/11/17.
+ *
+ * @typeparam A This represents your Activity that contains the view
+ * @typeparam V This represents your own implementation of BaseViewModel
+ *
  */
 
-public abstract class BaseView<A extends LifecycleActivity, V extends ViewModel> {
+public abstract class BaseView<A extends LifecycleActivity, V extends AndroidViewModel> {
 
     protected WeakReference<A> mBaseActivity;
     protected V mBaseViewModel;
@@ -24,7 +29,9 @@ public abstract class BaseView<A extends LifecycleActivity, V extends ViewModel>
      * by the BaseViewModel.
      *
      *  e.g:
-     *  baseViewModel.getDataList().observer(mBaseActivity.get(),ew Observer<List<User>>() {
+     *  We have a ViewModel que tiene un livedata (mediante el metodo getDataList()) al cual desde la vista le definimos un observer para
+     *  que cuando esos datos cambien ese observer reacciones y se llame al metodo showDataInUi
+     *  baseViewModel.getDataList().observer(mBaseActivity.get(),new Observer<List<User>>() {
      *       @Override
      *       public void onChanged(@Nullable List<User> users) {
      *           showDataInUi();
