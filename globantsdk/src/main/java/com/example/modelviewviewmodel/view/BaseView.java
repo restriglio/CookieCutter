@@ -9,7 +9,7 @@ import java.lang.ref.WeakReference;
 /**
  * Created by raul.striglio on 03/11/17.
  *
- * @typeparam A This represents your Activity that contains the view
+ * @typeparam A This represents your Activity related to this view
  * @typeparam V This represents your own implementation of BaseViewModel
  *
  */
@@ -29,8 +29,9 @@ public abstract class BaseView<A extends LifecycleActivity, V extends AndroidVie
      * by the BaseViewModel.
      *
      *  e.g:
-     *  We have a ViewModel que tiene un livedata (mediante el metodo getDataList()) al cual desde la vista le definimos un observer para
-     *  que cuando esos datos cambien ese observer reacciones y se llame al metodo showDataInUi
+     *  We have a ViewModel that contains LiveData data that must be observed by our view,
+     *  in order to react to changes in such data and show it calling showDataInUi method
+     *
      *  baseViewModel.getDataList().observer(mBaseActivity.get(),new Observer<List<User>>() {
      *       @Override
      *       public void onChanged(@Nullable List<User> users) {

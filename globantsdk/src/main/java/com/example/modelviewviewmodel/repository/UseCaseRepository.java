@@ -8,6 +8,9 @@ import java.util.List;
 
 /**
  * Created by raul.striglio on 27/11/17.
+ *
+ * @typeparam T This represents your model entity
+ *
  */
 
 public abstract class UseCaseRepository<T> {
