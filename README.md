@@ -1,7 +1,6 @@
 # CookieCutter
 
-The initial idea of this CookieCutter is to provide a base architecture in order to be able to implement
-a brand new project using Room and LiveData.
+The initial idea of the Android CookieCutter is to provide a base and clean architecture in order to be able to implement a brand new project using Room and LiveData, having the option of chose MVVM or MVP architectural patterns.
 
 # How the project is structured
 
