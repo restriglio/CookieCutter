@@ -3,7 +3,7 @@ package com.example.globant.sampleapp.posts.activity;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 
-import com.example.modelviewviewmodel.activities.BaseActivity;
+import com.example.modelviewviewmodel.activity.BaseActivity;
 import com.example.globant.sampleapp.global.Constants;
 import com.example.globant.sampleapp.R;
 import com.example.globant.sampleapp.posts.mvvm.view.PostsView;

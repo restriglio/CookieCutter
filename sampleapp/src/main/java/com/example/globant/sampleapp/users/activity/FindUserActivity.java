@@ -3,7 +3,7 @@ package com.example.globant.sampleapp.users.activity;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 
-import com.example.modelviewviewmodel.activities.BaseActivity;
+import com.example.modelviewviewmodel.activity.BaseActivity;
 import com.example.globant.sampleapp.R;
 import com.example.globant.sampleapp.users.view.FindUserView;
 import com.example.globant.sampleapp.users.viewmodel.FindUserViewModel;

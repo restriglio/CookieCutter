@@ -1,1 +1,1 @@
-include ':sampleapp', ':globantsdk'
+include ':sampleapp', ':globantsdk', ':fragmentssampleapp'

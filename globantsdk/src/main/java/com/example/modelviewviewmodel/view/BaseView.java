@@ -2,6 +2,7 @@ package com.example.modelviewviewmodel.view;
 
 import android.arch.lifecycle.AndroidViewModel;
 import android.arch.lifecycle.LifecycleActivity;
+import android.arch.lifecycle.LifecycleRegistryOwner;
 import android.arch.lifecycle.ViewModel;
 
 import java.lang.ref.WeakReference;
@@ -14,7 +15,7 @@ import java.lang.ref.WeakReference;
  *
  */
 
-public abstract class BaseView<A extends LifecycleActivity, V extends AndroidViewModel> {
+public abstract class BaseView<A extends LifecycleRegistryOwner, V extends AndroidViewModel> {
 
     protected WeakReference<A> mBaseActivity;
     protected V mBaseViewModel;
@@ -25,7 +26,7 @@ public abstract class BaseView<A extends LifecycleActivity, V extends AndroidVie
         subscribeUiToLiveData();
     }
 
-    /* In this method you must define your observer in order to receive the livedata changes managed
+    /* In this method you must define your observer in order to receive the LiveData changes managed
      * by the BaseViewModel.
      *
      *  e.g:

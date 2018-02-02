@@ -1,19 +1,18 @@
-package com.example.modelviewviewmodel.activities;
+package com.example.modelviewviewmodel.fragment;
 
-import android.arch.lifecycle.LifecycleActivity;
+import android.arch.lifecycle.LifecycleFragment;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 
 /**
- * Created by raul.striglio on 03/11/17.
+ * Created by raul.striglio on 01/02/18.
  */
 
-public abstract class BaseActivity extends LifecycleActivity {
-
+public abstract class BaseFragment extends LifecycleFragment {
 
     /*
-      The next two commented lines are an example of how to inject the view into the activity using dagger 2.11
-      Dagger 2.11 must be used to resolve this dependency in order to have our view instanciated.
+      The next two commented lines are an example of how to inject the view into the Fragment using dagger 2.11
+      in order to resolve this dependency, to have our view instantiated.
 
       @Inject
       BaseView baseView;
@@ -22,8 +21,8 @@ public abstract class BaseActivity extends LifecycleActivity {
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
-        injectThis();
         super.onCreate(savedInstanceState);
+        injectThis();
     }
 
 

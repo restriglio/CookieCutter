@@ -6,8 +6,6 @@ import com.example.globant.sampleapp.users.view.MainView;
 import com.example.globant.sampleapp.users.viewmodel.MainViewModel;
 import com.example.modelviewviewmodel.repository.UseCaseRepository;
 
-import javax.inject.Singleton;
-
 import dagger.Module;
 import dagger.Provides;
 
@@ -19,7 +17,6 @@ import dagger.Provides;
 public class MainActivityModule {
 
     @Provides
-    @Singleton
     UseCaseRepository provideUserRepository(UserRepository userRepository){
         return userRepository;
     }

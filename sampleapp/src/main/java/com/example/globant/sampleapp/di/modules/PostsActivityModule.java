@@ -19,7 +19,6 @@ import dagger.Provides;
 public class PostsActivityModule {
 
     @Provides
-    @Singleton
     UseCaseRepository providePostRepository(PostRepository postRepository){
         return postRepository;
     }
