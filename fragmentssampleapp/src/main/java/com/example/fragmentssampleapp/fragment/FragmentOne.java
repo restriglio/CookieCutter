@@ -23,6 +23,10 @@ public class FragmentOne extends BaseFragment {
     @Inject
     FragmentOneView fragmentOneView;
 
+    public String getFragmentTag(){
+        return FragmentOne.class.getSimpleName();
+    }
+
     public static FragmentOne newInstance() {
 
         Bundle args = new Bundle();

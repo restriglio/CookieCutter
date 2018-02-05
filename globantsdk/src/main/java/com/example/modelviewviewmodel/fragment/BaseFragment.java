@@ -31,5 +31,6 @@ public abstract class BaseFragment extends LifecycleFragment {
      *
      */
     protected abstract void injectThis();
+    public abstract String getFragmentTag();
 
 }

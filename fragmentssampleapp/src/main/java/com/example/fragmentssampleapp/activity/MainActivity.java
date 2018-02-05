@@ -53,7 +53,7 @@ public class MainActivity extends BaseActivity implements HasSupportFragmentInje
         getSupportFragmentManager()
                 .beginTransaction()
                 .replace(R.id.container, fragment)
-                .addToBackStack(null)
+                .addToBackStack(fragment.getFragmentTag())
                 .commit();
     }
 
