@@ -61,4 +61,7 @@ dependencies {
     compile 'com.birbit:android-priority-jobqueue:2.0.1'
 
     compile 'com.aurelhubert:ahbottomnavigation:2.1.0'
+
+    //Picasso
+    compile 'com.squareup.picasso:picasso:2.5.2'
 }
