@@ -38,7 +38,7 @@ public class MainActivity extends BaseActivity implements HasSupportFragmentInje
     @Override
     protected void onResume() {
         super.onResume();
-        mainActivityView.initView();
+        //mainActivityView.initView();
     }
 
     @Override

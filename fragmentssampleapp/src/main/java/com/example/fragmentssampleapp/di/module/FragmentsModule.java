@@ -19,17 +19,17 @@ import dagger.Provides;
 public class FragmentsModule {
 
     @Provides
-    FragmentOneView bindsFragmentOneView(FragmentOne fragmentOne, FragmentViewModel fragmentViewModel ){
-        return new FragmentOneView(fragmentOne, fragmentViewModel);
+    FragmentOneView bindsFragmentOneView(FragmentOne fragmentOne, FragmentViewModel baseViewModel) {
+        return new FragmentOneView(fragmentOne, baseViewModel);
     }
 
     @Provides
-    FragmentTwoView bindsFragmentTwoView(FragmentTwo fragmentTwo, FragmentViewModel fragmentViewModel){
+    FragmentTwoView bindsFragmentTwoView(FragmentTwo fragmentTwo, FragmentViewModel fragmentViewModel) {
         return new FragmentTwoView(fragmentTwo, fragmentViewModel);
     }
 
     @Provides
-    FragmentThreeView bindsFragmentThreeView(FragmentThree fragmentThree , FragmentViewModel fragmentViewModel){
-        return  new FragmentThreeView(fragmentThree, fragmentViewModel);
+    FragmentThreeView bindsFragmentThreeView(FragmentThree fragmentThree, FragmentViewModel fragmentViewModel) {
+        return new FragmentThreeView(fragmentThree, fragmentViewModel);
     }
 }

@@ -43,4 +43,9 @@ public class FragmentTwo extends BaseFragment {
     protected void injectThis() {
         AndroidSupportInjection.inject(this);
     }
+
+    @Override
+    public String getFragmentTag() {
+        return null;
+    }
 }

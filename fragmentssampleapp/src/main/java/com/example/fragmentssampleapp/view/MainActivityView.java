@@ -1,18 +1,22 @@
 package com.example.fragmentssampleapp.view;
 
+import android.arch.lifecycle.Observer;
+import android.support.annotation.Nullable;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.content.ContextCompat;
 
 import com.aurelhubert.ahbottomnavigation.AHBottomNavigation;
 import com.aurelhubert.ahbottomnavigation.AHBottomNavigationAdapter;
-import com.aurelhubert.ahbottomnavigation.AHBottomNavigationItem;
 import com.example.fragmentssampleapp.R;
 import com.example.fragmentssampleapp.activity.MainActivity;
+import com.example.fragmentssampleapp.db.entities.Hero;
 import com.example.fragmentssampleapp.fragment.FragmentOne;
 import com.example.fragmentssampleapp.fragment.FragmentThree;
 import com.example.fragmentssampleapp.fragment.FragmentTwo;
 import com.example.fragmentssampleapp.viewmodel.MainViewModel;
 import com.example.modelviewviewmodel.view.BaseView;
+
+import java.util.List;
 
 import javax.inject.Inject;
 
@@ -30,6 +34,8 @@ public class MainActivityView extends BaseView<MainActivity, MainViewModel> impl
     @BindView(R.id.bottom_navigation)
     AHBottomNavigation bottomNavigation;
 
+    private List<Hero> mHeroes;
+
     private int[] tabColors;
     private AHBottomNavigationAdapter navigationAdapter;
 
@@ -42,7 +48,21 @@ public class MainActivityView extends BaseView<MainActivity, MainViewModel> impl
 
     @Override
     protected void subscribeUiToLiveData() {
+        mBaseViewModel.getHeroes().observe(mBaseActivity.get(), new Observer<List<Hero>>() {
+            @Override
+            public void onChanged(@Nullable List<Hero> heroes) {
 
+                if (heroes == null || heroes.size() <= 0) {
+                    //Fetch data from API or Server
+                    mBaseViewModel.fetchHerosFromServer();
+                } else {
+                    //Data fetched from DataBase
+                    mHeroes = heroes;
+                    showDataInUi();
+                    initView();
+                }
+            }
+        });
     }
 
     @Override
@@ -51,8 +71,6 @@ public class MainActivityView extends BaseView<MainActivity, MainViewModel> impl
     }
 
     public void initView() {
-
-
         tabColors = mBaseActivity.get().getApplicationContext().getResources().getIntArray(R.array.tab_colors);
         navigationAdapter = new AHBottomNavigationAdapter(mBaseActivity.get(), R.menu.bottom_navigation_menu_3);
         navigationAdapter.setupWithBottomNavigation(bottomNavigation, tabColors);
