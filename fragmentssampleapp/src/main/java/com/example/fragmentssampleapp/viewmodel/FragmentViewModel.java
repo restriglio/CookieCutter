@@ -27,6 +27,10 @@ public class FragmentViewModel extends BaseViewModel {
         return useCaseRepository.getDataList();
     }
 
+    public LiveData<Hero> getHero() {
+        return useCaseRepository.getDataList();
+    }
+
     public void fetchHerosFromServer() {
         useCaseRepository.requestDataToServer();
     }

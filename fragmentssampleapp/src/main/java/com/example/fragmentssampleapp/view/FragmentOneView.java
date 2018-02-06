@@ -7,6 +7,7 @@ import android.support.v7.widget.RecyclerView;
 
 import com.example.fragmentssampleapp.db.entities.Hero;
 import com.example.fragmentssampleapp.fragment.FragmentOne;
+import com.example.fragmentssampleapp.view.adapters.HeroAdapter;
 import com.example.fragmentssampleapp.viewmodel.FragmentViewModel;
 import com.example.modelviewviewmodel.view.BaseView;
 

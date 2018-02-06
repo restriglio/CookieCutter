@@ -1,7 +1,8 @@
-package com.example.fragmentssampleapp.view;
+package com.example.fragmentssampleapp.view.adapters;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -53,14 +54,15 @@ public class HeroAdapter extends RecyclerView.Adapter<HeroAdapter.HeroHolder> {
 
         Picasso.with(context).load(heroes.get(position).getImageurl()).into(holder.imageView);
 
-        /*holder.itemView.setOnClickListener(new View.OnClickListener() {
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(context, HeroDetailActivity.class);
+                /*Intent intent = new Intent(context, HeroDetailActivity.class);
                 intent.putExtra(Constants.USER_ID, String.valueOf(heroes.get(position).getId()));
-                context.startActivity(intent);
+                context.startActivity(intent);*/
+                Log.e("Click","Click on: " + heroes.get(position).getName());
             }
-        });*/
+        });
     }
 
     public class HeroHolder extends RecyclerView.ViewHolder {
