@@ -34,8 +34,6 @@ public class MainActivityView extends BaseView<MainActivity, MainViewModel> impl
     @BindView(R.id.bottom_navigation)
     AHBottomNavigation bottomNavigation;
 
-    private List<Hero> mHeroes;
-
     private int[] tabColors;
     private AHBottomNavigationAdapter navigationAdapter;
 
@@ -57,7 +55,6 @@ public class MainActivityView extends BaseView<MainActivity, MainViewModel> impl
                     mBaseViewModel.fetchHerosFromServer();
                 } else {
                     //Data fetched from DataBase
-                    mHeroes = heroes;
                     showDataInUi();
                     initView();
                 }

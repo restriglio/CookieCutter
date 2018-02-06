@@ -1,8 +1,13 @@
 package com.example.fragmentssampleapp.viewmodel;
 
 import android.app.Application;
+import android.arch.lifecycle.LiveData;
 
+import com.example.fragmentssampleapp.db.entities.Hero;
+import com.example.fragmentssampleapp.repository.HeroRepository;
 import com.example.modelviewviewmodel.viewmodel.BaseViewModel;
+
+import java.util.List;
 
 import javax.inject.Inject;
 
@@ -13,7 +18,16 @@ import javax.inject.Inject;
 public class FragmentViewModel extends BaseViewModel {
 
     @Inject
-    public FragmentViewModel(Application application) {
+    public FragmentViewModel(Application application, HeroRepository useCaseRepository) {
         super(application);
+        this.useCaseRepository = useCaseRepository;
+    }
+
+    public LiveData<List<Hero>> getHeroes() {
+        return useCaseRepository.getDataList();
+    }
+
+    public void fetchHerosFromServer() {
+        useCaseRepository.requestDataToServer();
     }
 }
