@@ -23,11 +23,14 @@ public interface HeroDao {
     @Query("select * from hero")
     LiveData<List<Hero>> loadAllHeros();
 
+    @Query("select * from hero where id = :id")
+    List<Hero> findById(int id);
+
     @Insert(onConflict = IGNORE)
     void insertHero(Hero hero);
 
     @Insert
-    void insertAll( List<Hero> heroes);
+    void insertAll(List<Hero> heroes);
 
     @Update(onConflict = IGNORE)
     void updateHero(Hero user);

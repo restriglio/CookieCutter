@@ -104,14 +104,14 @@ public class MainActivityView extends BaseView<MainActivity, MainViewModel> impl
 
             case 1:
                 fragmentManager.beginTransaction()
-                        .replace(R.id.container, FragmentTwo.newInstance())
+                        .replace(R.id.container, FragmentTwo.newInstance(1))
                         .addToBackStack(BACK_STACK_MAIN_TAG)
                         .commit();
                 break;
 
             case 2:
                 fragmentManager.beginTransaction()
-                        .replace(R.id.container, FragmentThree.newInstance())
+                        .replace(R.id.container, FragmentThree.newInstance(2))
                         .addToBackStack(BACK_STACK_MAIN_TAG)
                         .commit();
                 break;

@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.fragmentssampleapp.R;
+import com.example.fragmentssampleapp.global.Constants;
 import com.example.fragmentssampleapp.view.FragmentThreeView;
 import com.example.modelviewviewmodel.fragment.BaseFragment;
 
@@ -20,14 +21,15 @@ import dagger.android.support.AndroidSupportInjection;
 
 public class FragmentThree extends BaseFragment {
 
-    public static String TAG = FragmentThree.class.getSimpleName();
+    private int id;
+    private View rootView;
 
     @Inject
     FragmentThreeView fragmentThreeView;
 
-    public static FragmentThree newInstance() {
+    public static FragmentThree newInstance(int id) {
         Bundle args = new Bundle();
-
+        args.putInt(Constants.HERO_ID, id);
         FragmentThree fragment = new FragmentThree();
         fragment.setArguments(args);
         return fragment;
@@ -37,7 +39,15 @@ public class FragmentThree extends BaseFragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_three, container, false);
+        id = getArguments().getInt(Constants.HERO_ID);
+        rootView = inflater.inflate(R.layout.fragment_three, container, false);
+        return rootView;
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        fragmentThreeView.loadHeroFromDB(id);
     }
 
     @Override
@@ -48,5 +58,9 @@ public class FragmentThree extends BaseFragment {
     @Override
     public String getFragmentTag() {
         return null;
+    }
+
+    public View getRootView() {
+        return rootView;
     }
 }

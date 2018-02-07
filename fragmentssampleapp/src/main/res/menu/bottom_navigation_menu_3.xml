@@ -5,11 +5,11 @@
         android:icon="@drawable/ic_apps_black_24dp" />
 
     <item
-        android:title="@string/menu_2"
+        android:title="@string/hero_menu_name2"
         android:icon="@drawable/ic_maps_local_bar" />
 
     <item
-        android:title="@string/menu_3"
+        android:title="@string/hero_menu_name3"
         android:icon="@drawable/ic_maps_local_restaurant" />
 
 </menu>

@@ -1,8 +1,8 @@
 package com.example.fragmentssampleapp.activity;
 
+import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
-import android.os.Bundle;
 
 import com.example.fragmentssampleapp.R;
 import com.example.fragmentssampleapp.view.MainActivityView;

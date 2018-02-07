@@ -1,6 +1,8 @@
 package com.example.fragmentssampleapp.repository;
 
 import android.app.Application;
+import android.arch.lifecycle.LiveData;
+import android.arch.lifecycle.MutableLiveData;
 
 import com.example.fragmentssampleapp.db.AppDatabase;
 import com.example.fragmentssampleapp.db.entities.Hero;
@@ -28,6 +30,8 @@ public class HeroRepository extends UseCaseRepository<Hero> {
     private AppDatabase mDataBase;
     private HeroApiService mClient;
     private CompositeDisposable disposable;
+
+    private MutableLiveData<List<Hero>> mHeroesList = new MutableLiveData<>();
 
     @Inject
     public HeroRepository(Application context, HeroApiService client) {
@@ -79,5 +83,15 @@ public class HeroRepository extends UseCaseRepository<Hero> {
 
                     }
                 });
+    }
+
+    public LiveData<List<Hero>> findHero(int id) {
+
+        mHeroesList.setValue(mDataBase.heroModel().findById(id));
+        return getFoundHeroList();
+    }
+
+    public MutableLiveData<List<Hero>> getFoundHeroList() {
+        return mHeroesList;
     }
 }

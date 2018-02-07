@@ -15,7 +15,7 @@ import javax.inject.Inject;
  * Created by raul.striglio on 02/02/18.
  */
 
-public class FragmentViewModel extends BaseViewModel {
+public class FragmentViewModel extends BaseViewModel<Hero, HeroRepository> {
 
     @Inject
     public FragmentViewModel(Application application, HeroRepository useCaseRepository) {
@@ -27,11 +27,16 @@ public class FragmentViewModel extends BaseViewModel {
         return useCaseRepository.getDataList();
     }
 
-    public LiveData<Hero> getHero() {
-        return useCaseRepository.getDataList();
-    }
-
     public void fetchHerosFromServer() {
         useCaseRepository.requestDataToServer();
+    }
+
+    public LiveData<List<Hero>> findbyId(int id) {
+        useCaseRepository.findHero(id);
+        return getFoundHero();
+    }
+
+    public LiveData<List<Hero>> getFoundHero() {
+        return useCaseRepository.getFoundHeroList();
     }
 }
