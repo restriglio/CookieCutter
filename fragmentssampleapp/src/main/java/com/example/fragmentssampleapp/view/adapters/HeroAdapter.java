@@ -1,16 +1,20 @@
 package com.example.fragmentssampleapp.view.adapters;
 
+import android.arch.lifecycle.LifecycleActivity;
 import android.content.Context;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.BaseExpandableListAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.fragmentssampleapp.R;
+import com.example.fragmentssampleapp.activity.MainActivity;
 import com.example.fragmentssampleapp.db.entities.Hero;
+import com.example.fragmentssampleapp.fragment.FragmentThree;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
@@ -57,10 +61,7 @@ public class HeroAdapter extends RecyclerView.Adapter<HeroAdapter.HeroHolder> {
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                /*Intent intent = new Intent(context, HeroDetailActivity.class);
-                intent.putExtra(Constants.USER_ID, String.valueOf(heroes.get(position).getId()));
-                context.startActivity(intent);*/
-                Log.e("Click","Click on: " + heroes.get(position).getName());
+                ((MainActivity)context).addFragmentOnTop(new FragmentThree());
             }
         });
     }

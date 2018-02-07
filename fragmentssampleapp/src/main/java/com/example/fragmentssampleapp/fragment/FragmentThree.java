@@ -20,6 +20,8 @@ import dagger.android.support.AndroidSupportInjection;
 
 public class FragmentThree extends BaseFragment {
 
+    public static String TAG = FragmentThree.class.getSimpleName();
+
     @Inject
     FragmentThreeView fragmentThreeView;
 

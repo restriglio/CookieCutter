@@ -64,14 +64,15 @@ public class MainActivity extends BaseActivity implements HasSupportFragmentInje
 
         if (fragments.getBackStackEntryCount() > 1) {
             // We have fragments on the backstack that are poppable
-            fragments.popBackStackImmediate();
-        } else if (homeFrag == null || !homeFrag.isVisible()) {
-            // We aren't showing the home screen, so that is the next stop on the back journey
-            mainActivityView.getNav().setCurrentItem(0);
+            fragments.popBackStack();
+
+            if (homeFrag == null || !homeFrag.isVisible()) {
+                // We aren't showing the home screen, so that is the next stop on the back journey
+                mainActivityView.getNav().setCurrentItem(0);
+            }
         } else {
             // We are already showing the home screen, so the next stop is out of the app.
             supportFinishAfterTransition();
         }
     }
-
 }
