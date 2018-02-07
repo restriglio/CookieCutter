@@ -25,7 +25,6 @@ public class FragmentTwo extends BaseFragment {
     FragmentTwoView fragmentTwoView;
 
     private int id;
-    private View rootView;
 
     public static FragmentTwo newInstance(int id) {
 
@@ -40,8 +39,8 @@ public class FragmentTwo extends BaseFragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         id = getArguments().getInt(Constants.HERO_ID);
-        rootView = inflater.inflate(R.layout.fragment_three, container, false);
-        return rootView;
+        setRootview(inflater.inflate(R.layout.fragment_three, container, false));
+        return getRootview();
     }
 
     @Override
@@ -62,9 +61,5 @@ public class FragmentTwo extends BaseFragment {
 
     public FragmentTwoView getFragmentTwoView() {
         return fragmentTwoView;
-    }
-
-    public View getRootView() {
-        return rootView;
     }
 }

@@ -40,8 +40,8 @@ public class FragmentThree extends BaseFragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         id = getArguments().getInt(Constants.HERO_ID);
-        rootView = inflater.inflate(R.layout.fragment_three, container, false);
-        return rootView;
+        setRootview(inflater.inflate(R.layout.fragment_three, container, false));
+        return getRootview();
     }
 
     @Override
@@ -58,9 +58,5 @@ public class FragmentThree extends BaseFragment {
     @Override
     public String getFragmentTag() {
         return null;
-    }
-
-    public View getRootView() {
-        return rootView;
     }
 }

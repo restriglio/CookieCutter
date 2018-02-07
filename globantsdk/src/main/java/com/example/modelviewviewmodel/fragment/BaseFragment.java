@@ -35,7 +35,11 @@ public abstract class BaseFragment extends LifecycleFragment {
     protected abstract void injectThis();
     public abstract String getFragmentTag();
 
-    /*public View getRootview() {
+    public View getRootview() {
         return rootview;
-    }*/
+    }
+
+    public void setRootview(View rootview) {
+        this.rootview = rootview;
+    }
 }

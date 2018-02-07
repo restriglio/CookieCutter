@@ -69,14 +69,14 @@ public class FragmentTwoView extends BaseView<FragmentTwo, FragmentViewModel> {
 
     @Override
     protected void showDataInUi() {
-        tvName = fragmentTwo.getRootView().findViewById(R.id.tv_name);
-        tvRealName = fragmentTwo.getRootView().findViewById(R.id.tv_real_name);
-        tvTeam = fragmentTwo.getRootView().findViewById(R.id.tv_team);
-        tvFirst = fragmentTwo.getRootView().findViewById(R.id.tv_first);
-        tvCreate = fragmentTwo.getRootView().findViewById(R.id.tv_create);
-        tvPublisher = fragmentTwo.getRootView().findViewById(R.id.tv_publisher);
-        tvBio = fragmentTwo.getRootView().findViewById(R.id.tv_bio);
-        imageView = fragmentTwo.getRootView().findViewById(R.id.imageView);
+        tvName = fragmentTwo.getRootview().findViewById(R.id.tv_name);
+        tvRealName = fragmentTwo.getRootview().findViewById(R.id.tv_real_name);
+        tvTeam = fragmentTwo.getRootview().findViewById(R.id.tv_team);
+        tvFirst = fragmentTwo.getRootview().findViewById(R.id.tv_first);
+        tvCreate = fragmentTwo.getRootview().findViewById(R.id.tv_create);
+        tvPublisher = fragmentTwo.getRootview().findViewById(R.id.tv_publisher);
+        tvBio = fragmentTwo.getRootview().findViewById(R.id.tv_bio);
+        imageView = fragmentTwo.getRootview().findViewById(R.id.imageView);
 
         tvName.setText(mHero.getName());
         tvRealName.setText(mHero.getRealname());
