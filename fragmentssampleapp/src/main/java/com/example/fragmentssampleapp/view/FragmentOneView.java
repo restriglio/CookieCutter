@@ -5,6 +5,7 @@ import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
+import com.example.fragmentssampleapp.R;
 import com.example.fragmentssampleapp.db.entities.Hero;
 import com.example.fragmentssampleapp.fragment.FragmentOne;
 import com.example.fragmentssampleapp.view.adapters.HeroAdapter;
@@ -23,9 +24,9 @@ public class FragmentOneView extends BaseView<FragmentOne, FragmentViewModel> {
 
     private List<Hero> mHeroes;
 
-    RecyclerView mRecyclerView;
+    private RecyclerView mRecyclerView;
 
-    FragmentOne fragmentOne;
+    private FragmentOne fragmentOne;
 
     @Inject
     public FragmentOneView(FragmentOne fragmentOne, FragmentViewModel baseViewModel) {
@@ -53,7 +54,7 @@ public class FragmentOneView extends BaseView<FragmentOne, FragmentViewModel> {
 
     @Override
     protected void showDataInUi() {
-        mRecyclerView = fragmentOne.getmRecyclerView();
+        mRecyclerView = fragmentOne.getRootview().findViewById(R.id.recycler_view);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(mBaseActivity.get().getActivity());
         HeroAdapter heroAdapter = new HeroAdapter(mHeroes, mBaseActivity.get().getActivity());
         mRecyclerView.setLayoutManager(linearLayoutManager);

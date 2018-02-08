@@ -38,7 +38,7 @@ public class MainActivity extends BaseActivity implements HasSupportFragmentInje
     @Override
     protected void onResume() {
         super.onResume();
-        //mainActivityView.initView();
+        mainActivityView.initView();
     }
 
     @Override
@@ -64,7 +64,7 @@ public class MainActivity extends BaseActivity implements HasSupportFragmentInje
 
         if (fragments.getBackStackEntryCount() > 1) {
             // We have fragments on the backstack that are poppable
-            fragments.popBackStack();
+            fragments.popBackStackImmediate();
 
             if (homeFrag == null || !homeFrag.isVisible()) {
                 // We aren't showing the home screen, so that is the next stop on the back journey

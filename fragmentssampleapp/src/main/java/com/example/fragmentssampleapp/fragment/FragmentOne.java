@@ -24,8 +24,6 @@ public class FragmentOne extends BaseFragment {
     @Inject
     FragmentOneView fragmentOneView;
 
-    RecyclerView mRecyclerView;
-
     public String getFragmentTag(){
         return FragmentOne.class.getSimpleName();
     }
@@ -43,19 +41,13 @@ public class FragmentOne extends BaseFragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_one, container, false);
-        mRecyclerView = view.findViewById(R.id.recycler_view);
-
-        return view;
+        setRootview(inflater.inflate(R.layout.fragment_one, container, false));
+        return getRootview();
 
     }
 
     @Override
     protected void injectThis() {
         AndroidSupportInjection.inject(this);
-    }
-
-    public RecyclerView getmRecyclerView() {
-        return mRecyclerView;
     }
 }

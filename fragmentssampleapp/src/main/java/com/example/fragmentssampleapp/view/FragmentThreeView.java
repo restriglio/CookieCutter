@@ -27,14 +27,14 @@ public class FragmentThreeView extends BaseView<FragmentThree, FragmentViewModel
     private Hero mHero;
     private FragmentThree fragmentThree;
 
-    TextView tvName;
-    TextView tvRealName;
-    TextView tvTeam;
-    TextView tvFirst;
-    TextView tvCreate;
-    TextView tvPublisher;
-    TextView tvBio;
-    ImageView imageView;
+    private TextView tvName;
+    private TextView tvRealName;
+    private TextView tvTeam;
+    private TextView tvFirst;
+    private TextView tvCreate;
+    private TextView tvPublisher;
+    private TextView tvBio;
+    private ImageView imageView;
 
     @Inject
     public FragmentThreeView(FragmentThree fragmentThree, FragmentViewModel baseViewModel) {

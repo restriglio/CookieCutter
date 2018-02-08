@@ -27,14 +27,14 @@ public class FragmentTwoView extends BaseView<FragmentTwo, FragmentViewModel> {
     private Hero mHero;
     private FragmentTwo fragmentTwo;
 
-    TextView tvName;
-    TextView tvRealName;
-    TextView tvTeam;
-    TextView tvFirst;
-    TextView tvCreate;
-    TextView tvPublisher;
-    TextView tvBio;
-    ImageView imageView;
+    private TextView tvName;
+    private TextView tvRealName;
+    private TextView tvTeam;
+    private TextView tvFirst;
+    private TextView tvCreate;
+    private TextView tvPublisher;
+    private TextView tvBio;
+    private ImageView imageView;
 
     @Inject
     public FragmentTwoView(FragmentTwo fragmentTwo, FragmentViewModel baseViewModel) {
