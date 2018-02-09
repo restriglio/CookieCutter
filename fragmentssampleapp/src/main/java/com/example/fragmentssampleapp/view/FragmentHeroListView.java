@@ -7,7 +7,7 @@ import android.support.v7.widget.RecyclerView;
 
 import com.example.fragmentssampleapp.R;
 import com.example.fragmentssampleapp.db.entities.Hero;
-import com.example.fragmentssampleapp.fragment.FragmentOne;
+import com.example.fragmentssampleapp.fragment.FragmentHeroList;
 import com.example.fragmentssampleapp.view.adapters.HeroAdapter;
 import com.example.fragmentssampleapp.viewmodel.FragmentViewModel;
 import com.example.modelviewviewmodel.view.BaseView;
@@ -20,18 +20,18 @@ import javax.inject.Inject;
  * Created by raul.striglio on 02/02/18.
  */
 
-public class FragmentOneView extends BaseView<FragmentOne, FragmentViewModel> {
+public class FragmentHeroListView extends BaseView<FragmentHeroList, FragmentViewModel> {
 
     private List<Hero> mHeroes;
 
     private RecyclerView mRecyclerView;
 
-    private FragmentOne fragmentOne;
+    private FragmentHeroList fragmentHeroList;
 
     @Inject
-    public FragmentOneView(FragmentOne fragmentOne, FragmentViewModel baseViewModel) {
-        super(fragmentOne, baseViewModel);
-        this.fragmentOne = fragmentOne;
+    public FragmentHeroListView(FragmentHeroList fragmentHeroList, FragmentViewModel baseViewModel) {
+        super(fragmentHeroList, baseViewModel);
+        this.fragmentHeroList = fragmentHeroList;
     }
 
     @Override
@@ -54,7 +54,7 @@ public class FragmentOneView extends BaseView<FragmentOne, FragmentViewModel> {
 
     @Override
     protected void showDataInUi() {
-        mRecyclerView = fragmentOne.getRootview().findViewById(R.id.recycler_view);
+        mRecyclerView = fragmentHeroList.getRootview().findViewById(R.id.recycler_view);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(mBaseActivity.get().getActivity());
         HeroAdapter heroAdapter = new HeroAdapter(mHeroes, mBaseActivity.get().getActivity());
         mRecyclerView.setLayoutManager(linearLayoutManager);

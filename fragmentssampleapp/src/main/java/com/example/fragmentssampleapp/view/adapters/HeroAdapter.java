@@ -11,7 +11,7 @@ import android.widget.TextView;
 import com.example.fragmentssampleapp.R;
 import com.example.fragmentssampleapp.activity.MainActivity;
 import com.example.fragmentssampleapp.db.entities.Hero;
-import com.example.fragmentssampleapp.fragment.FragmentTwo;
+import com.example.fragmentssampleapp.fragment.FragmentHeroDetail;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
@@ -41,7 +41,7 @@ public class HeroAdapter extends RecyclerView.Adapter<HeroAdapter.HeroHolder> {
 
     @Override
     public HeroHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        final View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.hero_item, parent, false);
+        final View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.hero_list_item, parent, false);
         return new HeroHolder(view);
     }
 
@@ -58,7 +58,7 @@ public class HeroAdapter extends RecyclerView.Adapter<HeroAdapter.HeroHolder> {
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                FragmentTwo fragment = FragmentTwo.newInstance(heroes.get(position).getId());
+                FragmentHeroDetail fragment = FragmentHeroDetail.newInstance(heroes.get(position).getId());
                 ((MainActivity) context).addFragmentOnTop(fragment);
             }
         });

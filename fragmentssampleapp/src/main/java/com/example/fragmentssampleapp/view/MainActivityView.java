@@ -7,9 +7,9 @@ import com.aurelhubert.ahbottomnavigation.AHBottomNavigation;
 import com.aurelhubert.ahbottomnavigation.AHBottomNavigationAdapter;
 import com.example.fragmentssampleapp.R;
 import com.example.fragmentssampleapp.activity.MainActivity;
-import com.example.fragmentssampleapp.fragment.FragmentOne;
-import com.example.fragmentssampleapp.fragment.FragmentThree;
-import com.example.fragmentssampleapp.fragment.FragmentTwo;
+import com.example.fragmentssampleapp.fragment.FragmentHeroDetail;
+import com.example.fragmentssampleapp.fragment.FragmentHeroList;
+import com.example.fragmentssampleapp.fragment.FragmentHeroImage;
 import com.example.fragmentssampleapp.viewmodel.MainViewModel;
 import com.example.modelviewviewmodel.view.BaseView;
 
@@ -79,21 +79,21 @@ public class MainActivityView extends BaseView<MainActivity, MainViewModel> impl
         switch (position) {
             case 0:
                 fragmentManager.beginTransaction()
-                        .replace(R.id.container, FragmentOne.newInstance())
+                        .replace(R.id.container, FragmentHeroList.newInstance())
                         .addToBackStack(BACK_STACK_MAIN_TAG)
                         .commit();
                 break;
 
             case 1:
                 fragmentManager.beginTransaction()
-                        .replace(R.id.container, FragmentTwo.newInstance(1))
+                        .replace(R.id.container, FragmentHeroDetail.newInstance(1))
                         .addToBackStack(BACK_STACK_MAIN_TAG)
                         .commit();
                 break;
 
             case 2:
                 fragmentManager.beginTransaction()
-                        .replace(R.id.container, FragmentThree.newInstance(2))
+                        .replace(R.id.container, FragmentHeroImage.newInstance(2))
                         .addToBackStack(BACK_STACK_MAIN_TAG)
                         .commit();
                 break;

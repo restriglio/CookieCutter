@@ -2,13 +2,13 @@ package com.example.fragmentssampleapp.fragment;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.fragmentssampleapp.R;
-import com.example.fragmentssampleapp.view.FragmentOneView;
+import com.example.fragmentssampleapp.global.Constants;
+import com.example.fragmentssampleapp.view.FragmentHeroImageView;
 import com.example.modelviewviewmodel.fragment.BaseFragment;
 
 import javax.inject.Inject;
@@ -19,20 +19,18 @@ import dagger.android.support.AndroidSupportInjection;
  * Created by raul.striglio on 02/02/18.
  */
 
-public class FragmentOne extends BaseFragment {
+public class FragmentHeroImage extends BaseFragment {
+
+    private int id;
+    private View rootView;
 
     @Inject
-    FragmentOneView fragmentOneView;
+    FragmentHeroImageView fragmentHeroImageView;
 
-    public String getFragmentTag(){
-        return FragmentOne.class.getSimpleName();
-    }
-
-    public static FragmentOne newInstance() {
-
+    public static FragmentHeroImage newInstance(int id) {
         Bundle args = new Bundle();
-
-        FragmentOne fragment = new FragmentOne();
+        args.putInt(Constants.HERO_ID, id);
+        FragmentHeroImage fragment = new FragmentHeroImage();
         fragment.setArguments(args);
         return fragment;
     }
@@ -41,13 +39,24 @@ public class FragmentOne extends BaseFragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        setRootview(inflater.inflate(R.layout.fragment_one, container, false));
+        id = getArguments().getInt(Constants.HERO_ID);
+        setRootview(inflater.inflate(R.layout.fragment_hero_image, container, false));
         return getRootview();
+    }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        fragmentHeroImageView.loadHeroFromDB(id);
     }
 
     @Override
     protected void injectThis() {
         AndroidSupportInjection.inject(this);
+    }
+
+    @Override
+    public String getFragmentTag() {
+        return FragmentHeroImage.class.getSimpleName();
     }
 }

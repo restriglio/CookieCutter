@@ -1,11 +1,11 @@
 package com.example.fragmentssampleapp.di.module;
 
-import com.example.fragmentssampleapp.fragment.FragmentOne;
-import com.example.fragmentssampleapp.fragment.FragmentThree;
-import com.example.fragmentssampleapp.fragment.FragmentTwo;
-import com.example.fragmentssampleapp.view.FragmentOneView;
-import com.example.fragmentssampleapp.view.FragmentThreeView;
-import com.example.fragmentssampleapp.view.FragmentTwoView;
+import com.example.fragmentssampleapp.fragment.FragmentHeroList;
+import com.example.fragmentssampleapp.fragment.FragmentHeroImage;
+import com.example.fragmentssampleapp.fragment.FragmentHeroDetail;
+import com.example.fragmentssampleapp.view.FragmentHeroImageView;
+import com.example.fragmentssampleapp.view.FragmentHeroListView;
+import com.example.fragmentssampleapp.view.FragmentHeroDetailView;
 import com.example.fragmentssampleapp.viewmodel.FragmentViewModel;
 
 import dagger.Module;
@@ -19,17 +19,17 @@ import dagger.Provides;
 public class FragmentsModule {
 
     @Provides
-    FragmentOneView bindsFragmentOneView(FragmentOne fragmentOne, FragmentViewModel baseViewModel) {
-        return new FragmentOneView(fragmentOne, baseViewModel);
+    FragmentHeroListView bindsFragmentOneView(FragmentHeroList fragmentHeroList, FragmentViewModel baseViewModel) {
+        return new FragmentHeroListView(fragmentHeroList, baseViewModel);
     }
 
     @Provides
-    FragmentTwoView bindsFragmentTwoView(FragmentTwo fragmentTwo, FragmentViewModel fragmentViewModel) {
-        return new FragmentTwoView(fragmentTwo, fragmentViewModel);
+    FragmentHeroDetailView bindsFragmentTwoView(FragmentHeroDetail fragmentHeroDetail, FragmentViewModel fragmentViewModel) {
+        return new FragmentHeroDetailView(fragmentHeroDetail, fragmentViewModel);
     }
 
     @Provides
-    FragmentThreeView bindsFragmentThreeView(FragmentThree fragmentThree, FragmentViewModel fragmentViewModel) {
-        return new FragmentThreeView(fragmentThree, fragmentViewModel);
+    FragmentHeroImageView bindsFragmentThreeView(FragmentHeroImage fragmentHeroImage, FragmentViewModel fragmentViewModel) {
+        return new FragmentHeroImageView(fragmentHeroImage, fragmentViewModel);
     }
 }

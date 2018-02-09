@@ -14,9 +14,9 @@
     <string name="menu_4">Menu 4</string>
     <string name="menu_5">Menu 5</string>
 
-    <string name="hero_menu_name">Heroes</string>
-    <string name="hero_menu_name2">Capitan</string>
-    <string name="hero_menu_name3">Iron Man</string>
+    <string name="hero_menu_item_1">Heroes</string>
+    <string name="hero_menu_item_2">Detalle</string>
+    <string name="hero_menu_item_3">Imagen</string>
     <string name="nombre">Nombre:</string>
     <string name="nombre_real">Nombre Real:</string>
     <string name="team">Team:</string>
