@@ -7,7 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.fragmentssampleapp.R;
-import com.example.fragmentssampleapp.view.FragmentOneView;
+import com.example.fragmentssampleapp.view.FragmentHeroListView;
 import com.example.modelviewviewmodel.fragment.BaseFragment;
 
 import javax.inject.Inject;
@@ -18,20 +18,16 @@ import dagger.android.support.AndroidSupportInjection;
  * Created by raul.striglio on 02/02/18.
  */
 
-public class FragmentOne extends BaseFragment {
+public class FragmentHeroList extends BaseFragment {
 
     @Inject
-    FragmentOneView fragmentOneView;
+    FragmentHeroListView fragmentHeroListView;
 
-    public String getFragmentTag(){
-        return FragmentOne.class.getSimpleName();
-    }
-
-    public static FragmentOne newInstance() {
+    public static FragmentHeroList newInstance() {
 
         Bundle args = new Bundle();
 
-        FragmentOne fragment = new FragmentOne();
+        FragmentHeroList fragment = new FragmentHeroList();
         fragment.setArguments(args);
         return fragment;
     }
@@ -40,11 +36,18 @@ public class FragmentOne extends BaseFragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_one, container, false);
+        setRootview(inflater.inflate(R.layout.fragment_hero_list, container, false));
+        return getRootview();
+
     }
 
     @Override
     protected void injectThis() {
         AndroidSupportInjection.inject(this);
+    }
+
+    @Override
+    public String getFragmentTag() {
+        return FragmentHeroList.class.getSimpleName();
     }
 }

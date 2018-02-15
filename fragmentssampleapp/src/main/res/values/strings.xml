@@ -14,4 +14,15 @@
     <string name="menu_4">Menu 4</string>
     <string name="menu_5">Menu 5</string>
 
+    <string name="hero_menu_item_1">Heroes</string>
+    <string name="hero_menu_item_2">Detalle</string>
+    <string name="hero_menu_item_3">Imagen</string>
+    <string name="nombre">Nombre:</string>
+    <string name="nombre_real">Nombre Real:</string>
+    <string name="team">Team:</string>
+    <string name="first">First:</string>
+    <string name="creado">Creado:</string>
+    <string name="publisher">Publisher:</string>
+    <string name="heroes">Heroes</string>
+    <string name="peliculas">Peliculas</string>
 </resources>

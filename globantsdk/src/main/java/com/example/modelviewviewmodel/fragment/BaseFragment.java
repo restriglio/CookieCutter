@@ -3,6 +3,7 @@ package com.example.modelviewviewmodel.fragment;
 import android.arch.lifecycle.LifecycleFragment;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.view.View;
 
 /**
  * Created by raul.striglio on 01/02/18.
@@ -18,6 +19,7 @@ public abstract class BaseFragment extends LifecycleFragment {
       BaseView baseView;
 
     */
+    private View rootview;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -33,4 +35,11 @@ public abstract class BaseFragment extends LifecycleFragment {
     protected abstract void injectThis();
     public abstract String getFragmentTag();
 
+    public View getRootview() {
+        return rootview;
+    }
+
+    public void setRootview(View rootview) {
+        this.rootview = rootview;
+    }
 }

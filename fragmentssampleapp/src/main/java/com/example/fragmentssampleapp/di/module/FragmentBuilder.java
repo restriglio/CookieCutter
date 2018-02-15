@@ -1,8 +1,8 @@
 package com.example.fragmentssampleapp.di.module;
 
-import com.example.fragmentssampleapp.fragment.FragmentOne;
-import com.example.fragmentssampleapp.fragment.FragmentThree;
-import com.example.fragmentssampleapp.fragment.FragmentTwo;
+import com.example.fragmentssampleapp.fragment.FragmentHeroImage;
+import com.example.fragmentssampleapp.fragment.FragmentHeroList;
+import com.example.fragmentssampleapp.fragment.FragmentHeroDetail;
 
 import dagger.Module;
 import dagger.android.ContributesAndroidInjector;
@@ -15,12 +15,12 @@ import dagger.android.ContributesAndroidInjector;
 public abstract class FragmentBuilder {
 
     @ContributesAndroidInjector(modules = FragmentsModule.class)
-    abstract FragmentOne provideFragmentOneFactory();
+    abstract FragmentHeroList provideFragmentOneFactory();
 
     @ContributesAndroidInjector(modules = FragmentsModule.class)
-    abstract FragmentTwo provideFragmentTwoFactory();
+    abstract FragmentHeroDetail provideFragmentTwoFactory();
 
     @ContributesAndroidInjector(modules = FragmentsModule.class)
-    abstract FragmentThree provideFragmentThreeFactory();
+    abstract FragmentHeroImage provideFragmentThreeFactory();
 
 }
