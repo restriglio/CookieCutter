@@ -24,11 +24,11 @@ import butterknife.ButterKnife;
 
 public class PostsView extends BaseView<PostsActivity, PostsViewModel> {
 
-    private List<Post> mPosts;
+    private List<Post> postsLists;
     private String userId;
 
-    @BindView(R.id.rv_posts)
-    RecyclerView mRvPosts;
+    @BindView(R.id.postsList)
+    RecyclerView postsList;
 
     @Inject
     public PostsView(PostsActivity postsActivity, PostsViewModel postsViewModel ) {
@@ -39,18 +39,18 @@ public class PostsView extends BaseView<PostsActivity, PostsViewModel> {
     @Override
     protected void subscribeUiToLiveData() {
 
-        userId = mBaseActivity.get().getUserId();
-        mBaseViewModel.getPosts().observe(mBaseActivity.get(), new Observer<List<Post>>() {
+        userId = baseActivity.get().getUserId();
+        baseViewModel.getPosts().observe(baseActivity.get(), new Observer<List<Post>>() {
             @Override
             public void onChanged(@Nullable List<Post> posts) {
                 if (posts == null || posts.size() <= 0) {
                     //Fetch data from API or Server
-                    mBaseViewModel.fetchPostsByUserId(userId);
+                    baseViewModel.fetchPostsByUserId(userId);
                 } else {
                     //Data fetched from DataBase
-                    mPosts = mBaseViewModel.getLocalPostsByUserId(userId).getValue();
-                    if(mPosts.size() <= 0 ){
-                        mBaseViewModel.fetchPostsByUserId(userId);
+                    postsLists = baseViewModel.getLocalPostsByUserId(userId).getValue();
+                    if(postsLists.size() <= 0 ){
+                        baseViewModel.fetchPostsByUserId(userId);
                     } else {
                         showDataInUi();
                     }
@@ -63,10 +63,10 @@ public class PostsView extends BaseView<PostsActivity, PostsViewModel> {
     @Override
     protected void showDataInUi() {
 
-        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(mBaseActivity.get());
-        PostsAdapter postsAdapter = new PostsAdapter(mPosts);
-        mRvPosts.setAdapter(postsAdapter);
-        mRvPosts.setLayoutManager(linearLayoutManager);
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(baseActivity.get());
+        PostsAdapter postsAdapter = new PostsAdapter(postsLists);
+        postsList.setAdapter(postsAdapter);
+        postsList.setLayoutManager(linearLayoutManager);
         postsAdapter.notifyDataSetChanged();
 
     }

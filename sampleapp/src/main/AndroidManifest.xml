@@ -14,14 +14,14 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
 
-        <activity android:name="com.example.globant.sampleapp.users.activity.MainActivity">
+        <activity android:name="com.example.globant.sampleapp.usersList.activity.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
 
-        <activity android:name="com.example.globant.sampleapp.users.activity.FindUserActivity" />
+        <activity android:name="com.example.globant.sampleapp.usersList.activity.FindUserActivity" />
         <activity android:name="com.example.globant.sampleapp.posts.activity.PostsActivity" />
 
     </application>

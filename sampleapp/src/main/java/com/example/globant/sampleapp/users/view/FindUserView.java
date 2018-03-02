@@ -31,19 +31,19 @@ import butterknife.ButterKnife;
 public class FindUserView extends BaseView<FindUserActivity, FindUserViewModel> {
 
 
-    @BindView(R.id.found_user)
-    TextView foundUser;
+    @BindView(R.id.foundUsers)
+    TextView foundUsers;
 
-    @BindView(R.id.et_text_to_find)
-    EditText etTextToFind;
+    @BindView(R.id.textInputToFind)
+    EditText textInputToFind;
 
-    @BindView(R.id.pb_search)
-    RelativeLayout mPbSearch;
+    @BindView(R.id.progressBarContainer)
+    RelativeLayout progressBarContainer;
 
-    private Handler mHandler;
+    private Handler handler;
     private Runnable delayedAction = null;
-    private List<User> mUsers;
-    private Observer<List<User>> mListObserver;
+    private List<User> usersList;
+    private Observer<List<User>> usersListObserver;
 
     private boolean viewConfigured = false;
 
@@ -55,9 +55,9 @@ public class FindUserView extends BaseView<FindUserActivity, FindUserViewModel> 
     }
 
     public void configureView() {
-        mHandler = new Handler();
+        handler = new Handler();
 
-        etTextToFind.addTextChangedListener(new TextWatcher() {
+        textInputToFind.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
 
@@ -71,21 +71,21 @@ public class FindUserView extends BaseView<FindUserActivity, FindUserViewModel> 
             @Override
             public void afterTextChanged(final Editable editable) {
                 if (delayedAction != null) {
-                    mHandler.removeCallbacks(delayedAction);
+                    handler.removeCallbacks(delayedAction);
                 }
 
                 if (editable.toString() != null && !editable.toString().isEmpty()) {
                     delayedAction = new Runnable() {
                         @Override
                         public void run() {
-                            mPbSearch.setVisibility(View.VISIBLE);
-                            etTextToFind.setVisibility(View.GONE);
-                            foundUser.setVisibility(View.GONE);
+                            progressBarContainer.setVisibility(View.VISIBLE);
+                            textInputToFind.setVisibility(View.GONE);
+                            foundUsers.setVisibility(View.GONE);
                             startSearching(editable.toString());
                         }
                     };
 
-                    mHandler.postDelayed(delayedAction, 1000);
+                    handler.postDelayed(delayedAction, 1000);
                 }
             }
         });
@@ -94,28 +94,28 @@ public class FindUserView extends BaseView<FindUserActivity, FindUserViewModel> 
     }
 
     public void startSearching(String textToFind) {
-        mBaseViewModel.findUserByText(textToFind);
+        baseViewModel.findUserByText(textToFind);
     }
 
     public void showFoundUsers(String users) {
-        mPbSearch.setVisibility(View.GONE);
-        etTextToFind.setVisibility(View.VISIBLE);
-        foundUser.setVisibility(View.VISIBLE);
-        foundUser.setText(users);
+        progressBarContainer.setVisibility(View.GONE);
+        textInputToFind.setVisibility(View.VISIBLE);
+        foundUsers.setVisibility(View.VISIBLE);
+        foundUsers.setText(users);
     }
 
     public void noUserFound() {
-        mPbSearch.setVisibility(View.GONE);
-        etTextToFind.setVisibility(View.VISIBLE);
-        foundUser.setVisibility(View.VISIBLE);
-        Toast.makeText(mBaseActivity.get(), "No se encontro resutado", Toast.LENGTH_SHORT).show();
+        progressBarContainer.setVisibility(View.GONE);
+        textInputToFind.setVisibility(View.VISIBLE);
+        foundUsers.setVisibility(View.VISIBLE);
+        Toast.makeText(baseActivity.get(), "No se encontro resutado", Toast.LENGTH_SHORT).show();
     }
 
     @Override
     //Since this users list comes from a search query, we just have to check our local DB.
     protected void subscribeUiToLiveData() {
 
-        mListObserver = new Observer<List<User>>() {
+        usersListObserver = new Observer<List<User>>() {
             @Override
             public void onChanged(@Nullable List<User> users) {
 
@@ -125,25 +125,25 @@ public class FindUserView extends BaseView<FindUserActivity, FindUserViewModel> 
                         noUserFound();
                     } else {
                         //data fetched from DataBase
-                        mUsers = users;
+                        usersList = users;
                         showDataInUi();
                     }
                 }
             }
         };
 
-        mBaseViewModel.getFoundUsers().observe(mBaseActivity.get(), mListObserver);
+        baseViewModel.getFoundUsers().observe(baseActivity.get(), usersListObserver);
     }
 
     public void removeObserver() {
-        mBaseViewModel.getFoundUsers().removeObserver(mListObserver);
-        mBaseViewModel.clearFoundUsers();
+        baseViewModel.getFoundUsers().removeObserver(usersListObserver);
+        baseViewModel.clearFoundUsers();
     }
 
     @Override
     protected void showDataInUi() {
         StringBuilder sb = new StringBuilder();
-        for (User user : mUsers) {
+        for (User user : usersList) {
             sb.append(user.name);
             sb.append(", ");
             sb.append(user.userName);

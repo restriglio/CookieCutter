@@ -24,12 +24,12 @@ import butterknife.ButterKnife;
 
 public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserViewHolder> {
 
-    private List<User> users;
+    private List<User> usersList;
     private Context context;
 
 
-    public UserAdapter(List<User> users, Context context) {
-        this.users = users;
+    public UserAdapter(List<User> usersList, Context context) {
+        this.usersList = usersList;
         this.context = context;
     }
 
@@ -44,7 +44,7 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserViewHolder
     public void onBindViewHolder(UserViewHolder holder, int position) {
         StringBuilder sb = new StringBuilder();
 
-        final User user = users.get(position);
+        final User user = usersList.get(position);
         sb.append(user.name);
         sb.append(", ");
         sb.append(user.userName);
@@ -52,7 +52,7 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserViewHolder
         sb.append(user.getAddress().toString());
         sb.append("\n");
 
-        holder.tvUser.setText(sb.toString());
+        holder.userData.setText(sb.toString());
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -67,13 +67,13 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserViewHolder
 
     @Override
     public int getItemCount() {
-        return users.size();
+        return usersList.size();
     }
 
     public class UserViewHolder extends RecyclerView.ViewHolder {
 
-        @BindView(R.id.tv_user)
-        TextView tvUser;
+        @BindView(R.id.userData)
+        TextView userData;
 
         public UserViewHolder(View itemView) {
             super(itemView);

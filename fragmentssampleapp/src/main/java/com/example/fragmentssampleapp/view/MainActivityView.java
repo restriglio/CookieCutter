@@ -50,15 +50,17 @@ public class MainActivityView extends BaseView<MainActivity, MainViewModel> impl
     }
 
     public void initView() {
-        tabColors = mBaseActivity.get().getApplicationContext().getResources().getIntArray(R.array.tab_colors);
-        navigationAdapter = new AHBottomNavigationAdapter(mBaseActivity.get(), R.menu.bottom_navigation_menu_3);
+
+
+        tabColors = baseActivity.get().getApplicationContext().getResources().getIntArray(R.array.tab_colors);
+        navigationAdapter = new AHBottomNavigationAdapter(baseActivity.get(), R.menu.bottom_navigation_menu_3);
         navigationAdapter.setupWithBottomNavigation(bottomNavigation, tabColors);
 
         bottomNavigation.setTranslucentNavigationEnabled(true);
 
-        bottomNavigation.setDefaultBackgroundColor(ContextCompat.getColor(mBaseActivity.get(), R.color.colorPrimaryDark));
-        bottomNavigation.setAccentColor(ContextCompat.getColor(mBaseActivity.get(), R.color.colorAccent));
-        bottomNavigation.setInactiveColor(ContextCompat.getColor(mBaseActivity.get(), R.color.inactive_tabs));
+        bottomNavigation.setDefaultBackgroundColor(ContextCompat.getColor(baseActivity.get(), R.color.colorPrimaryDark));
+        bottomNavigation.setAccentColor(ContextCompat.getColor(baseActivity.get(), R.color.colorAccent));
+        bottomNavigation.setInactiveColor(ContextCompat.getColor(baseActivity.get(), R.color.inactive_tabs));
 
         bottomNavigation.setOnTabSelectedListener(this);
         onTabSelected(0, false);
@@ -72,7 +74,7 @@ public class MainActivityView extends BaseView<MainActivity, MainViewModel> impl
     @Override
     public boolean onTabSelected(int position, boolean wasSelected) {
         // Pop off everything up to and including the current tab
-        FragmentManager fragmentManager = mBaseActivity.get().getSupportFragmentManager();
+        FragmentManager fragmentManager = baseActivity.get().getSupportFragmentManager();
         fragmentManager.popBackStack(BACK_STACK_MAIN_TAG, FragmentManager.POP_BACK_STACK_INCLUSIVE);
 
 
