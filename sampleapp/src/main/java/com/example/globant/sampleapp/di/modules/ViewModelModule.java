@@ -3,8 +3,8 @@ package com.example.globant.sampleapp.di.modules;
 import android.arch.lifecycle.ViewModel;
 import android.arch.lifecycle.ViewModelProvider;
 
-import com.example.globant.sampleapp.users.viewmodel.FindUserViewModel;
-import com.example.globant.sampleapp.users.viewmodel.MainViewModel;
+import com.example.globant.sampleapp.users.mvvm.viewmodel.FindUserViewModel;
+import com.example.globant.sampleapp.users.mvvm.viewmodel.MainViewModel;
 import com.example.globant.sampleapp.global.MainViewModelFactory;
 import com.example.globant.sampleapp.posts.mvvm.viewmodel.PostsViewModel;
 

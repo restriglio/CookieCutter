@@ -2,8 +2,8 @@ package com.example.globant.sampleapp.di.modules;
 
 import com.example.globant.sampleapp.users.activity.MainActivity;
 import com.example.globant.sampleapp.users.repositories.UserRepository;
-import com.example.globant.sampleapp.users.view.MainView;
-import com.example.globant.sampleapp.users.viewmodel.MainViewModel;
+import com.example.globant.sampleapp.users.mvvm.view.MainView;
+import com.example.globant.sampleapp.users.mvvm.viewmodel.MainViewModel;
 import com.example.modelviewviewmodel.repository.UseCaseRepository;
 
 import javax.inject.Singleton;

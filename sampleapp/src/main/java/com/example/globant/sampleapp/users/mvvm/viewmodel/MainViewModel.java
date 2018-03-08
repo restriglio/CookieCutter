@@ -1,4 +1,4 @@
-package com.example.globant.sampleapp.users.viewmodel;
+package com.example.globant.sampleapp.users.mvvm.viewmodel;
 
 import android.app.Application;
 import android.arch.lifecycle.LiveData;

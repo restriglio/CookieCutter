@@ -37,13 +37,13 @@ public class UserRepository extends UseCaseRepository<User> {
     @Inject
     public UserRepository(Application context, UserApiService client) {
         super(context);
-        mContext = context;
+        this.context = context;
         mClient = client;
         disposable = new CompositeDisposable();
     }
 
     public void initLocalData() {
-        mDataBase = AppDatabase.getInMemoryDatabase(mContext);
+        mDataBase = AppDatabase.getInMemoryDatabase(context);
         setDataList(mDataBase.userModel().loadAllUsers());
     }
 

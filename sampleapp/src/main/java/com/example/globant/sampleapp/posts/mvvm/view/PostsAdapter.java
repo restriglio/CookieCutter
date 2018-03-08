@@ -20,10 +20,10 @@ import butterknife.ButterKnife;
 
 public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.PostsViewHolder> {
 
-    private List<Post> mPostsList;
+    private List<Post> postsList;
 
     public PostsAdapter(List<Post> postsList){
-        mPostsList = postsList;
+        this.postsList = postsList;
     }
 
     @Override
@@ -35,23 +35,23 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.PostsViewHol
     @Override
     public void onBindViewHolder(PostsViewHolder holder, int position) {
 
-        Post post = mPostsList.get(position);
-        holder.tvTitle.setText(post.getTitle());
-        holder.tvBody.setText(post.getBody());
+        Post post = postsList.get(position);
+        holder.title.setText(post.getTitle());
+        holder.body.setText(post.getBody());
     }
 
     @Override
     public int getItemCount() {
-        return mPostsList.size();
+        return postsList.size();
     }
 
     public class PostsViewHolder extends RecyclerView.ViewHolder {
 
-        @BindView(R.id.tv_title)
-        TextView tvTitle;
+        @BindView(R.id.title)
+        TextView title;
 
-        @BindView(R.id.tv_body)
-        TextView tvBody;
+        @BindView(R.id.body)
+        TextView body;
 
         public PostsViewHolder(View itemView) {
             super(itemView);

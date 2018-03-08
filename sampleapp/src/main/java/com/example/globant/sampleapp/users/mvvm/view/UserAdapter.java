@@ -1,4 +1,4 @@
-package com.example.globant.sampleapp.users.view;
+package com.example.globant.sampleapp.users.mvvm.view;
 
 import android.content.Context;
 import android.content.Intent;
@@ -52,7 +52,7 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserViewHolder
         sb.append(user.getAddress().toString());
         sb.append("\n");
 
-        holder.tvUser.setText(sb.toString());
+        holder.user.setText(sb.toString());
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -72,8 +72,8 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserViewHolder
 
     public class UserViewHolder extends RecyclerView.ViewHolder {
 
-        @BindView(R.id.tv_user)
-        TextView tvUser;
+        @BindView(R.id.user)
+        TextView user;
 
         public UserViewHolder(View itemView) {
             super(itemView);

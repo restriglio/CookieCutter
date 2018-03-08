@@ -5,8 +5,8 @@ import android.support.annotation.Nullable;
 
 import com.example.modelviewviewmodel.activities.BaseActivity;
 import com.example.globant.sampleapp.R;
-import com.example.globant.sampleapp.users.view.FindUserView;
-import com.example.globant.sampleapp.users.viewmodel.FindUserViewModel;
+import com.example.globant.sampleapp.users.mvvm.view.FindUserView;
+import com.example.globant.sampleapp.users.mvvm.viewmodel.FindUserViewModel;
 
 import javax.inject.Inject;
 

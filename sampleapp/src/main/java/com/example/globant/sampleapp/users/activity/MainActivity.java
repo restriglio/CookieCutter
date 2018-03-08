@@ -5,7 +5,7 @@ import android.os.Bundle;
 
 import com.example.modelviewviewmodel.activities.BaseActivity;
 import com.example.globant.sampleapp.R;
-import com.example.globant.sampleapp.users.view.MainView;
+import com.example.globant.sampleapp.users.mvvm.view.MainView;
 
 import javax.inject.Inject;
 

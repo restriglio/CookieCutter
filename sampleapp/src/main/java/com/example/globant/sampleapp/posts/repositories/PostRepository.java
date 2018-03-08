@@ -24,24 +24,24 @@ import io.reactivex.schedulers.Schedulers;
 
 public class PostRepository extends UseCaseRepository<Post> {
 
-    private AppDatabase mDataBase;
-    private PostApiService mClient;
+    private AppDatabase dataBase;
+    private PostApiService client;
     private CompositeDisposable disposable;
-    private String mUserId;
+    private String userId;
 
 
     @Inject
     public PostRepository(Application context, PostApiService client){
         super(context);
-        mContext = context;
-        mClient = client;
+        this.context = context;
+        this.client = client;
         disposable = new CompositeDisposable();
     }
 
     @Override
     public void initLocalData() {
-        mDataBase = AppDatabase.getInMemoryDatabase(mContext);
-        setDataList(mDataBase.postsModel().loadAllPosts());
+        dataBase = AppDatabase.getInMemoryDatabase(context);
+        setDataList(dataBase.postsModel().loadAllPosts());
     }
 
     @Override
@@ -51,19 +51,19 @@ public class PostRepository extends UseCaseRepository<Post> {
 
     @Override
     public void addDataList(List<Post> dataList) {
-        mDataBase.postsModel().insertAll(dataList);
-        setDataList(mDataBase.postsModel().loadAllPosts());
+        dataBase.postsModel().insertAll(dataList);
+        setDataList(dataBase.postsModel().loadAllPosts());
     }
 
     public void setPostsDataListByUserId(String userId){
         MutableLiveData<List<Post>> listMutableLiveData = new MutableLiveData<>();
-        listMutableLiveData.setValue(mDataBase.postsModel().loadPostsByUser(userId));
+        listMutableLiveData.setValue(dataBase.postsModel().loadPostsByUser(userId));
         setDataList(listMutableLiveData);
     }
 
     @Override
     public void requestDataToServer() {
-        mClient.getPosById(mUserId).subscribeOn(Schedulers.computation())
+        client.getPosById(userId).subscribeOn(Schedulers.computation())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Observer<List<Post>>() {
                     @Override
@@ -73,8 +73,8 @@ public class PostRepository extends UseCaseRepository<Post> {
 
                     @Override
                     public void onNext(List<Post> posts) {
-                        mDataBase.postsModel().insertAll(posts);
-                        setPostsDataListByUserId(mUserId);
+                        dataBase.postsModel().insertAll(posts);
+                        setPostsDataListByUserId(userId);
                         getDataList();
                         disposable.dispose();
                     }
@@ -93,7 +93,7 @@ public class PostRepository extends UseCaseRepository<Post> {
 
 
     public void requestPostsToServerByUser(final String userId) {
-        mUserId = userId;
+        this.userId = userId;
         requestDataToServer();
     }
 }

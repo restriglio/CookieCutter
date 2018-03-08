@@ -1,4 +1,4 @@
-package com.example.globant.sampleapp.users.view;
+package com.example.globant.sampleapp.users.mvvm.view;
 
 import android.arch.lifecycle.Observer;
 import android.content.Intent;
@@ -13,7 +13,7 @@ import com.example.globant.sampleapp.R;
 import com.example.globant.sampleapp.db.entities.User;
 import com.example.globant.sampleapp.users.activity.FindUserActivity;
 import com.example.globant.sampleapp.users.activity.MainActivity;
-import com.example.globant.sampleapp.users.viewmodel.MainViewModel;
+import com.example.globant.sampleapp.users.mvvm.viewmodel.MainViewModel;
 
 import java.util.List;
 
@@ -30,35 +30,35 @@ public class MainView extends BaseView<MainActivity, MainViewModel> {
 
     private List<User> mUsers;
 
-    @BindView(R.id.names_list)
-    RecyclerView mUsersRecyclerView;
+    @BindView(R.id.names)
+    RecyclerView names;
 
-    @BindView(R.id.fund_user)
-    Button mFundUser;
+    @BindView(R.id.fundUser)
+    Button fundUser;
 
     @Inject
     public MainView(MainActivity mainActivity, MainViewModel mainViewModel) {
         super(mainActivity, mainViewModel);
 
         ButterKnife.bind(this, mainActivity);
-        mFundUser.setOnClickListener(new View.OnClickListener() {
+        fundUser.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent findUser = new Intent(mBaseActivity.get(), FindUserActivity.class);
-                mBaseActivity.get().startActivity(findUser);
+                Intent findUser = new Intent(baseActivity.get(), FindUserActivity.class);
+                baseActivity.get().startActivity(findUser);
             }
         });
     }
 
     @Override
     protected void subscribeUiToLiveData() {
-        mBaseViewModel.getUsers().observe(mBaseActivity.get(), new Observer<List<User>>() {
+        baseViewModel.getUsers().observe(baseActivity.get(), new Observer<List<User>>() {
             @Override
             public void onChanged(@Nullable List<User> users) {
 
                 if (users == null || users.size() <= 0) {
-                    //Fetch data from API or Server
-                    mBaseViewModel.fetchUsersFromServer();
+                    //There is no local data, so we have to fetch data from server
+                    baseViewModel.fetchUsersFromServer();
                 } else {
                     //Data fetched from DataBase
                     mUsers = users;
@@ -71,10 +71,10 @@ public class MainView extends BaseView<MainActivity, MainViewModel> {
     @Override
     protected void showDataInUi() {
 
-        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(mBaseActivity.get());
-        UserAdapter userAdapter = new UserAdapter(mUsers, mBaseActivity.get());
-        mUsersRecyclerView.setLayoutManager(linearLayoutManager);
-        mUsersRecyclerView.setAdapter(userAdapter);
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(baseActivity.get());
+        UserAdapter userAdapter = new UserAdapter(mUsers, baseActivity.get());
+        names.setLayoutManager(linearLayoutManager);
+        names.setAdapter(userAdapter);
         userAdapter.notifyDataSetChanged();
     }
 }

@@ -16,16 +16,16 @@ import java.util.List;
 public abstract class UseCaseRepository<T> {
 
 
-    protected Context mContext;
+    protected Context context;
 
     /* LiveData to manage a list of T elements */
-    protected LiveData<List<T>> mDataList = new MutableLiveData<>();
+    protected LiveData<List<T>> dataList = new MutableLiveData<>();
 
     /* LiveData to manage a T element */
     protected LiveData<T> mData = new MutableLiveData<>();
 
     public UseCaseRepository(Context context){
-        mContext = context;
+        this.context = context;
         initLocalData();
     }
 
@@ -40,11 +40,11 @@ public abstract class UseCaseRepository<T> {
 
     /* method that returns the local LiveData list. This method must be observed in your view */
     public LiveData<List<T>> getDataList() {
-        return mDataList;
+        return dataList;
     }
 
     public void setDataList(LiveData<List<T>> mDataList) {
-        this.mDataList = mDataList;
+        this.dataList = mDataList;
     }
 
     /* Implements the logic to request the data to the server with RxAndroid */
