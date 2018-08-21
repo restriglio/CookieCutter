@@ -24,8 +24,9 @@ public class MainViewModel extends BaseViewModel {
     public MainViewModel(Application application, UserRepository useCaseRepository, PostRepository postRepository) {
         super(application);
         this.useCaseRepository = useCaseRepository;
-        this.postRepository = postRepository;
 
+        //Added this repositorie to show hoy to work with two repositories in one viewmodel
+        this.postRepository = postRepository;
         postRepository.initLocalData();
 
     }
