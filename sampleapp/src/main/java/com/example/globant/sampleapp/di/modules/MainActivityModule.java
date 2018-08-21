@@ -1,5 +1,6 @@
 package com.example.globant.sampleapp.di.modules;
 
+import com.example.globant.sampleapp.posts.repositories.PostRepository;
 import com.example.globant.sampleapp.users.activity.MainActivity;
 import com.example.globant.sampleapp.users.repositories.UserRepository;
 import com.example.globant.sampleapp.users.mvvm.view.MainView;
